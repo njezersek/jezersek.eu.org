@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+   <title>Nejc Jezeršek - O meni</title>
+   <meta charset="utf8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   <link rel="shortcut icon" href="media/logo.ico" type="image/x-icon">	
+   <link rel="stylesheet" type="text/css" href="style.css">
+   <link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Sniglet&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+</head>
+<body>
+	<header>
+		<div class="main2">
+			<table>
+				<tr>
+					<td>
+						<a href="Domov.html"><h1>Nejc Jezeršek</h1></a>
+						<h2>Nekaj o meni</h2>
+					</td>
+					<td>
+						<nav>
+							<ul>
+								<a href="Domov.html"><li>Domov</li></a>
+								<a href="Galerija.html"><li>Galerija</li></a>
+								<a href="Omeni.html"><li>O meni</li></a>
+								<a href="Clanki.html"><li>Članki</li></a>
+							</ul>
+						</nav>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</header>
+	<div class="main2">
+		<section>
+			<h3>Življenjepis</h3>
+				<p>Jaz sem Nejc Jezeršek. Rodil sem se 19. 6. leta 2000 v Ljubljani. Živim v vasi Preserje, ki leži
+blizu Domžal. Obiskujem deveti razred osnovne šole Preserje pri Radomljah. Šolanje 
+nameravam nadaljevati na Vegovi gimnaziji.</p>
+		</section>
+		<section>
+			<h3>Kaj me zanima</h3>
+			<p>Zanima me racunalnistvo predvsem programiranje
+in oblikovanje spletnih strani.</p>
+		</section>		
+		<section>
+			<h3>Kontakt</h3>
+			<ul>
+				<li><p>Pošlji mi Email: <a href="mailto:njezersek@gmail.com" target="_top">njezersek@gmail.com</a></p></li>
+				<li><p>Pokliči me po telefonu: 070315713</p></li>
+				<li><p>Pošlji mi posto na naslov: <a href="https://www.google.si/maps/place/VI.+ulica+10,+1235+Radomlje/@46.1730717,14.6047896,17z/data=!3m1!4b1!4m2!3m1!1s0x476535bc724488b3:0x9e86b3ae573ec53b?hl=sl">VI. ulica 10</a></p></li>
+				<li><p>Dodaj me za prijatelja na Facebooku: <a href="https://www.facebook.com/nejc.jezersek.3">Nejc Jezeršek</a></p></li>
+			</ul>
+			<div id="googleMap" style="width:100%;height:400px;"></div>
+		</section>
+		<section>
+			<h3>Naj, naj, naj</h3>
+			<ul>
+				<li><p>Naj stvar: racunalnik</p></li>
+				<li><p>Naj glasba: rock, pop</p></li>
+				<li><p>Naj film: Robin Hood men in tights</p></li>
+				<li><p>Naj hrana: kebab</p></li>
+				<li><p>Naj sladica: palacinke</p></li>
+				<li><p>Naj predmet: matematika</p></li>
+				<li><p>Naj letni cas: poletje</p></li>
+				<li><p>Naj sport: kolesarjenje</p></li>
+			</ul>
+		</section>
+
+	</div>
+	<footer>
+		<div class="main2">
+			<p>Nejc Jezeršek - 2014 - Vse pravice pridržane - <a class="jezik" href="Aboutme.html">set language to ENG</a></p>
+		</div>
+	</footer>
+	
+ 
+	<script>
+		var myCenter=new google.maps.LatLng(46.173012, 14.604798);
+// lokacija (kordinati) točke					     /\
+
+		function initialize()
+		{
+		var mapProp = {
+		  center: myCenter,
+		  zoom:10,
+// začetni zoom /\
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+		  };
+
+		var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+		var marker = new google.maps.Marker({
+		  position: myCenter,
+		  title:'Klikni za povečavo'
+		  });
+
+		marker.setMap(map);
+		
+// Povečaj ob kliko na oznako
+		google.maps.event.addListener(marker,'click',function() {
+		  map.setZoom(15);
+// zoom po kliku	  /\
+		  map.setCenter(marker.getPosition());});
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+</body>

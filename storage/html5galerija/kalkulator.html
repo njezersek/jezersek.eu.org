@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="sl">
+<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+<link rel="icon" href="media/favicon.ico" type="image/x-icon">
+<head>
+	<meta charset="UTF-8">	
+	<title>Kalkulator</title>
+	
+	<style>
+		.contain{
+			width: 550px;
+			background-color: #85C2FF;
+			border-radius: 5px;
+			box-shadow: 0px 10px 0px #5D88B2;
+			
+			margin-left: auto;
+			margin-right: auto;
+			padding: 20px 7px 20px;
+
+		}
+		
+		table{
+			display: table;
+			margin-left: auto;
+			margin-right: auto;
+			width: 530px;
+			table-layout: fixed;
+		}
+		
+		.button{
+			background: white;
+			border-radius: 5px;
+			box-shadow: 0px 6px 0px #888888;
+			
+			margin: 3px 0 3px;
+			
+			font-weight: bold;
+			color: #333333;
+			text-align: center;
+			font-size: 50px;
+			font-family: "calibri";
+			
+			cursor:default;
+			
+			-webkit-transition: background 0.2s; /* For Safari 3.1 to 6.0 */
+			transition: background 0.2s;
+			
+		}
+		
+			.button:active{
+				-webkit-animation: press 0.2s; /* Chrome, Safari, Opera */
+				animation: press 0.2s;
+			}
+
+					/* Chrome, Safari, Opera */
+					@-webkit-keyframes press {
+						0% {box-shadow: 0px 6px 0px #888888;margin: 3px 0 3px;}
+						50% {box-shadow: 0px 1px 0px #888888;margin: 9px 0 -3px;}
+						100% {box-shadow: 0px 6px 0px #888888;margin: 3px 0 3px;}
+					}
+
+					/* Standard syntax */
+					@keyframes press {
+						0% {box-shadow: 0px 6px 0px #888888;margin: 3px 0 3px;}
+						50% {box-shadow: 0px 1px 0px #888888;margin: 9px 0 -3px;}
+						100% {box-shadow: 0px 6px 0px #888888;margin: 3px 0 3px;}
+					}
+			
+			.button:hover{
+				background: #CCE0FF;
+			}
+			
+			.button::-moz-selection { /* Code for Firefox */
+				background: rgba(100, 100, 100, 0);
+			}
+
+			.button::selection {
+				background: rgba(100, 100, 100, 0);
+			}
+			
+		#equal{
+			background: #E0FF85;
+			box-shadow: 0px 6px 0px #B1C966;
+			
+			-webkit-transition: background 0.2s; /* For Safari 3.1 to 6.0 */
+			transition: background 0.2s;
+		}
+		
+		#equal:hover{
+			background: #DAFF6C;
+		}
+		
+		#equal:active{
+				-webkit-animation: pressE 0.4s; /* Chrome, Safari, Opera */
+				animation: pressE 0.4s;
+			}
+
+					/* Chrome, Safari, Opera */
+					@-webkit-keyframes pressE {
+						0% {box-shadow: 0px 6px 0px #B1C966;margin: 3px 0 3px;}
+						50% {box-shadow: 0px 1px 0px #B1C966;margin: 9px 0 -3px;}
+						100% {box-shadow: 0px 6px 0px #B1C966;margin: 3px 0 3px;}
+					}
+
+					/* Standard syntax */
+					@keyframes pressE {
+						0% {box-shadow: 0px 6px 0px #B1C966;margin: 3px 0 3px;}
+						50% {box-shadow: 0px 1px 0px #B1C966;margin: 9px 0 -3px;}
+						100% {box-shadow: 0px 6px 0px #B1C966;margin: 3px 0 3px;}
+					}
+			
+		h1{
+			margin-top: 0px;
+			margin-bottom: 0px;
+			padding: 0 10px 0;
+			
+			white-space: nowarp;
+			overflow: hidden;
+		}
+		
+		#display1{
+			border-radius: 5px;
+			text-align: left;
+			
+			border: none;
+			
+			width: 100%;
+			
+			font-size: 30px;
+			font-family: "calibri";
+			color: #333333;
+			font-weight: bold;
+		}
+		
+		#display2{
+			text-align: right;
+			background-color: rgba(100, 100, 100, 0);
+			font-size: 30px;
+			font-family: "calibri";
+			color: #333333;
+		}
+		
+		.display{
+			background: white;
+			height: 80px;
+			box-shadow: 0px -6px 0px #888888;
+			border-radius: 5px;
+			width: 523px;
+			
+			margin: 5px 0 5px;
+			margin-top: 0px;
+			margin-bottom: 0px;
+			
+			font-size: 15px;
+			font-family: "calibri";
+			color: #333333;
+			
+		}
+		
+		
+		
+		input:focus{
+			border: none;
+			 outline: none; 
+		}
+	
+	a{
+		text-decoration: none; 
+		color: #0066CC;
+	}
+	</style>
+</head>
+<body>
+
+	<div class="contain">
+	<table>
+		<tr>
+			<td>
+				<div class="display">
+					<form onsubmit="return false" id="frm1">
+						<input id="display1" type="text" name="display" value="" onkeypress="setTimeout(function(){update()}, 1)" autocomplete="off"><br>
+						<h1 id="display2"></h1>
+					</form> 
+				</div>
+			</td>	
+		</tr>
+		
+		<tr>
+			<td onclick="set('7')"><div class="button">7</div></td>	<td onclick="set('8')"><div class="button">8</div></td>	<td onclick="set('9')"><div class="button">9</div></td>	<td onclick="set('(')"><div class="button">(</div></td>	<td onclick="set(')')"><div class="button">)</div></td>
+		</tr>
+		<tr>
+			<td onclick="set('4')"><div class="button">4</div></td>	<td onclick="set('5')"><div class="button">5</div></td>	<td onclick="set('6')"><div class="button">6</div></td>	<td onclick="set('*')"><div class="button">*</div></td>	<td onclick="set('/')"><div class="button">/</div></td>
+		</tr>
+		<tr>
+			<td onclick="set('1')"><div class="button">1</div></td>	<td onclick="set('2')"><div class="button">2</div></td>	<td onclick="set('3')"><div class="button">3</div></td>	<td onclick="set('+')"><div class="button">+</div></td>	<td onclick="set('-')"><div class="button">-</div></td>
+		</tr>
+		<tr>
+			<td onclick="del()"><div class="button">del</div></td>	<td onclick="set('0')"><div class="button">0</div></td>	<td onclick="set('.')"><div class="button">.</div></td>	<td onclick="set(pi)"><div class="button">π</div></td>	<td onclick="error(); setTimeout(function(){equal()}, 1);"><div id="equal" class="button">=</div></td>	
+		</tr>
+	</table>
+	</div>
+	<a href="index.html"><h3>Nazaj na domačo spletno stran</h3></a>
+	
+
+<script>
+console.log('kalkulator_v4');
+
+var number = '';
+var result = '';
+var pi = Math.PI; //pi
+document.getElementById("display1").value = "";
+
+function equal() {
+    var x = document.getElementById("frm1");
+	number = x.elements[0].value;
+	
+	result = eval(number);
+	
+    document.getElementById("display2").innerHTML = result;
+	
+	number = result;
+}
+
+function del() {
+			if (number.length > 1) {
+			number = number.slice(0, number.length-1);
+			document.getElementById("display1").value = number;
+			}
+			else{
+			number = '';
+			document.getElementById("display1").value = '';
+			}
+		}
+
+function error(id) {
+	if(result == '') {
+	document.getElementById("display2").innerHTML= 'Error';
+	}
+}
+
+function set(num) {		
+	result = '';//
+	
+	number = number + num;
+	document.getElementById("display1").value = number;
+	document.getElementById("display2").innerHTML = result;
+			
+}
+
+function update(){
+	result = '';//
+	var x = document.getElementById("frm1");
+    number = x.elements[0].value;
+}
+
+function ca() {
+	number = '';
+	result = '';
+	document.getElementById("display1").value = '';
+	document.getElementById("display2").innerHTML = '';
+}
+
+document.addEventListener('keydown', function(event) {
+		if	(event.keyCode == 13) {equal();}	
+	});
+</script>
+</body>
+</html>

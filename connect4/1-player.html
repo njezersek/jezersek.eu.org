@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="UTF-8">	
+	<title>Connect4</title>
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<style>
+		body{
+			background: #fff;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		
+		canvas{
+		}
+	</style>
+</head>
+	
+<body>
+	<canvas id="canvas"></canvas>
+	
+	<script>
+		var w = 0;
+		var h = 0;
+		
+		var rows = 6;
+		var columns = 7;
+		var size = 100;
+		var padding = 15;
+		var xOffset = 0;
+		var selected = -1;
+		
+		var game = [
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0]
+		];
+		var player = 1;
+		var computer = 2;
+		var turn = 1;
+		
+		var c = document.getElementById('canvas');
+		var ctx = c.getContext('2d');
+		
+		function render(){
+			ctx.clearRect(0,0,w,h); //pocisti
+		
+			ctx.fillStyle = "#fff"; 
+			ctx.fillRect(0,0,w, h); //ozadje
+			
+			ctx.fillStyle = "#24a"; 
+			ctx.fillRect(xOffset,0,columns*size, rows*size); // igralna polosca
+			
+			for(var x=0; x<columns; x++){
+				for(var y=0; y<rows; y++){				
+					ctx.beginPath();
+					ctx.arc(x*size+size/2+xOffset, y*size+size/2, size/2-padding/2, 0, 2 * Math.PI, false); // polja
+					
+					if(game[y][x] == 0){
+						ctx.fillStyle = '#fff';
+					}
+					else if(game[y][x] == 1){
+						ctx.fillStyle = '#f00';
+					}
+					else if(game[y][x] == 2){
+						ctx.fillStyle = '#ff0';
+					}
+					ctx.fill();
+					ctx.lineWidth = padding/3;
+					ctx.strokeStyle = '#139';
+					ctx.stroke();
+				}
+			}
+			
+			if(selected > -1){
+				ctx.fillStyle = "rgba(0, 0, 55, 0.5)";
+				ctx.fillRect(selected*size+xOffset,0,size, rows*size); //izbran stolpec
+			}
+		}
+		var lookAhead = 0;
+		var Game = function(gameData, turn, change){
+			this.gameData = gameData;
+			this.turn = (turn%2)+1;
+			this.prevTurn = turn;
+			this.value = evaluate(gameData);
+			this.nValue = null;
+			this.change = change;
+			
+			this.pGames = [];
+			
+			if(this.value == -1){
+			
+				//ustvari vse mozne igre
+				/*
+				for(var i=0; i<this.gameData.length; i++){
+					if(this.gameData[i] == "_"){
+						this.gameData[i] = this.turn;
+						var newGame = this.gameData.slice();
+						this.gameData[i] = "_";
+						this.pGames[this.pGames.length] = new Game(newGame, this.turn, i);
+					}
+				}
+				*/
+				
+				/*for(var y=0; y<rows; y++){
+					for(var x=0; x<columns; x++){
+						if(this.gameData[y][x] == 0){
+							this.gameData[y][x] = this.turn;
+							lookAhead++;
+							if(lookAhead < 3){
+								var newGame = copy2dArr(this.gameData); // tole ne bo delal > naredi funkcijo z akopiranje
+								this.pGames[this.pGames.length] = new Game(newGame, this.turn, [y,x]);
+							}
+							lookAhead--;
+							this.gameData[y][x] = 0;
+						}
+					}
+				}*/
+				
+				for(var x=0; x<columns; x++){
+					for(var y=rows-1; y>=0; y--){
+						if(this.gameData[y][x] == 0){
+							this.gameData[y][x] = this.turn;
+							lookAhead++;
+							if(lookAhead < 7){
+								var newGame = copy2dArr(this.gameData); // tole ne bo delal > naredi funkcijo z akopiranje
+								this.pGames[this.pGames.length] = new Game(newGame, this.turn, x);
+							}
+							else this.nValue = 0; //not finished
+							lookAhead--;
+							this.gameData[y][x] = 0;
+							break;
+						}
+					}					
+				}
+				
+				
+				
+				
+				//uporabi minimax za dedovanje vrednotenja
+				if(this.turn == computer){ //isci najvecjo vrednost
+					var max = -10000
+					for(var p=0;p<this.pGames.length;p++){
+						if(this.pGames[p].nValue > max)max = this.pGames[p].nValue;
+						this.nValue = max;
+					}
+				}
+				else{ //isci najmanjso vrednost
+					var min = 10000
+					for(var p=0;p<this.pGames.length;p++){
+						if(this.pGames[p].nValue < min)min = this.pGames[p].nValue;
+						this.nValue = min;
+					}
+				}
+			}
+			else{
+				if(this.value == 0)this.nValue = 0; //draw
+				else if(this.value == computer)this.nValue = 10; //computer
+				else if(this.value == player)this.nValue = -10;	//player
+			}
+			
+		}
+		
+		function copy2dArr(arr){
+			newArr = [];
+			for(var i=0; i<arr.length; i++){
+				newArr.push(arr[i].slice());
+			}
+			
+			return newArr;
+		}
+		
+		
+		function evaluate(gameData){
+			for(var p=1; p<3; p++){
+				for(var y=0; y<rows; y++){
+					for(var x=0; x<columns; x++){
+						if(y+3<rows)if(gameData[y][x] == p && gameData[y+1][x] == p && gameData[y+2][x] == p && gameData[y+3][x] == p)return p;
+						if(x+3<columns)if(gameData[y][x] == p && gameData[y][x+1] == p && gameData[y][x+2] == p && gameData[y][x+3] == p)return p;
+						if(y+3<rows && x+3<columns)if(gameData[y][x] == p && gameData[y+1][x+1] == p && gameData[y+2][x+2] == p && gameData[y+3][x+3] == p)return p;
+						if(y+3<rows && x+3<columns)if(gameData[y][x+3] == p && gameData[y+1][x+2] == p && gameData[y+2][x+1] == p && gameData[y+3][x] == p)return p;
+					}
+				}
+			}
+			draw = true;
+			for(var x=0; x<columns; x++){
+				if(gameData[0][x] == 0)draw = false;
+			}
+			if(draw)return 0;
+			return -1;
+		}
+		
+		function aiMove(){
+			newTurn = (turn%2)+1;
+			var gameAi = new Game(game, newTurn);
+			
+			var pMoves = [];
+			
+			var moves = [];
+			for(var a=0; a<gameAi.pGames.length; a++){
+				if(gameAi.pGames[a].nValue == gameAi.nValue)moves[moves.length] = gameAi.pGames[a].change;
+				pMoves[pMoves.length] = gameAi.pGames[a].nValue;
+			}
+			move = moves[Math.floor(Math.random()*moves.length)]; //od enakovrednih potez nakljucno izberi eno
+			
+			console.log(move, gameAi);
+			console.log(pMoves);
+			//var move = prompt("Izberi polje za racunalnik");
+			//data[move] = computer;
+			//alert(move);
+			place(move);
+			//turn = player;
+			//update(null);
+		}
+		
+		function place(selCol){
+			for(var y=rows-1; y>=0; y--){
+				if(game[y][selCol] == 0){
+					game[y][selCol] = turn;
+					turn = (turn%2)+1; //zamenjaj kdo je na potezi 1<>2;
+					e = evaluate(game);
+					if(e != -1){
+						if(e == 0)alert("Draw!");
+						if(e == 1)alert("Red wins!");
+						if(e == 2)alert("Yellow wins!");
+					}
+					break;
+				}
+			}
+			render();
+		}
+		
+		window.addEventListener('mousemove', function(event){
+			selected = Math.floor((event.clientX - xOffset)/size); //izracunaj izbran stolpec
+			if(selected>6||selected<0)selected=-1;
+			if(event.clientY > rows*size)selected=-1;
+			
+			render();
+		});
+		
+		window.addEventListener('click', function(event){
+			selected = Math.floor((event.clientX - xOffset)/size); //izracunaj izbran stolpec
+			if(selected>6||selected<0)selected=-1;
+			if(event.clientY > rows*size)selected=-1;
+			
+			place(selected);
+			
+			aiMove();
+		});
+		
+		window.addEventListener('keypress', function(event){
+			if(event.keyCode >= 49 && event.keyCode <= 55)place(event.keyCode-49)
+		});
+	
+		function resize(){
+			c.height = h = window.innerHeight;
+			c.width = w = window.innerWidth;
+
+			if(h*columns < w*rows){
+				size = h/rows;
+				xOffset = (w - size*columns)/2;
+			}
+			else{
+				size = w/columns;
+				xOffset = 0;
+			}
+			padding = size / 6;
+			
+			render();
+		}
+		
+		window.addEventListener('resize', resize);
+		resize();
+	</script>
+</body>
+</html>

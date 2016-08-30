@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>rotacija</title>
+	<style>
+		canvas{
+		  background: black;
+		  padding: 0;
+		  margin: 0;
+		}
+
+		body{
+		  margin: 0;
+		  overflow: hidden;
+		}
+	</style>
+  </head>
+
+  <body>
+
+    <canvas id="c">
+</canvas>
+    
+<script>
+/* CONFIG */
+var speed = 0.01;
+var originX = 200;
+var originY = 200;
+var cricleR = 100;
+var cricleNPoints = 20;
+var cricleX = 200;
+var cricleY = 200;
+/* --- */
+
+
+var c = document.getElementById('c');
+var ctx = c.getContext('2d');
+
+var Point = function(x,y){
+	this.x = x;
+	this.y = y;
+	this.size = 10;
+	
+	this.render = function(){
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI, false);
+		ctx.fillStyle = 'green';
+		ctx.fill();
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = '#003300';
+		ctx.stroke();
+	}
+	
+	this.rotate = function(x,y,d){
+		var nx = Math.cos(d) * (this.x-x) - Math.sin(d) * (this.y-y) + x;
+		var ny = Math.sin(d) * (this.x-x) + Math.cos(d) * (this.y-y) + y;
+		
+		this.x = nx;
+		this.y = ny;
+	}
+	
+}
+
+
+/* definicja tock  */
+var points = [new Point(100,100), new Point(300,100), new Point(300,300), new Point(100,300)];
+
+cricle(cricleR, cricleNPoints, cricleX, cricleY);
+function cricle(r, nPoints, x, y){
+    for (var i = 0; i < nPoints; i++) {
+		points.push( new Point((x + r * Math.cos(2 * Math.PI * i / nPoints)),(y + r * Math.sin(2 * Math.PI * i / nPoints))) );
+	}
+}
+/* --- */
+
+function render(){
+	ctx.clearRect(0,0,c.width,c.height);
+	for(i=0; i<points.length; i++){
+		points[i].render();
+	}
+	
+	//narisi origin
+	ctx.beginPath();
+	ctx.arc(originX, originY, 5, 0, 2 * Math.PI, false);
+	ctx.fillStyle = 'red';
+	ctx.fill();
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = '#330000';
+	ctx.stroke();
+}
+
+function rotate(){
+	for(i=0; i<points.length; i++){
+		points[i].rotate(originX, originY, speed);
+	}
+}
+
+function tick(){
+	rotate();
+	render();
+	setTimeout(tick, 10);
+}
+tick();
+
+//resizing
+window.addEventListener('resize', resize);
+function resize(){
+	c.width = window.innerWidth;
+	c.height = window.innerHeight;
+	render();
+}
+resize();
+</script>
+
+  </body>
+</html>

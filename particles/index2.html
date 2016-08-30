@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>A Pen by  Nejc</title>
+	<style>
+		canvas{
+		  background: black;
+		  padding: 0;
+		  margin: 0;
+		}
+
+		body{
+		  margin: 0;
+		  overflow: hidden;
+		}
+	</style>
+  </head>
+
+  <body>
+
+    <canvas id="c">
+</canvas>
+    
+<script>
+var c = document.getElementById('c');
+var ctx = c.getContext('2d');
+var running = true;
+var spawning = true;
+
+var direction = 0;
+var mouseX = 0;
+var mouseY = 0;
+var oldX = 0;
+var oldY = 0;
+var speedX = mouseX-oldX;
+var speedY = mouseY-oldY;
+
+var Particle = function(x,y,sx,sy,color){
+  this.x = x;
+  this.y = y;
+  this.sx = sx;
+  this.sy = sy;
+  this.c = color;
+  this.size = 5;
+  
+  this.move = function(){
+    this.x += this.sx;
+    this.y += this.sy;
+	
+	this.size -= 0.05;
+	if(this.size < 0){
+		particles.splice(particles.indexOf(this),1);
+		return 1;
+	}
+	else if((this.x < -10) || (this.x > c.width+10) || (this.y < -10) || (this.y > c.height+10)){
+	  particles.splice(particles.indexOf(this),1);
+	  return 1;
+	}
+	else return 0;
+  }
+  
+  this.render = function(){
+	  ctx.beginPath();
+	  ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI, false);
+	  ctx.fillStyle = 'green';
+	  ctx.fill();
+	  ctx.lineWidth = 1;
+	  ctx.strokeStyle = '#003300';
+	  ctx.stroke();
+  }
+}
+
+var particles = [];
+
+tick();
+
+function tick(){
+  
+  
+  ctx.clearRect(0,0,c.width,c.height);
+  for(i=0; i<particles.length; i++){
+    particles[i].render();
+    i += particles[i].move();
+  }
+  if(running)setTimeout(tick, 10);
+  
+}
+
+function spawn(){
+	if(spawning){
+		
+		
+		if(Math.abs(speedX)>10)speedX = 10 * speedX/Math.abs(speedX);
+		if(Math.abs(speedY)>10)speedY = 10 * speedY/Math.abs(speedY);
+		
+		if(Math.abs(speedX)>0.1 || Math.abs(speedY)>0.1){
+			particles.push(new Particle(mouseX,mouseY,-speedX,-speedY,"red"));
+		}
+	  }
+}
+
+function click(){
+	for(i=0; i<2*Math.PI; i+=Math.PI/10){
+		speedX = Math.cos(i)*2;
+		speedY = Math.sin(i)*2;
+		particles.push(new Particle(mouseX,mouseY,speedX,speedY,"red"));
+	}
+}
+
+window.addEventListener('mousemove', function(event){
+	mouseX = event.clientX;
+	mouseY = event.clientY;
+	speedX = mouseX-oldX;
+	speedY = mouseY-oldY;
+	spawn();
+	oldX = mouseX;
+	oldY = mouseY;
+	
+});
+window.addEventListener('click', function(event){
+	mouseX = event.clientX;
+	mouseY = event.clientY;
+	click();
+});
+
+window.addEventListener('resize', resize);
+function resize(){
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
+}
+
+resize();
+</script>
+
+  </body>
+</html>

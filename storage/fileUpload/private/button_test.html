@@ -1,0 +1,32 @@
+
+<style>
+	.lepgumb{
+		background: pink;
+		padding: 20px;
+		display: inline-block;
+		cursor: pointer;
+		margin: 10px;
+	}
+</style>
+
+<form id="upload_form" enctype="multipart/form-data" method="post">
+	<input type="file" name="file1" id="file1" onchange="fileChosen()"><br>
+	<!--<input type="button" value="Upload File" onclick="uploadFile()">-->
+	
+	<div class="lepgumb" onclick="uploadPrompt()">Upload</div>
+</form>
+
+<script>
+	function _(el){
+		return document.getElementById(el);
+	}
+
+	function uploadPrompt(){
+		_('file1').click();
+	}
+	
+	function fileChosen(){
+		
+	}
+
+</script>

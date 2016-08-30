@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="UTF-8">	
+	<title>Tic-Tac-Toe</title>
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<style>
+		
+		body{
+			background: #29b765;
+			margin: 0;
+			padding: 0;
+		}
+		
+		table, th, td {
+			border-collapse: collapse;
+			text-align: center;
+			font-size: 50px;
+			font-family: "calibri";
+		}
+		
+		td{
+			border: 2px solid #FFF;
+			width: 150px;
+			height: 150px;
+			transition-property: opacity;
+			transition-duration: 0.3s;
+			opacity: 0.3;
+		}
+		
+		#td1{
+			border-top-style: none;
+			border-right-style: solid;
+			border-bottom-style: solid;
+			border-left-style: none;
+		}
+		#td2{
+			border-top-style: none;
+			border-right-style: solid;
+			border-bottom-style: solid;
+			border-left-style: solid;
+		}
+		#td3{
+			border-top-style: none;
+			border-right-style: none;
+			border-bottom-style: solid;
+			border-left-style: solid;
+		}
+		#td4{
+			border-top-style: solid;
+			border-right-style: solid;
+			border-bottom-style: solid;
+			border-left-style: none;
+		}
+		#td5{
+			border-top-style: solid;
+			border-right-style: solid;
+			border-bottom-style: solid;
+			border-left-style: solid;
+		}
+		#td6{
+			border-top-style: solid;
+			border-right-style: none;
+			border-bottom-style: solid;
+			border-left-style: solid;
+		}
+		#td7{
+			border-top-style: solid;
+			border-right-style: solid;
+			border-bottom-style: none;
+			border-left-style: none;
+		}
+		#td8{
+			border-top-style: solid;
+			border-right-style: solid;
+			border-bottom-style: none;
+			border-left-style: solid;
+		}
+		#td9{
+			border-top-style: solid;
+			border-right-style: none;
+			border-bottom-style: none;
+			border-left-style: solid;
+		}
+		
+		table{
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		h1, h2{
+			text-align: center;
+			font-family: 'Raleway', sans-serif;
+			color: #FFF;
+			font-size: 45px;
+			margin: 0;
+			padding: 30px;
+		}
+		
+		td{
+			font-family: 'Raleway', sans-serif;
+			color: white;
+			font-size: 120px;
+			margin: 0;
+			padding: 0;
+		}
+		
+		#senca{
+			background: rgba(0,0,0,0.5);
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			transition-property: opacity;
+			transition-duration: 0.3s;
+		}
+		
+		#okno{
+			background: #FFF;
+			width: 350px;
+			margin: 200px auto 0;
+			padding: 20px 20px 60px;
+		}
+		
+		#display{
+			font-family: 'Raleway', sans-serif;
+			font-size: 25px;
+		}
+		
+		#gumb{
+			border: 2px solid #29b765;
+			font-family: 'Raleway', sans-serif;
+			font-size: 15px;
+			padding: 10px 15px;
+			display: inline-block;
+			float: right;
+			color: #29b765;
+			font-weight: bold;
+			cursor: pointer;
+		}
+	</style>
+</head>
+	
+<body>
+	<div id="senca">
+		<div id="okno">
+			<div id="display">napis</div>
+			<br>
+			<div id="gumb" onclick="zapriObjavo()">OK</div>
+		</div>
+	</div>
+	<h1 id="sporocilo">Tic-Tac-Toe</h1>
+	<h2 id="navrsti"></h2>
+	<table>
+		<tr>
+			<td id="td1" onclick="spremeni(this)" onmouseover="hover(this)" onmouseout="unhover(this)"></td>
+			<td id="td2" onclick="spremeni(this)" onmouseover="hover(this)" onmouseout="unhover(this)"></td>
+			<td id="td3" onclick="spremeni(this)" onmouseover="hover(this)" onmouseout="unhover(this)"></td>
+		</tr>
+		<tr>
+			<td id="td4" onclick="spremeni(this)" onmouseover="hover(this)" onmouseout="unhover(this)"></td>
+			<td id="td5" onclick="spremeni(this)" onmouseover="hover(this)" onmouseout="unhover(this)"></td>
+			<td id="td6" onclick="spremeni(this)" onmouseover="hover(this)" onmouseout="unhover(this)"></td>
+		</tr>
+		<tr>
+			<td id="td7" onclick="spremeni(this)" onmouseover="hover(this)" onmouseout="unhover(this)"></td>
+			<td id="td8" onclick="spremeni(this)" onmouseover="hover(this)" onmouseout="unhover(this)"></td>
+			<td id="td9" onclick="spremeni(this)" onmouseover="hover(this)" onmouseout="unhover(this)"></td>
+		</tr>
+	</table>
+	
+	<script>
+		var stikalo = "X"
+		
+		var celica1;
+		var celica2;
+		var celica3;
+		var celica4;
+		var celica5;
+		var celica6;
+		var celica7;
+		var celica8;
+		var celica9;
+		
+		var zmaga = "";
+		var pause = false;
+		
+		document.getElementById("senca").style.opacity = "0";
+		
+		function hover(element){
+			if((element.style.opacity == "")&&(pause == false)){
+				element.innerHTML = stikalo;
+			}
+		}
+		function unhover(element){
+			if((element.style.opacity == "")&&(pause == false)){
+				element.innerHTML = "";
+			}
+		}
+		function spremeni(element){
+			if((element.style.opacity == "")&&(pause == false)){
+				element.innerHTML = stikalo;
+				element.style.opacity = "1";
+				if(stikalo == "X")stikalo = "O";
+				else stikalo = "X";
+				preglej();
+				preveri();
+			}
+		}
+		function preglej(){
+			celica1 = document.getElementById("td1").innerHTML;
+			celica2 = document.getElementById("td2").innerHTML;
+			celica3 = document.getElementById("td3").innerHTML;
+			celica4 = document.getElementById("td4").innerHTML;
+			celica5 = document.getElementById("td5").innerHTML;
+			celica6 = document.getElementById("td6").innerHTML;
+			celica7 = document.getElementById("td7").innerHTML;
+			celica8 = document.getElementById("td8").innerHTML;
+			celica9 = document.getElementById("td9").innerHTML;
+		}
+		function preveri(){
+			var znak;
+			for(i=0; i<2; i++){
+				if(i == 0)znak = "X";
+				if (i == 1)znak = "O";
+				
+				if((celica1 == znak)&&(celica2 == znak)&&(celica3 == znak))zmaga = znak;
+				else if((celica4 == znak)&&(celica5 == znak)&&(celica6 == znak))zmaga = znak;
+				else if((celica7 == znak)&&(celica8 == znak)&&(celica9 == znak))zmaga = znak;
+				
+				else if((celica1 == znak)&&(celica4 == znak)&&(celica7 == znak))zmaga = znak;
+				else if((celica2 == znak)&&(celica5 == znak)&&(celica8 == znak))zmaga = znak;
+				else if((celica3 == znak)&&(celica6 == znak)&&(celica9 == znak))zmaga = znak;
+				
+				else if((celica1 == znak)&&(celica5 == znak)&&(celica9 == znak))zmaga = znak;
+				else if((celica3 == znak)&&(celica5 == znak)&&(celica7 == znak))zmaga = znak;
+			}
+			if(zmaga == ""){
+				if((celica1 != "")&&(celica2 != "")&&(celica3 != "")&&(celica4 != "")&&(celica5 != "")&&(celica6 != "")&&(celica7 != "")&&(celica8 != "")&&(celica9 != ""))zmaga = "izenaceno";
+			}
+			izpisi();
+		}
+		function izpisi(){
+			if(zmaga == "X")objavi("X wins!");
+			if(zmaga == "O")objavi("O wins!");
+			if(zmaga == "izenaceno")objavi("Draw!");
+		}
+		function objavi(text){
+			document.getElementById("senca").style.opacity = "1";
+			document.getElementById("senca").style.zIndex = "20";
+			document.getElementById("display").innerHTML = text;
+			pause = true;
+		}
+		function zapriObjavo(){
+			document.getElementById("senca").style.opacity = "0";
+			document.getElementById("senca").style.zIndex = "0";
+			document.getElementById("display").innerHTML = "";
+			reset();
+			pause = false;
+		}
+		function reset(){
+			for(i = 1; i<10; i++){
+				document.getElementById("td" + i).innerHTML = "";
+				document.getElementById("td" + i).style.opacity = "";
+			}
+			zmaga = "";
+		}
+	</script>
+</body>
+</html>

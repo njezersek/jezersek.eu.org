@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML Tutorial</title>
+	<style>
+		body{
+			margin: 0;
+			overflow-x: hidden;
+		}
+		
+		aside{
+			background: hotpink;
+			position: fixed;
+			width: 200px;
+			height: 100vh;
+			left: -200px;
+			transition: all 0.3s;
+		}
+		
+		.top{
+			background: pink;
+			padding: 20px;
+		}
+		
+		main{
+			position: relative;
+			left: 0px;
+			transition: all 0.3s;
+			//margin-left: 200px;
+		}
+		
+		p, h1{
+			padding: 0 20px;
+		}
+	</style>
+</head>
+<body>
+	<aside id="aside">
+		<a>Test</a>
+	</aside>
+	<main id="main">
+		<div class="top" onclick="toggle()">menu</div>
+		<h1>This is a heading</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus libero urna, porta vitae elit id, pulvinar volutpat nisi. Nulla sodales, nulla ultricies sagittis rutrum, nibh libero sagittis ante, eget gravida mauris sem ac arcu. Vestibulum interdum lobortis purus, ac luctus mi interdum id. Etiam sit amet eleifend diam, a pulvinar tellus. Vestibulum interdum lorem mauris, venenatis vulputate tortor dignissim molestie. Phasellus sodales quam nec urna aliquet, et porttitor nunc pulvinar. Sed pretium dolor eget porttitor lacinia. Integer volutpat odio lectus, at consequat eros aliquet in. Donec vitae erat in libero euismod placerat eget sit amet mauris. Mauris pharetra nunc at urna porttitor, ac rhoncus nibh rhoncus. Donec rhoncus, justo id pharetra consectetur, nisl est elementum libero, a sollicitudin odio ex eget metus. Vestibulum ac fringilla eros. Curabitur dapibus, dui ac tincidunt imperdiet, justo odio suscipit mi, in vehicula libero nulla et nibh. Pellentesque sit amet pulvinar purus. In rutrum turpis turpis, a ultrices ipsum cursus eu.
+
+	Phasellus tincidunt sed quam vitae iaculis. Morbi efficitur leo vel nisi dignissim, id volutpat eros faucibus. Morbi vehicula gravida justo, a accumsan massa imperdiet in. Vestibulum gravida odio lobortis, hendrerit leo vel, tempor arcu. Morbi ac nibh felis. Mauris ut tellus eu diam efficitur elementum id non ex. Aenean vel condimentum tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum aliquet fermentum nunc sed molestie. Phasellus tempus nunc eu tortor tempor porta. Nulla egestas felis sit amet justo tempor, et tincidunt elit molestie. Nam varius porta blandit. Aenean elementum, nisl at malesuada consectetur, magna nulla lobortis eros, sit amet maximus dolor arcu eget est. Suspendisse a justo sem.
+
+	Vestibulum sed porttitor leo. Nunc eleifend turpis ut fringilla suscipit. Maecenas at hendrerit leo. Vestibulum volutpat porttitor lobortis. Duis fermentum enim vitae congue lacinia. Mauris eget elit in mi auctor laoreet sed tristique sapien. Nunc dapibus placerat dolor, dapibus tincidunt ligula. Praesent vel nibh et dolor pulvinar aliquet. Nam blandit tempor purus, eget viverra sapien elementum ut. Donec nec vulputate neque, facilisis tincidunt urna. Quisque at cursus dui.
+
+	Sed suscipit, magna placerat varius ornare, enim nibh maximus enim, a volutpat dolor nulla in lorem. Aenean ac sodales ligula. Proin vitae blandit metus. Phasellus eu mauris et diam eleifend pretium in ut purus. Phasellus vel imperdiet est, sed rhoncus tellus. Phasellus blandit, justo nec maximus bibendum, ex lacus commodo leo, nec maximus quam magna vel velit. Sed congue accumsan ipsum. Suspendisse sed dolor et elit pharetra mollis vel id magna. Duis magna libero, cursus ac suscipit et, iaculis non est. Fusce sed tortor ac velit malesuada pellentesque quis sed nulla. Aenean imperdiet turpis sem, vitae vestibulum libero fermentum eget. Nulla quis hendrerit orci, vitae porta magna. Praesent diam neque, tincidunt sed luctus eget, consectetur tincidunt justo. In ut mauris metus. Fusce eget mattis velit, eu egestas nisl.
+
+	Donec in mi orci. Fusce luctus feugiat mauris ac convallis. Aenean aliquam nisl ut rhoncus blandit. Phasellus ullamcorper purus in ligula viverra dictum. Donec feugiat quam et ante ultrices finibus. Proin fermentum quam urna, sit amet bibendum lacus tempor quis. Integer ipsum sapien, suscipit in vehicula nec, ornare in lorem. Curabitur semper convallis porta.</p>
+	</main>
+	
+	<script>
+		var odprt = false;
+		function toggle(){
+			if(odprt){
+				document.getElementById('aside').style.left = "-200px";
+				document.getElementById('main').style.left = "0px";
+				odprt = false;
+			}
+			else{
+				document.getElementById('aside').style.left = "0px";
+				document.getElementById('main').style.left = "200px";
+				odprt = true;
+			}
+		}
+	</script>
+	
+</body>
+</html>

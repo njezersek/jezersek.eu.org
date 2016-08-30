@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
+	<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<title>Kriza v ZDA - kviz</title>
+	<style>
+		body, html{
+			margin: 0;
+			padding: 0;
+			background: #d6d4d1; /* Old browsers */
+			background: -moz-linear-gradient(left,  #d6d4d1 0%, #eaeaea 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,#d6d4d1), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* IE10+ */
+			background: linear-gradient(to right,  #d6d4d1 0%,#eaeaea 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d4d1', endColorstr='#eaeaea',GradientType=1 ); /* IE6-9 */
+		}
+		
+		h1{
+			font-family: 'Chewy', cursive;
+			font-size: 100px;
+			color: black;
+			cursor:context-menu;
+		}
+		
+		h2{
+			cursor:context-menu;
+		}
+		
+		h2, h3{
+			font-family: 'Josefin Sans', sans-serif;
+		}
+		
+		h3, h4{
+			border-radius: 7px;
+			padding: 10px;
+			cursor: pointer;
+		}
+		
+		h4{
+			margin: 0px;
+			padding: 5px;
+		}
+		
+		.con, #preveri{
+			background: #FFFFFF;
+			padding: 20px;
+			margin-top: 20px;
+			border-radius: 5px;
+			-webkit-box-shadow: 0px 0px 70px -4px rgba(0,0,0,0.75);
+			-moz-box-shadow: 0px 0px 70px -4px rgba(0,0,0,0.75);
+			box-shadow: 0px 0px 70px -4px rgba(0,0,0,0.75);
+		}
+		
+		#preveri{
+			background-color: #7ACC29;
+			font-size: 25px;
+			color: white;
+		}
+		
+		.center{
+			max-width: 800px;
+			margin: 0 auto 0;
+		}
+		
+		a{
+			text-decoration: none;
+			color: black;
+		}
+	</style>
+</head>
+	
+<body>
+	<div class="center">
+		<div id="kviz">
+			<h1>Kriza v ZDA - kviz</h1>
+		</div>
+		
+		<div id="preveri" onclick="preveri()"><h4 id="display">Preveri!<h4></div>
+		<a href="index.html"><h3>Nazaj na domačo spletno stran</h3></a>
+	</div>
+	
+	<script>
+		var data = function (v, o1, o2, o3, o4, i) {
+		   this.vprasanje = v;
+		   this.odgovor1 = o1;
+		   this.odgovor2 = o2;
+		   this.odgovor3 = o3;
+		   this.odgovor4 = o4;
+		   this.izbira = i;
+		};	
+		
+		var vprasanja = [
+			new data(
+				"Zakaj je nastala mala gospodarska kriza?",
+				"Ker se je industrija morala preusmeriti iz vojaške v mirnodobno",
+				"Ker so prišli tajkuni in pokradli ves denar",
+				"Ker se med vojno ljudje niso šolali in je zmanjkalo izobraženih ljudi",
+				"Ker so bile med vojno vse tovarne uničene",
+				0),
+			new data(
+				"Katerega leta se je začela velika gospodarska kriza?",
+				"1920",
+				"1922",
+				"1928",
+				"1919",
+				0),
+			new data(
+				"Kateri predsednik je vladal v ZDA po 1.svetovni vojni?",
+				"Herbert Hoover",
+				"Franklin Delano Roosevelt",
+				"Barack Obama",
+				"Dwight David Eisenhower",
+				0),
+			new data(
+				"Kaj se je zgodilo na črni petek?",
+				"Cena delnic se je zelo spustila",
+				"Umrl je ameriški predsednik Herbert Hoover",
+				"Umrl je ameriški predsednik Franklin Delano Roosevelt",
+				"Amerika je vrgla atomsko bombo",
+				0),
+			new data(
+				"Kaj so vzroki za veliko gospodarsko krizo?",
+				"Vobtoku je bilo preveč denarja in dolžniki niso mogli odplačevati dolgov",
+				"Oropali so ameriško državno zakladnico in iz nje odnesli skoraj vse",
+				"Ker se je industrija morala preusmeriti iz vojaške v mirnodobno",
+				"Ameriška vojska je porabila preveč denarja",
+				0),
+			new data(
+				"Kaj so posledice velike gospodarske krize?",
+				"Zaprli so več tisoč bank in več milijonv ljudi po celem svetu je izgubilo službo",
+				"Ameriški predsednik je naredil samomor",
+				"Ljudje so ves svoj denar naložili v banke",
+				"Ljudje so ves svoj denar zakopali v zemljo",
+				0),
+			new data(
+				"Kako se imenuje nova gospodarska politika, ki so jo uporabili za reševanje krize?",
+				"New Deal",
+				"New Try",
+				"Great Deal",
+				"New Opportunity",
+				0),
+			new data(
+				"Na kakšen način so reševali krizo?",
+				"Zvišali so davke in znižali pokojnine in plače",
+				"Znižali so davke da je ljudem ostalo več denarja",
+				"Zaprli so tovarne ki so imele premalo zaposlenih",
+				"Zvišali so plače in pokojnine, da so ljudje lahko več kupovali",
+				0),
+			new data(
+				"Kaj je povzročila denarna reforma?",
+				"Da je postal dolar odvisen od količine srebra v lasti države",
+				"Da je postal dolar odvisen od količine zlata v lasti države",
+				"Da so vsi, ki so imeli preveč denarja morali dati nekaj denarja revnim",
+				"Zvišanje vrednosti dolarja",
+				0),
+			new data(
+				"Kaj je povzročila reforma industrije?",
+				"Podjetjem določa kako si lahko konkurirajo",
+				"Da morajo podjetja plačevati več davkov",
+				"Podjetjem omejuje kaj lahko izdelujejo",
+				"Podjetja prisili da zaposlijo brezposelne ljudi",
+				0)
+		];
+		
+		for(i=0; i < vprasanja.length; i++){
+			var odgovori = [
+				'<h3 id="1s'+i+ '" onclick="izberi(1,' + i + ')">' + vprasanja[i].odgovor1 + '</h3>',
+				'<h3 id="2s'+i+ '" onclick="izberi(2,' + i + ')">' + vprasanja[i].odgovor2 + '</h3>',
+				'<h3 id="3s'+i+ '" onclick="izberi(3,' + i + ')">' + vprasanja[i].odgovor3 + '</h3>',
+				'<h3 id="4s'+i+ '" onclick="izberi(4,' + i + ')">' + vprasanja[i].odgovor4 + '</h3>'];
+				
+				odgovori = shuffle(odgovori);
+			var vprasanjeOdgovori = 
+				'<div class="con"><h2 id="id' + (i+1) + '">' + (i+1) + '. ' + vprasanja[i].vprasanje + '</h2>' + odgovori[0]+odgovori[1]+odgovori[2]+odgovori[3] + '</div>';
+			
+			document.getElementById("kviz").innerHTML += vprasanjeOdgovori;
+		}
+		
+		function shuffle(array) {
+			  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+			  // While there remain elements to shuffle...
+			  while (0 !== currentIndex) {
+
+				// Pick a remaining element...
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+
+				// And swap it with the current element.
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			  }
+
+			  return array;
+		}
+		
+		function izberi(odg, st){
+			vprasanja[st].izbira = odg;
+			for(i=1; i<5; i++){
+				document.getElementById(i + 's' + st).style.border = "0px solid #CCCCCC";
+				document.getElementById(i + 's' + st).style.padding = "10px";
+			}
+			document.getElementById(odg + 's' + st).style.border = "1px solid #CCCCCC";
+			document.getElementById(odg + 's' + st).style.padding = "9px";
+			
+		}
+		
+		function preveri(){
+			var pravilnih = 0;
+			for(i=1; i<(vprasanja.length +1); i++){
+				if(vprasanja[i-1].izbira == 1){
+					document.getElementById('id'+i).style.color = "green";
+					pravilnih++;
+				}
+				else{
+					document.getElementById('id'+i).style.color = "red";
+				}
+			}
+			document.getElementById("display").innerHTML = 'Pravilnih je ' + pravilnih + '/' + vprasanja.length + ' odgovorov' ;
+			document.getElementById("preveri").style.cursor = "context-menu";
+		}
+	</script>
+</body>
+</html>

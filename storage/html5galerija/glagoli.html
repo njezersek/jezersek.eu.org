@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="media/favicon.ico" type="image/x-icon">
+	<title>Glagoli</title>
+	<style>
+		body{
+			font-family: calibri;
+			color: #8F5500;
+			margin: 0px;
+			padding: 0px;
+			background: #d6d4d1; /* Old browsers */
+			background: -moz-linear-gradient(left,  #d6d4d1 0%, #eaeaea 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,#d6d4d1), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* IE10+ */
+			background: linear-gradient(to right,  #d6d4d1 0%,#eaeaea 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d4d1', endColorstr='#eaeaea',GradientType=1 ); /* IE6-9 */
+
+
+		}
+		
+		h1{
+			color: #CCA300;
+			width: 100%;
+			top: -60px;
+			z-index: -6;
+			text-align: center;
+			position: absolute;
+			font-size: 70px;
+		}
+	
+		.content{
+			width: 100%;
+			max-width:800px;
+			margin:50px auto;
+			background: #FFF;
+			border-radius: 10px;
+			-webkit-border-radius:10px;
+			-moz-border-radius: 10px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+		}
+		
+		.content2{
+			padding: 30px;
+		}
+		
+		#vprasanje{
+			background: #CC7A00;
+			padding: 20px 30px 15px 30px;
+			border-radius: 10px 10px 0 0;
+			margin: -30px -30px 30px -30px;
+			-webkit-border-radius: 10px 10px 0 0;
+			-moz-border-radius: 10px 10px 0 0;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'calibri', serif;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			border: 1px solid #CC7A00;
+		}
+		
+		#odgovor{
+			clear: both;
+			border: 4px solid #fff;
+			font-size: 22px;
+			margin-top: 90px;
+			color: #1A1A1A;
+			min-height: 40px;
+		}
+		
+		#submit{
+			height: 35px;
+			width: 10%;
+			background: #CC7A00;
+			border-radius: 0px 5px 5px 0px;
+			-webkit-border-radius: 0px 5px 5px 0px;
+			-moz-border-radius: 0px 5px 5px 0px;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'calibri', serif;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			border: 1px solid #CC7A00;
+			font-size: 15px;
+			float: left;
+		}
+		
+		#submit:hover{
+			background: #D18719;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+		}
+		
+		.padding{
+			padding: 7px;
+		}
+		
+		#answer{
+			height: 37px;
+			width: 89%;
+			display: block;
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			padding: 8px 0 8px;
+			border-radius: 5px 0px 0px 5px;
+			-webkit-border-radius: 5px 0px 0px 5px;
+			-moz-border-radius: 5px 0px 0px 5px;
+			border: 1px solid #BABABA;
+			box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+			-moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+			-webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+			float: left;
+			font-size: 18px;
+		}
+		
+		#answer:focus{
+			border: solid 1px #CC7A00;
+			outline: none; 
+		}
+		
+		.stolpec{
+			width: 50%;
+			float: left;
+		}
+		
+		.con-r{
+			padding: 0 20px 0;
+			background: #F8F8F8;
+			border: 1px solid #CFCFCF;
+			border-radius: 6px;
+			margin-bottom: 15px;
+			margin-left: 10px;
+		}
+		
+		.con-l{
+			padding: 0 20px 0;
+			background: #F8F8F8;
+			border: 1px solid #CFCFCF;
+			border-radius: 6px;
+			margin-bottom: 15px;	
+			margin-right: 10px;
+		}
+		
+		::selection {
+			background: rgba(225, 225, 225, 0); /* WebKit/Blink Browsers */
+		}
+		::-moz-selection {
+			background: rgba(225, 225, 225, 0); /* Gecko Browsers */
+		}
+		
+		footer{
+			clear: both;
+			color: #4A4A4A;
+		}
+		
+		a{
+			color: #CC7A00;
+			text-decoration: none;
+			font-weight: bold;
+		}
+		
+		.right{
+			text-align: right;
+		}
+		
+		@media screen and (max-width: 800px) {
+			.content{
+				margin: 40px auto;
+			}
+			
+			.content2{
+				padding: 0px 30px 30px 30px;
+			}
+			
+			#vprasanje{
+				margin: -40px -30px 30px -30px;
+				border-radius:0;
+				-webkit-border-radius: 0;
+				-moz-border-radius: 0;
+			}
+		
+			#answer{
+				width: 84%;
+			}
+			
+			#submit{
+				width: 15%;
+			}
+			
+			h1{
+				color: #CC7A00;
+				width: 100%;
+				top: -40px;
+				z-index: -6;
+				text-align: center;
+				position: absolute;
+				font-size: 50px;
+			}
+		}
+		
+		@media screen and (max-width: 600px) {	
+			#answer{
+				width: 79%;
+			}
+			
+			#submit{
+				width: 20%;
+			}
+		}
+		
+		@media screen and (max-width: 450px) {	
+			.content2{
+				padding: 0px 10px 10px 10px;
+			}
+			
+			#vprasanje{
+				margin: -40px -10px 10px -10px;
+			}
+			
+			#answer{
+				width: 69%;
+			}
+			
+			#submit{
+				width: 30%;
+			}
+			
+			#vprasanje{
+				font-size: 20px;
+			}
+			
+			#odgovor{
+				margin-top: 50px;
+				font-size: 16px;
+				min-height: 25px;
+			}
+			
+			h3, ul, li{
+				font-size: 14px;
+			}
+			
+			p{
+				font-size: 10px;
+			}
+		}
+		@media screen and (max-width: 400px) {	
+			.stolpec{
+				width: 100%;
+				clear: both;
+			}
+			
+			.con-r{
+				padding: 0 20px 0;
+				background: #F8F8F8;
+				border: 1px solid #CFCFCF;
+				border-radius: 6px;
+				margin-bottom: 15px;
+				margin-left: 0px;
+			}
+		
+			.con-l{
+				padding: 0 20px 0;
+				background: #F8F8F8;
+				border: 1px solid #CFCFCF;
+				border-radius: 6px;
+				margin-bottom: 15px;	
+				margin-right: 0px;
+			}
+		}
+		
+		@media screen and (max-width: 250px) {	
+			#answer{
+				width: 56%;
+			}
+			
+			#submit{
+				width: 40%;
+			}
+		}
+		
+		@media screen and (max-width: 200px) {	
+			#submit{
+				font-size: 10px;
+			}
+		}
+	</style>
+</head>
+	
+<body id="body">
+	<h1>Angleški nepravilni glagoli</h1>
+		<div class="content">
+		<div class="content2">
+			<h2 id="vprasanje"></h2>
+
+				<form onsubmit="return false" id="frm1">
+						<input id="answer" type="text" name="answer" value="" autocomplete="off">
+						<div id="submit" onclick="submit()"><div class="padding">Odgovori</div></div>
+				</form> 
+
+			<h2 id="odgovor"></h2>
+			<div class="seznam">
+				<div class="stolpec">
+					<div class="con-l">
+						<h3>Ne znam</h3>
+						<ul id="neznam">
+							<p>ta seznam je prazen</p>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="stolpec">
+					<div class="con-r">
+						<h3>Znam</h3>
+						<ul id="znam">
+							<p>ta seznam je prazen</p>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<footer>
+				<p>Ta spletna aplikacija si zapomni kaj že znate in kaj ne, zato uporablja piškotke, ki se shranijo v vaš brskalnik. Če piškotkov ne želite več oziroma bi radi resetirali aplikacijo <a href="#" onclick="clearCookie()">kliknite tukaj</a> in nato osvežite spletno stran.</p>
+				<p>Če ste našli napako v aplikaciji ali pa imate idejo kako jo izboljšati mi lahko pošljete email na <a href="mailto:njezersek@gmail.com?Subject=Nepravilni%20glagoli">njezersek@gmail.com</a>.</p>
+				<p>Za ogled te spletne strani je najbolj primeren Google Chrome.</p>
+				<a href="index.html">Nazaj na domačo stran</a>
+				<p class="right">Angleški nepravilni glagoli - 2014 - vse pravice pridržane - Nejc</p>
+			</footer>
+		</div>
+	</div>
+
+<script>
+var answer = '';
+
+var form = 0;
+
+var Glagol = function (verb, simple, particip, slo) {
+   this.Verb = verb;
+   this.Simple = simple;
+   this.Participle = particip;
+   this.Translation = slo;
+};
+
+//===================================VERBS==================================//
+// 			verb		simple		participle	slo							//
+var glagoli = [
+new Glagol('be', 		'was/were', 'been', 	'biti'),					//1
+new Glagol('beat', 		'beat', 	'beaten', 	'tolči'),					//2
+new Glagol('become', 	'became', 	'become', 	'postati'),					//3
+new Glagol('begin', 	'began', 	'begun', 	'začeti'),					//4
+new Glagol('bite', 		'bit', 		'bitten', 	'ugrizniti'),				//5
+new Glagol('bleed', 	'bled', 	'bled', 	'krvaveti'),				//6
+new Glagol('blow', 		'blew', 	'blown', 	'pihati'),					//7
+new Glagol('break', 	'broke', 	'broken', 	'zlomiti'),					//8
+new Glagol('bring', 	'brought', 	'brought', 	'prinesti'),				//9
+new Glagol('build', 	'built', 	'built', 	'graditi'),					//10
+new Glagol('buy', 		'bought', 	'bouhgt', 	'kupiti'),					//11
+new Glagol('can/be able to','could','has/have been able to','moči'),		//12
+new Glagol('catch', 	'caught', 	'caught', 	'ujeti'),					//13
+new Glagol('choose', 	'chose', 	'chosen', 	'izbrati'),					//14
+new Glagol('come',	 	'came', 	'come', 	'priti'),					//15
+new Glagol('cost',	 	'cost', 	'cost', 	'stati'),					//16
+new Glagol('cut',	 	'cut',	 	'cut', 		'rezati'),					//17
+new Glagol('do',	 	'did',	 	'done', 	'delati'),					//18
+new Glagol('dream',	 	'dreamt',	'dreamt', 	'sanjati'),					//19
+new Glagol('drink',	 	'drank',	'drunk', 	'piti'),					//20
+new Glagol('drive',	 	'drove',	'driven', 	'voziti'),					//21
+new Glagol('eat',	 	'ate',		'eaten', 	'jesti'),					//22
+new Glagol('fall',	 	'fell',		'fallen', 	'pasti'),					//23
+new Glagol('feel',	 	'felt',		'felt', 	'čutiti'),					//24
+new Glagol('fight',	 	'fought',	'fought', 	'boriti se'),				//25
+new Glagol('find',	 	'found',	'found', 	'najti'),					//26
+new Glagol('fly',	 	'flew',		'flown', 	'leteti'),					//27
+new Glagol('forget', 	'forgot',	'forgotten','pozabiti'),				//28
+new Glagol('get', 		'got',		'got',		'dobiti'),					//29
+new Glagol('give', 		'gave',		'given',	'dati'),					//30
+new Glagol('go', 		'went',		'gone',		'iti'),						//31
+new Glagol('grow', 		'grew',		'grown',	'rasti'),					//32
+new Glagol('hang', 		'hung',		'hung',		'obviseti'),				//33
+new Glagol('have', 		'had',		'had',		'imeti'),					//34
+new Glagol('hear', 		'heard',	'heard',	'slišati'),					//35
+new Glagol('hit', 		'hit',		'hit',		'zadeti'),					//36
+new Glagol('hold', 		'held',		'held',		'držati'),					//37
+new Glagol('keep', 		'kept',		'kept',		'hraniti'),					//38
+new Glagol('know', 		'knew',		'known',	'vedeti'),					//39
+new Glagol('leave', 	'left',		'left',		'zapustiti'),				//40
+new Glagol('lend', 		'lent',		'lent',		'pristati'),				//41
+new Glagol('lose', 		'lost',		'lost',		'izgubiti'),				//42
+new Glagol('make', 		'made',		'made',		'narediti'),				//43
+new Glagol('meet', 		'met',		'met',		'srečati'),					//44
+new Glagol('pay', 		'paid',		'paid',		'plačati'),					//45
+new Glagol('put', 		'put',		'put',		'položiti'),				//46
+new Glagol('read', 		'read',		'read',		'brati'),					//47
+new Glagol('ride', 		'rode',		'ridden',	'jahati'),					//48
+new Glagol('ring', 		'rang',		'rung',		'zvoniti'),					//49
+new Glagol('rise', 		'rose',		'risen',	'dvigniti'),				//50
+new Glagol('run', 		'ran',		'run',		'teči'),					//51
+new Glagol('say', 		'said',		'said',		'reči'),					//52
+new Glagol('see', 		'saw',		'seen',		'videti'),					//53
+new Glagol('sell', 		'sold',		'sold',		'prodati'),					//54
+new Glagol('send', 		'sent',		'sent',		'poslati'),					//55
+new Glagol('shake', 	'shook',	'shaken',	'stresti'),					//56
+new Glagol('show', 		'showed',	'shown',	'pokazati'),				//57
+new Glagol('shine', 	'shone',	'shone',	'sijati'),					//58
+new Glagol('sing', 		'sang',		'sung',		'peti'),					//59
+new Glagol('sink', 		'sank',		'sunk',		'potoniti'),				//60
+new Glagol('sit', 		'sat',		'sat',		'sedeti'),					//61
+new Glagol('sleep', 	'slept',	'slept',	'spati'),					//62
+new Glagol('smell', 	'smelt',	'smelt',	'dišati'),					//63
+new Glagol('speak', 	'spoke',	'spoken',	'govoriti'),				//64
+new Glagol('spend', 	'spent',	'spent',	'porabiti'),				//65
+new Glagol('stand', 	'stood',	'stood',	'stati'),					//66
+new Glagol('steal', 	'stole',	'stolen',	'krasti'),					//67
+new Glagol('swim', 		'swam',		'swum',		'plavati'),					//68
+new Glagol('take', 		'took',		'taken',	'vzeti'),					//69
+new Glagol('teach', 	'taught',	'taught',	'učiti'),					//70
+new Glagol('tell', 		'told',		'told',		'povedati'),				//71
+new Glagol('think', 	'thought',	'thought',	'misliti'),					//72
+new Glagol('throw', 	'threw',	'thrown',	'vreči'),					//73
+new Glagol('understand','understood','understood','razumeti'),				//74
+new Glagol('upset',		'upset',	'upset',	'razburiti'),				//75
+new Glagol('wake',		'woke',		'woken',	'zbuditi'),					//76
+new Glagol('wear',		'wore',		'worn',		'nositi'),					//77
+new Glagol('win',		'won',		'won',		'zmagati'),					//78
+new Glagol('write',		'wrote',	'written',	'pisati')					//79 zadnji ne sme imeti vejice !!!
+];
+//==========================================================================//
+
+
+var verbId = Math.floor(Math.random()* glagoli.length);
+
+var Znam= [];
+var Neznam= [];
+var st = 0;
+
+//PIŠKITKI
+
+if((localStorage.gNeznam == "") || (localStorage.gNeznam == "undefined") || (localStorage.gNeznam == undefined)){
+			console.log('ni piskotka');
+	}
+else{
+	getNCookie();
+	console.log('klicem funkcijo');
+}
+
+if((localStorage.gZnam == "") || (localStorage.gZnam == "undefined") || (localStorage.gZnam == undefined)){	
+			console.log('ni piskotka');
+	}
+else{
+	getZCookie();
+	console.log('klicem funkcijo');
+}
+
+if((localStorage.verbs == "") || (localStorage.verbs == "undefined") || (localStorage.verbs == undefined)){	
+			console.log('ni piskotka');
+	}
+else{
+	getCookie();
+	console.log('klicem funkcijo');
+}
+
+
+function sendVerbs(){
+	var S = JSON.stringify(glagoli);
+	
+	localStorage.verbs = S;
+	return "cookies sent";
+
+}
+
+function sendNeznam(){
+	var Sn = JSON.stringify(Neznam);
+	
+	localStorage.gNeznam = Sn;
+	return "cookies sent";
+	console.log('neznam');
+}
+
+function sendZnam(){
+	var Sz = JSON.stringify(Znam);
+	
+	localStorage.gZnam = Sz;
+	return "cookies sent";
+	console.log('znam');
+}
+
+function clearCookie(){
+	reset();
+	localStorage.verbs = '';
+	localStorage.gNeznam = '';
+	localStorage.gZnam = '';
+	return "cookies cleared";
+}
+
+function displayCookie(){
+	console.log(localStorage.verbs)
+	console.log(localStorage.gNeznam)
+	console.log(localStorage.gZnam)
+	return "cookies displayed";
+}
+
+function getCookie(){
+	glagoli = '';
+	var S = localStorage.verbs;
+	glagoli = JSON.parse(S);
+}
+
+function getNCookie(){
+	Neznam = '';
+	var Sn = localStorage.gNeznam;
+	Neznam = JSON.parse(Sn);
+	izpisiNeznam();
+}
+
+function getZCookie(){
+	Znam = '';
+	var Sz = localStorage.gZnam;
+	Znam = JSON.parse(Sz);
+	izpisiZnam();
+}
+
+//
+
+var vprasanje = document.getElementById("vprasanje"); //vprasanje
+var odgovor = document.getElementById("odgovor");	//odgovor
+
+vprasanje.innerHTML = 'Past simple: ' + glagoli[verbId].Verb + '?';	
+document.getElementById("answer").value = '';
+
+//FUNKCIJA SUBMIT//
+
+
+function submit() {
+	var x = document.getElementById("frm1");
+		answer = x.elements[0].value.toLowerCase(); //  user input
+		if(form == 0){
+			if(answer == (glagoli[verbId].Simple)){
+				odgovor.innerHTML = 'Odlično!';	
+				st++;	
+			}
+			else{
+				odgovor.innerHTML = 'Narobe. Pravilno je ' + glagoli[verbId].Simple + '.';	
+			}	
+		}		
+		else if (form == 1){
+
+			if(answer == (glagoli[verbId].Participle)){	
+				odgovor.innerHTML = 'Odlično!';
+				st++;
+			}	
+			else{																				//	GENERATOR ODGOVORA
+				odgovor.innerHTML = 'Narobe. Pravilno je ' + glagoli[verbId].Participle + '.';	
+			}
+		}
+		else if (form == 2){
+
+			if(answer == (glagoli[verbId].Translation)){
+				odgovor.innerHTML = 'Odlično!';
+				st++;
+			}	
+			else{
+				odgovor.innerHTML = 'Narobe. Pravilno je ' + glagoli[verbId].Translation + '.';	
+			}
+
+		if(st == 3) {
+			var index = Neznam.indexOf(glagoli[verbId].Verb);
+			if (index >= 0) {//če je glagol na seznamu Neznam
+				Neznam.splice(index,1);//izbrise glagol s seznama Neznam
+				izpisiNeznam();//izpise seznam Neznam
+				console.log('brisem');
+			}
+			else{
+				if (Znam.indexOf(glagoli[verbId].Verb) > 0);
+				else {//če glagola ni na seznamu Znam
+					Znam.push(glagoli[verbId].Verb);
+					console.log('pisem');
+				}
+				console.log('nic');
+			}
+			izpisiZnam();
+			glagoli.splice(verbId,1);
+			sendVerbs();
+		}
+		
+		else if(st == 0) {
+			glagoli.push(glagoli[verbId]);			
+			Neznam.push(glagoli[verbId].Verb);		
+
+			izpisiNeznam();				
+			sendVerbs();
+		}	
+
+			verbId = Math.floor(Math.random()* glagoli.length);							//	
+			st = 0;
+		}																				//
+		
+		
+		setTimeout(function(){odgovor.innerHTML = ''}, 2000)
+		preverikonec();
+			
+		if(form < 2){	//
+			form ++;	//
+		}				//  form loop (0-2)
+		else{			//
+			form = 0;	//
+		}
+		
+		
+		if (form == 0){																	//
+			vprasanje.innerHTML = 'Past simple: ' + glagoli[verbId].Verb + '?';			//
+			document.getElementById("answer").value = '';								//
+		}																				//
+		else if (form == 1){															//
+			vprasanje.innerHTML = 'Past participle: ' + glagoli[verbId].Verb + '?';		//
+			document.getElementById("answer").value = '';								//	GENERATOR VPRASANJ
+		}																				//
+		else if (form == 2){															//
+			vprasanje.innerHTML = 'Slovenski prevod: ' + glagoli[verbId].Verb + '?';	//
+			document.getElementById("answer").value = '';								//
+		}																				//
+		
+	}
+	
+function izpisiNeznam(){
+	var listNeznam = '';
+	if(Neznam.length >= 1){
+		for(i = 0; i < Neznam.length; i++){
+			var listNeznam = listNeznam + '<li>' + Neznam[i] + '</li>';
+			document.getElementById("neznam").innerHTML = listNeznam;
+		}
+	}
+	else{
+		document.getElementById("neznam").innerHTML = '<p class="center">ta seznam je prazen</p>';
+		console.log('ok')
+	}
+	sendNeznam();
+}
+
+function izpisiZnam(){
+	var listZnam = '';
+	
+	for(i = 0; i < Znam.length; i++){
+		var listZnam = listZnam + '<li>' + Znam[i] + '</li>';
+		document.getElementById("znam").innerHTML = listZnam;
+	}
+	
+	sendZnam();
+}
+	
+
+
+document.addEventListener('keydown', function(event) {
+	if	(event.keyCode == 13) {submit();}	
+});
+		
+function reset(){
+	Znam = '';
+	listZnam = '';
+	document.getElementById("znam").innerHTML = '';
+	Neznam = '';
+	listNeznam = '';
+	document.getElementById("neznam").innerHTML = '';
+}
+
+function preverikonec(){
+	if(glagoli.length < 0){
+		Neznam = '';
+		listNeznam = '';
+		Znam = '';
+		listZnam = '';
+		localStorage.verbs = '';
+		localStorage.gNeznam = '';
+		localStorage.gZnam = '';
+		document.getElementById("body").innerHTML = '<div class="content"><div class="content2"><h2 id="vprasanje">Znate že vse glagole!</h2><h2 id="odgovor">Če želite začeti znova, osvežite spletno stran.</h2><footer><p>Ta spletna aplikacija si zapomni kaj že znate in kaj ne, zato uporablja piškotke, ki se shranijo v vaš brskalnik. Če piškotkov ne želite več oziroma bi radi resetirali aplikacijo <a href="#" onclick="clearCookie()">kliknite tukaj</a> in nato osvežite spletno stran.</p><p>Če ste našli napako v aplikaciji ali pa imate idejo kako jo izboljšati mi lahko pošljete email na <a href="mailto:njezersek@gmail.com?Subject=Nepravilni%20glagoli">njezersek@gmail.com</a>.</p><p>Za ogled te spletne strani je najbolj primeren Google Chrome.</p><p class="right">Angleški nepravilni glagoli - 2014 - vse pravice pridržane - Nejc</p></footer></div></div>';
+	}
+}
+</script>
+	
+</body>
+
+</html>
+
+
+
+
+

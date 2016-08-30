@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style>
+		body{
+			margin: 0;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="display">
+	
+	</div>
+
+	<script>
+		var data = [
+			 'o','x','x',
+			 'o','_','_',
+			 'x','_','o'
+		]
+		
+		var data = [
+			 'x','x','_',
+			 'o','o','_',
+			 '_','_','_'
+		]
+		
+		data = ["_","_","_","_","_","_","_","_","_"];
+		var turn = "x";
+		
+		var player = "x";
+		var computer = "o";
+		
+		var Game = function(gameData, turn, change){
+			this.gameData = gameData;
+			if(turn == "x")var newTurn = "o";
+			else var newTurn = "x";
+			this.turn = newTurn;
+			this.prevTurn = turn;
+			this.value = evaluate(gameData);
+			this.nValue = null;
+			this.change = change;
+			
+			this.pGames = [];
+			
+			if(this.value == 0){
+			
+				//ustvari vse mozne igre
+				for(var i=0; i<this.gameData.length; i++){
+					if(this.gameData[i] == "_"){
+						this.gameData[i] = this.turn;
+						var newGame = this.gameData.slice();
+						this.gameData[i] = "_";
+						this.pGames[this.pGames.length] = new Game(newGame, this.turn, i);
+					}
+				}
+				
+				//uporabi minimax za dedovanje vrednotenja
+				if(this.turn == computer){ //isci najvecjo vrednost
+					var max = -10000
+					for(var p=0;p<this.pGames.length;p++){
+						if(this.pGames[p].nValue > max)max = this.pGames[p].nValue;
+						this.nValue = max;
+					}
+				}
+				else{ //isci najmanjso vrednost
+					var min = 10000
+					for(var p=0;p<this.pGames.length;p++){
+						if(this.pGames[p].nValue < min)min = this.pGames[p].nValue;
+						this.nValue = min;
+					}
+				}
+			}
+			else{
+				if(this.value == "_")this.nValue = 0;
+				else if(this.value == computer)this.nValue = 10;
+				else if(this.value == player)this.nValue = -10;
+			}
+			
+		}
+		
+		
+		function evaluate(gameData){
+			var players = ["x","o"];
+			for(var i=0; i<players.length; i++){
+				var p = players[i];
+				for(var j=0;j<3;j++){
+					if(gameData[j*3] == p && gameData[j*3+1] == p && gameData[j*3+2] == p)return p; //vodoravne
+				}
+				for(var j=0;j<3;j++){
+					if(gameData[j] == p && gameData[j+3] == p && gameData[j+6] == p)return p; //navpicne
+				}
+				if(gameData[0] == p && gameData[4] == p && gameData[8] == p)return p; //diagonale
+				if(gameData[2] == p && gameData[4] == p && gameData[6] == p)return p;
+			}
+			var c = 0;
+			for(var i=0; i<gameData.length; i++){
+				if(gameData[i] == "_")c++;
+			}
+			if(c==0)return "_";
+			return 0;
+		}
+		
+		function render(data){
+			console.log("   0 1 2");
+			var table = "";
+			table += "<table>";
+			for(y=0; y<3; y++){
+				table += "<tr>"
+				var line = y+": ";
+				for(x=y*3; x<y*3+3; x++){
+					table += "<td>"+data[x]+"</td>";
+					line += data[x]+" "
+				}
+				console.log(line);
+				table += "</tr>";
+			}
+			table += "</table>";
+			document.getElementById('display').innerHTML = table;
+		}
+		
+		function playerMove(){
+			var move = prompt("Izberi polje");
+			data[move] = player;
+			turn = computer;
+			update();
+		}
+		
+		function aiMove(){
+			//obrni turn ker je Game cuden
+		
+			if(turn == "x")var newTurn = "o";
+			else var newTurn = "x";
+		
+			var game = new Game(data, newTurn);
+			
+			move = 0;
+			for(var a=0; a<game.pGames.length; a++){
+				if(game.pGames[a].nValue == game.nValue)move = game.pGames[a].change;
+			}
+			
+			console.log(game);
+			//var move = prompt("Izberi polje za racunalnik");
+			data[move] = computer;
+			alert(move);
+			
+			turn = player;
+			update();
+		}
+		
+		function update(){		
+			render(data);
+			if(evaluate(data) == 0){
+				if(turn == player)playerMove();
+				else aiMove();			
+			}
+			else alert(evaluate(data));
+		}
+		
+		update();
+	</script>
+</body>	
+</html>

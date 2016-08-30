@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>
+	<style>
+		body{
+			margin: 0;
+			overflow: hidden;
+		}
+		
+		canvas{
+			background: #000;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="c">
+	</canvas>
+	
+	<script>
+		var c = document.getElementById('c');
+		var ctx = c.getContext('2d');
+		
+		var mouseX = 0;
+		var mouseY = 0;
+		
+		var triangle = [{x:20, y:20}, {x:500, y:300}, {x:300, y:600}];
+		function render(){
+			ctx.clearRect(0,0,c.width, c.height);
+			
+			
+				//	 | (x2 − x1) (y3 − y1) −  (x3 − x1) (y2 − y1) |/2
+			var p = Math.abs(((triangle[1].x - triangle[0].x) * (triangle[2].y - triangle[0].y)) - ((triangle[2].x - triangle[0].x) * (triangle[1].y - triangle[0].y)))/2;
+			var p1 = Math.abs(((triangle[1].x - triangle[0].x) * (mouseY - triangle[0].y)) - ((mouseX - triangle[0].x) * (triangle[1].y - triangle[0].y)))/2;
+			var p2 = Math.abs(((mouseX - triangle[0].x) * (triangle[2].y - triangle[0].y)) - ((triangle[2].x - triangle[0].x) * (mouseY - triangle[0].y)))/2;
+			var p3 = Math.abs(((triangle[1].x - mouseX) * (triangle[2].y - mouseY)) - ((triangle[2].x - mouseX) * (triangle[1].y - mouseY)))/2;
+			console.log(p, p1, p2, p3, p1+p2+p3);
+			if(p == p1+p2+p3)ctx.fillStyle = "lime";
+			else ctx.fillStyle = "red";
+			
+			
+			ctx.beginPath();
+			ctx.moveTo(triangle[0].x, triangle[0].y);
+			ctx.lineTo(triangle[1].x, triangle[1].y);
+			ctx.lineTo(triangle[2].x, triangle[2].y);
+			ctx.closePath();
+			ctx.fill();
+			ctx.strokeStyle = "green";
+			ctx.lineWidth = 3;
+			
+			ctx.beginPath();
+			ctx.moveTo(triangle[0].x, triangle[0].y);
+			ctx.lineTo(triangle[1].x, triangle[1].y);
+			ctx.lineTo(mouseX, mouseY);
+			ctx.closePath();
+			ctx.stroke();
+			
+			ctx.beginPath();
+			ctx.moveTo(triangle[0].x, triangle[0].y);
+			ctx.lineTo(mouseX, mouseY);
+			ctx.lineTo(triangle[2].x, triangle[2].y);
+			ctx.closePath();
+			ctx.stroke();
+			
+			ctx.beginPath();
+			ctx.moveTo(mouseX, mouseY);
+			ctx.lineTo(triangle[1].x, triangle[1].y);
+			ctx.lineTo(triangle[2].x, triangle[2].y);
+			ctx.closePath();
+			ctx.stroke();
+			
+		}
+		
+		window.addEventListener('mousemove', function(event){
+			mouseX = event.clientX;
+			mouseY = event.clientY;
+			render();
+		});
+		
+		window.addEventListener('resize', resize);
+		function resize(){
+		  c.width = window.innerWidth;
+		  c.height = window.innerHeight;
+		}
+
+		resize();
+		render();
+	</script>
+</body>

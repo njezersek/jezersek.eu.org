@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="media/favicon.ico" type="image/x-icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Test premikanja</title>
+	<style>
+		body{
+			margin: 0;
+			overflow: hidden;
+		}
+		
+		canvas{
+			border: black 1px solid;
+		}
+		
+		a{
+			text-decoration: none; 
+			color: #0066CC;
+		}
+	</style>
+</head>
+	
+<body>
+	<canvas id="canvas"></canvas>
+	<a href="index.html"><h3>Nazaj na domačo spletno stran</h3></a>
+	<script>
+(function () {
+	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+	window.requestAnimationFrame = requestAnimationFrame;
+})();
+
+
+window.onload = function init() {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	gameLoop();
+}
+
+window.addEventListener("keydown", function (e) {
+	keys[e.keyCode] = true;
+});
+window.addEventListener("keyup", function (e) {
+	keys[e.keyCode] = false;
+});
+
+
+var avatarX = 400,
+	avatarY = 300,
+	velX = 0,
+	velY = 0,
+	keys = [],
+	maxSpeed = 10;
+
+function gameLoop() {
+	whatKey();
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	canvas.width = 1280;
+	canvas.height = 720;
+
+	avatarX += velX;
+	avatarY += velY;
+
+	ctx.fillRect(avatarX, avatarY, 50, 50);
+
+	if(avatarX > canvas.width)avatarX = 0;
+	if(avatarX < 0)avatarX = canvas.width;
+	if(avatarY > canvas.height)avatarY = 0;
+	if(avatarY < 0)avatarY = canvas.height;
+
+	requestAnimationFrame(gameLoop);
+}
+
+function whatKey() {
+	if (keys[37]) {if (velX > -maxSpeed) velX -= 0.4;}
+	else if(velX < 0)velX += 0.1;
+	if (keys[39]) {if (velX < maxSpeed) velX += 0.4;}
+	else if(velX > 0)velX -= 0.1;
+	if (keys[40]) {if (velY < maxSpeed) velY += 0.4;}
+	else if(velY > 0)velY -= 0.1;
+	if (keys[38]) {if (velY > -maxSpeed) velY -= 0.4;}
+	else if(velY < 0)velY += 0.1;
+	
+	if ((velX > -0.1) && (velX < 0.1)) velX = 0;
+	if ((velY > -0.1) && (velY < 0.1)) velY = 0;
+}
+	</script>
+</body>
+</html>

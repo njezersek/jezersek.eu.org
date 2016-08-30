@@ -1,0 +1,235 @@
+body{
+	background: white;
+	margin: 0;
+	font-family: 'Comfortaa', cursive;
+}  
+
+.main{
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.main2{
+	max-width: 817px;
+	margin-left: auto;
+	margin-right: auto;
+}	 
+
+header{
+	background-color: #0052A3;
+	min-height: 100px;
+	margin: 0 0 10px;
+}
+
+.banner{
+	background-image: url(media/nejc_banner.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	height: 500px;
+}
+
+h1{
+	padding: 10px 10px 0;
+	color: white;
+	margin: 0;
+	font-size: 40px;
+}
+
+h2{
+	padding: 0 10px 0;
+	color: white;
+	margin: 0;
+}
+
+h3{
+	border-radius: 20px;
+	padding: 20px 10px 0;
+	color: #00478F;
+	margin: 0;
+	font-family: 'Sniglet', cursive;
+}
+
+a{
+	text-decoration: none;
+	color: #002952;
+}
+
+	a:hover{
+		color: #0052A3;
+	}
+
+p{
+	padding: 0 10px 0;
+	color: black;
+}
+
+footer{
+	background-color: #0052A3;
+	clear: both;
+	margin-top: 10px;
+}
+
+footer p{
+	padding: 5px 10px 5px;
+	color: white;
+}
+
+.jezik{
+	color: white;
+}
+
+	.jezik:hover{
+		color: #002952;
+	}
+
+nav{
+padding: 30px 0 10px;
+margin: 0;
+}
+
+nav ul{
+padding: 0;
+margin: 0;
+}
+
+nav ul li{
+display: inline;
+padding: 0 10px 0;
+color: white;
+margin: 0;
+text-decoration: none;
+}
+
+nav ul li:hover{
+border: 1px solid white;
+padding: 5px 9px 5px;
+border-radius: 4px;
+}
+
+#leva{
+	width: 50%;
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+#desna{
+	width: 50%;
+	float: right;
+	padding: 0;
+	margin: 0;
+}
+
+.full{
+	clear: both;
+}
+
+#a1{
+	background-image: url(media/nejc_banner.jpg);
+}
+#a2{
+	background-image: url(media/slika1.jpg);
+}
+#a3{
+	background-image: url(media/slika2.jpg);
+}
+#a4{
+	background-image: url(media/slika3.jpg);
+}
+#a5{
+	background-image: url(media/slika4.jpg);
+}
+#a6{
+	background-image: url(media/slika5.jpg);
+}
+#a7{
+	background-image: url(media/slika6.jpg);
+}
+#a8{
+	background-image: url(media/slika7.jpg);
+}
+#a9{
+	background-image: url(media/slika8.jpg);
+}
+#a10{
+	background-image: url(media/slika9.jpg);
+}
+#a11{
+	background-image: url(media/slika10.jpg);
+}
+#a12{
+	background-image: url(media/slika11.jpg);
+}
+#a13{
+	background-image: url(media/slika12.jpg);
+}
+#a14{
+	background-image: url(media/slika13.jpg);
+}
+#a15{
+	background-image: url(media/slika14.jpg);
+}
+#a16{
+	background-image: url(media/slika15.jpg);
+}
+#a17{
+	background-image: url(media/slika16.jpg);
+}
+#a18{
+	background-image: url(media/slika17.jpg);
+}
+#a19{
+	background-image: url(media/slika18.jpg);
+}
+#a20{
+	background-image: url(media/slika19.jpg);
+}
+#a21{
+	background-image: url(media/slika20.jpg);
+}
+#a22{
+	background-image: url(media/slika21.jpg);
+}
+#a23{
+	background-image: url(media/slika22.jpg);
+}
+#a24{
+	background-image: url(media/slika23.jpg);
+}
+
+.fluid{
+	width: 100%;
+	height: 150px;
+	float: left;
+	margin: auto;
+
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+	.fluid:hover > .opis{
+		visibility: visible;
+		background-color:rgba(250,250,250,0.7);
+	}
+
+.opis{
+	visibility: hidden;
+	font-size: 15px;
+	color: #0052A3;
+	padding: 10px 10px 10px;
+}
+
+/*.slika{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+#html{
+	background-image: url(media/HTML5.jpg);
+	width: 100%;
+	height: 300px;
+}

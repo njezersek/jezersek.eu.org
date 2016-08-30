@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>rotacija</title>
+	<style>
+		canvas{
+		  background: black;
+		  padding: 0;
+		  margin: 0;
+		}
+
+		body{
+		  margin: 0;
+		  overflow: hidden;
+		}
+	</style>
+  </head>
+
+  <body>
+
+    <canvas id="c">
+</canvas>
+    
+<script>
+var c = document.getElementById('c');
+var ctx = c.getContext('2d');
+var w=0,h=0;
+
+var pixels = [];
+
+var fov = 250;
+
+for(x = -250; x<250; x+=5){//tla
+	for(z = -250; z<250; z+=5){
+		pixels.push({x:x, y:40, z:z});
+	}
+}
+for(x = -250; x<250; x+=5){//strop
+	for(z = -250; z<250; z+=5){
+		pixels.push({x:x, y:-40, z:z});
+	}
+}
+for(x = -250; x<250; x+=1){//zid
+	for(y = -40; y<40; y+=1){
+		//pixels.push({x:x, y:y, z:0});
+	}
+}
+
+//kocka
+for(x = -15; x<15; x+=1){
+	for(y = 10; y<40; y+=1){
+		pixels.push({x:x, y:y, z:-100});
+		pixels.push({x:x, y:y, z:-130});
+	}
+}
+for(x = -15; x<15; x+=1){
+	for(z = -130; z<-100; z+=1){
+		pixels.push({x:x, y:40, z:z});
+		pixels.push({x:x, y:10, z:z});
+	}
+}
+for(y = 10; y<40; y+=1){
+	for(z = -130; z<-100; z+=1){
+		pixels.push({x:15, y:y, z:z});
+		pixels.push({x:-15, y:y, z:z});
+	}
+}
+
+function render(){
+	ctx.clearRect(0,0,w,h);
+	var i = pixels.length;
+	while(i--){
+		var pixel = pixels[i];
+		var scale = fov/(fov+pixel.z);
+		var x2d = pixel.x * scale + w/2;
+		var y2d = pixel.y * scale + h/2;
+		 //preveri da je pixel na zaslonu
+		if(x2d >= 0 && x2d <= w && y2d >= 0 && y2d <= h){
+			//pridobi mesto pixla
+			ctx.fillStyle = "green";
+			ctx.fillRect(x2d,y2d,1,1);
+		}
+		
+		//premikanje
+		pixel.z -= 1;
+		if(pixel.z < -fov)pixel.z += 2*fov;
+	}
+}
+
+function tick(){
+	render();
+	setTimeout(tick, 1);
+}
+
+//resizing
+window.addEventListener('resize', resize);
+function resize(){
+	w = c.width = window.innerWidth;
+	h = c.height = window.innerHeight;
+	render();
+}
+resize();
+tick();
+</script>
+
+  </body>
+</html>

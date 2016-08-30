@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="UTF-8">	
+	<title>Connect4</title>
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<style>
+		body{
+			background: #fff;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		
+		canvas{
+		}
+	</style>
+</head>
+	
+<body>
+	<canvas id="canvas"></canvas>
+	
+	<script>
+		var w = 0;
+		var h = 0;
+		
+		var rows = 6;
+		var columns = 7;
+		var size = 100;
+		var padding = 15;
+		var xOffset = 0;
+		var selected = -1;
+		
+		var game = [
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0]
+		];
+		var turn = 1;
+		
+		var c = document.getElementById('canvas');
+		var ctx = c.getContext('2d');
+		
+		function render(){
+			ctx.clearRect(0,0,w,h); //pocisti
+		
+			ctx.fillStyle = "#fff"; 
+			ctx.fillRect(0,0,w, h); //ozadje
+			
+			ctx.fillStyle = "#24a"; 
+			ctx.fillRect(xOffset,0,columns*size, rows*size); // igralna polosca
+			
+			for(var x=0; x<columns; x++){
+				for(var y=0; y<rows; y++){				
+					ctx.beginPath();
+					ctx.arc(x*size+size/2+xOffset, y*size+size/2, size/2-padding/2, 0, 2 * Math.PI, false); // polja
+					
+					if(game[y][x] == 0){
+						ctx.fillStyle = '#fff';
+					}
+					else if(game[y][x] == 1){
+						ctx.fillStyle = '#f00';
+					}
+					else if(game[y][x] == 2){
+						ctx.fillStyle = '#ff0';
+					}
+					ctx.fill();
+					ctx.lineWidth = padding/3;
+					ctx.strokeStyle = '#139';
+					ctx.stroke();
+				}
+			}
+			
+			if(selected > -1){
+				ctx.fillStyle = "rgba(0, 0, 55, 0.5)";
+				ctx.fillRect(selected*size+xOffset,0,size, rows*size); //izbran stolpec
+			}
+		}
+		
+		function place(selCol){
+			for(var y=rows-1; y>=0; y--){
+				if(game[y][selCol] == 0){
+					game[y][selCol] = turn;
+					turn = (turn%2)+1; //zamenjaj kdo je na potezi 1<>2;
+					
+					break;
+				}
+			}
+		}
+		
+		window.addEventListener('mousemove', function(event){
+			selected = Math.floor((event.clientX - xOffset)/size); //izracunaj izbran stolpec
+			if(selected>6||selected<0)selected=-1;
+			if(event.clientY > rows*size)selected=-1;
+			
+			render();
+		});
+		
+		window.addEventListener('click', function(event){
+			selected = Math.floor((event.clientX - xOffset)/size); //izracunaj izbran stolpec
+			if(selected>6||selected<0)selected=-1;
+			if(event.clientY > rows*size)selected=-1;
+			
+			place(selected);
+			render();
+		});
+	
+		function resize(){
+			c.height = h = window.innerHeight;
+			c.width = w = window.innerWidth;
+
+			if(h*columns < w*rows){
+				size = h/rows;
+				xOffset = (w - size*columns)/2;
+			}
+			else{
+				size = w/columns;
+				xOffset = 0;
+			}
+			padding = size / 6;
+			
+			render();
+		}
+		
+		window.addEventListener('resize', resize);
+		resize();
+	</script>
+</body>
+</html>

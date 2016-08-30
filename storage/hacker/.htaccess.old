@@ -1,0 +1,5 @@
+AuthType Basic
+AuthName "E, mali si malo zalutauo? Kodo molim!"
+AuthUserFile "/var/www/.htpasswd"
+Require valid-user
+

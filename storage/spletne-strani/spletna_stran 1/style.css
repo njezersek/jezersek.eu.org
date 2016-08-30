@@ -1,0 +1,119 @@
+body, div, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, img, form, fieldset, input, textarea, blockquote {
+	margin: 0; padding: 0; border: 0;
+}
+
+body {
+	background: #fff;
+	font: 16px/30px "Helvetica", sans-serif;
+	color: #333;
+}
+
+a {
+	color: #51749f;
+	text-decoration: none;
+}
+	a:hover {
+		color: #274a76;
+	}
+
+header {
+	height: 100px;
+	position: fixed;
+	width: 100%;
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 0%, #d6d6d6 100%); 
+	background: -webkit-linear-gradient(top, #ffffff 0%,#d6d6d6 100%); 
+	box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+	z-index: 10;
+}
+	#header-content {
+		width: 1000px; margin: 0 auto; padding: 35px 0 0 0;
+		overflow: hidden;
+	}
+		#header-content h1 {
+			float: left;
+			font-size: 50px; text-transform: uppercase; letter-spacing: 10px;
+			padding-bottom: 10px;
+		}
+		#header-content nav {
+			float: right;
+		}
+			#header-content nav li {
+				float: left;
+				font-size: 20px;
+				margin: 0 0 0 20px;
+				list-style: none;
+			}
+
+
+#banner {
+	height: 500px;
+	position: fixed;
+	background-size: cover;
+	background-position: bottom;
+	width: 100%;
+	top: 100px;
+}
+
+.domov{
+background: url(media/domov_banner.jpg);
+}
+
+.omeni{
+background: url(media/omeni_banner.jpg);
+}
+
+.galerija{
+background: url(media/galerija_banner.jpg);
+}
+
+.povezave{
+background: url(media/povezave_banner.jpg);
+}
+
+.članki{
+background: url(media/članki_banner.jpg);
+}
+
+.kontakt{
+background: url(media/kontakt_banner.jpg);
+}
+	#banner h2 {
+		margin: 130px auto;
+		color: #fff;
+		width: 800px;
+		font-size: 40px; line-height: 60px; text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 5px;
+		text-shadow: 0 3px 5px rgba(0,0,0,0.3);
+	}
+	
+
+#content {
+	background: #fff;
+	width: 100%; 
+	position: relative;
+	top: 500px;
+	z-index: 5;
+}
+
+section {
+	width: 1000px; padding: 5px 0 0 5px;
+	margin: 0 auto;
+}
+	sectoin p {
+		margin: 0 0 30px 0;
+	}
+
+footer {
+	width: 100%; padding: 10px 0 0 0;
+	margin: 10px auto;
+	background-color: #859EBC;
+}
+	footer p {
+		margin: 0 0 30px 0;
+	}
+
+.okrogla{
+border-radius: 5px;
+}

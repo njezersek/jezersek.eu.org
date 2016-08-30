@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Kača</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<style>
+		body{
+			background: #d6d4d1; /* Old browsers */
+			background: -moz-linear-gradient(left,  #d6d4d1 0%, #eaeaea 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,#d6d4d1), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* IE10+ */
+			background: linear-gradient(to right,  #d6d4d1 0%,#eaeaea 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d4d1', endColorstr='#eaeaea',GradientType=1 ); /* IE6-9 */
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+		}
+		canvas{
+			background: white;
+		}
+		body, html, canvas{margin: 0; padding: 0; font-family: 'Roboto', sans-serif;}
+		#vrstica{display: flex; background: #666666; margin-top: -4px; height: 100px;}
+		#vrstica div{}
+		#menuButton{
+			height: 100%;
+			width: 200px;
+			background: #007FFF;
+			font-size: 30px;
+			transition-property: background;
+			transition-duration: 0.3s;
+			cursor: pointer;
+		}
+		#menuButton:hover{
+			background: #006CD9;
+		}
+		#menuButton p{
+			text-align: center;
+			color: #FFFFFF;
+			margin-top: 15px;
+			margin-bottom: 0;
+		}
+		#dispalyLife{
+			font-size: 50px;
+			width: 50%;
+			margin: 0 auto 0;
+			padding: 0;
+			cursor:default;
+		}
+		#dispalyLife span{
+			margin: 0 5px 0;
+		}
+		.poln{
+			color: #D93600;
+		}
+		.prazen{
+			color: #AAAAAA;
+		}
+		#tocke{
+			font-size: 30px;
+			color: #FFFFFF;
+			margin: 15px 20px 0;
+			cursor:default;
+		}
+		h1{
+			font-size: 50px;
+			margin: 0;
+		}
+		.menu-gumb{
+			padding: 10px;
+			font-size: 20px;
+			transition-property: background;
+			transition-duration: 0.3s;
+			background: #007FFF;
+			border-radius: 7px;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			cursor: pointer;
+			margin: 5px 0 5px;
+		}
+		.menu-gumb:hover{
+			background: #006CD9;
+		}
+		
+		#game, #game-over, #rekord, #nastavitve{
+			display: none;
+		}
+		
+		/*MENU STYLE*/
+		
+		.container{
+			width: 100%;
+			max-width:800px;
+			margin:50px auto;
+			background: #FFF;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			min-height: 500px;
+		}
+		
+		.padding{
+			padding: 30px;
+		}
+		
+		header{
+			background: #007FFF;
+			padding: 20px 30px 15px 30px;
+			margin: -30px -30px 30px -30px;
+			border-radius: 5px 5px 0 0;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+		}
+		
+	</style>
+</head>
+	
+<body id="body">
+	<div id="game">
+		<canvas id="canvas"></canvas>
+		<div id="vrstica">
+			<div class="button" id="menuButton" onclick="igraKaca.pokaziMenu()"><p>Menu</p></div>
+			<div id="dispalyLife"></div>
+			<div id="tocke"></div>
+		</div>
+	</div>
+	<div id="con" class="container">
+		<div class="padding">
+			<div id="game-over">
+				<header>
+					<h1>Konec igre!</h1>
+				</header>
+				<h3 id="tockeDisplay"></h3>
+				<h3 id="rekordDisplay"></h3>
+				<div class="menu-gumb" onclick="novaIgra()">Ponovi</div>
+				<div class="menu-gumb" onclick="igraKaca.pokaziMenu()">Menu</div>
+			</div>
+			<div id="menu">
+				<header>
+					<h1>Kača</h1>
+				</header>
+				<div class="menu-gumb" onclick="novaIgra()">Nova igra</div>
+				<div class="menu-gumb" id="nadaljuj" onclick="igraKaca.pokaziIgro()">Nadaljuj</div>
+				<div class="menu-gumb" onclick="igraKaca.pokaziNastavitve()">Nastavitve</div>
+				<div class="menu-gumb" onclick="igraKaca.pokaziRekord()">Rekord</div>
+			</div>
+			<div id="nastavitve">
+				<header>
+					<h1>Nastavitve</h1>
+				</header>
+				<h2>Hitrost kače</h2>
+				<div class="menu-gumb" id="pocasi" onclick="igraKaca.spremeniHitrost(300)">Počasi</div>
+				<div class="menu-gumb" id="srednje" onclick="igraKaca.spremeniHitrost(200)">Srednje</div>
+				<div class="menu-gumb" id="hitro" onclick="igraKaca.spremeniHitrost(100)">Hitro</div>
+				<h2>Barva kače</h2>
+				<div class="menu-gumb" id="zelena" onclick="igraKaca.spremeniBarvo(1)">Zelena</div>
+				<div class="menu-gumb" id="modra" onclick="igraKaca.spremeniBarvo(2)">Modra</div>
+				<div class="menu-gumb" id="rdeca" onclick="igraKaca.spremeniBarvo(3)">Rdeča</div>
+				<div class="menu-gumb" id="oranzna" onclick="igraKaca.spremeniBarvo(4)">Oranžna</div>
+				<div class="menu-gumb" id="rjava" onclick="igraKaca.spremeniBarvo(5)">Rjava</div>
+				<br>
+				<div class="menu-gumb" onclick="igraKaca.pokaziMenu()">Nazaj</div>
+			</div>
+			<div id="rekord">
+				<header>
+					<h1>Rekord</h1>
+				</header>
+				<h3 id="rekordDisplay1">rekord: </h3>
+				<div class="menu-gumb" onclick="igraKaca.pokaziMenu()">Nazaj</div>
+			</div>
+		</div>
+	</div>
+	<script src="kaca.js"></script>
+</body>
+</html>

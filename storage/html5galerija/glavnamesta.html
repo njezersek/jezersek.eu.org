@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="media/favicon.ico" type="image/x-icon">
+	<title>Glavna mesta evrope</title>
+	<style>
+		body{
+			font-family: calibri;
+			color: #00327D;
+			margin: 0px;
+			padding: 0px;
+			background: #d6d4d1; /* Old browsers */
+			background: -moz-linear-gradient(left,  #d6d4d1 0%, #eaeaea 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,#d6d4d1), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* IE10+ */
+			background: linear-gradient(to right,  #d6d4d1 0%,#eaeaea 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d4d1', endColorstr='#eaeaea',GradientType=1 ); /* IE6-9 */
+
+
+		}
+		
+		h1{
+			color: #3083D6;
+			width: 100%;
+			top: -60px;
+			z-index: -6;
+			text-align: center;
+			position: absolute;
+			font-size: 70px;
+		}
+	
+		.content{
+			width: 100%;
+			max-width:800px;
+			margin:50px auto;
+			background: #FFF;
+			border-radius: 10px;
+			-webkit-border-radius:10px;
+			-moz-border-radius: 10px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+		}
+		
+		.content2{
+			padding: 30px;
+		}
+		
+		#vprasanje{
+			background: #0066CC;
+			padding: 20px 30px 15px 30px;
+			border-radius: 10px 10px 0 0;
+			margin: -30px -30px 30px -30px;
+			-webkit-border-radius: 10px 10px 0 0;
+			-moz-border-radius: 10px 10px 0 0;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'calibri', serif;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			border: 1px solid #257C9E;
+		}
+		
+		.moznosti{
+			height: 35px;
+			width: 25%;
+			float: left;
+			cursor: pointer;
+		}
+		
+		
+		.moznost{
+
+			background: #0066CC;
+			border-radius: 7px;
+			-webkit-border-radius: 7px;
+			-moz-border-radius: 7px;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'calibri', serif;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			border: 1px solid #257C9E;
+			font-size: 20px;
+			padding: 10px;
+			margin: 3px;
+			
+		}
+		
+		.moznost:hover{
+			background: #1975D1;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+		}
+		
+		#odgovor{
+			clear: both;
+			border: 4px solid #fff;
+			font-size: 22px;
+			margin-top: 90px;
+			color: #1A1A1A;
+			min-height: 40px;
+		}
+		
+		#submit{
+			height: 35px;
+			width: 10%;
+			background: #0066CC;
+			border-radius: 0px 5px 5px 0px;
+			-webkit-border-radius: 0px 5px 5px 0px;
+			-moz-border-radius: 0px 5px 5px 0px;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'calibri', serif;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			border: 1px solid #257C9E;
+			font-size: 15px;
+			float: left;
+			cursor: pointer;
+		}
+		
+		#submit:hover{
+			background: #1975D1;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+		}
+		
+		.padding{
+			padding: 7px;
+		}
+		
+		#answer{
+			height: 37px;
+			width: 89%;
+			display: block;
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			padding: 8px 0 8px;
+			border-radius: 5px 0px 0px 5px;
+			-webkit-border-radius: 5px 0px 0px 5px;
+			-moz-border-radius: 5px 0px 0px 5px;
+			border: 1px solid #BABABA;
+			box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+			-moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+			-webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+			float: left;
+			font-size: 18px;
+		}
+		
+		#answer:focus{
+			border: solid 1px #0066CC;
+			outline: none; 
+		}
+		
+		.stolpec{
+			width: 50%;
+			float: left;
+		}
+		
+		.con-r{
+			padding: 0 20px 0;
+			background: #F8F8F8;
+			border: 1px solid #CFCFCF;
+			border-radius: 6px;
+			margin-bottom: 15px;
+			margin-left: 10px;
+		}
+		
+		.con-l{
+			padding: 0 20px 0;
+			background: #F8F8F8;
+			border: 1px solid #CFCFCF;
+			border-radius: 6px;
+			margin-bottom: 15px;	
+			margin-right: 10px;
+		}
+		
+		::selection {
+			background: rgba(225, 225, 225, 0); /* WebKit/Blink Browsers */
+		}
+		::-moz-selection {
+			background: rgba(225, 225, 225, 0); /* Gecko Browsers */
+		}
+		
+		footer{
+			clear: both;
+			color: #4A4A4A;
+		}
+		
+		a{
+			color: #003366;
+			text-decoration: none;
+			font-weight: bold;
+		}
+		
+		.right{
+			text-align: right;
+		}
+		
+		@media screen and (max-width: 800px) {
+			.content{
+				margin: 40px auto;
+			}
+			
+			.content2{
+				padding: 0px 30px 30px 30px;
+			}
+			
+			#vprasanje{
+				margin: -40px -30px 30px -30px;
+				border-radius:0;
+				-webkit-border-radius: 0;
+				-moz-border-radius: 0;
+			}
+		
+			#answer{
+				width: 84%;
+			}
+			
+			#submit{
+				width: 15%;
+			}
+			
+			h1{
+				display: none;
+			}
+		}
+		
+		@media screen and (max-width: 600px) {	
+			#answer{
+				width: 79%;
+			}
+			
+			#submit{
+				width: 20%;
+			}
+			
+			.moznosti{
+				width: 50%;
+				margin-bottom: 20px;
+			}
+		}
+		
+		@media screen and (max-width: 450px) {				
+			.content2{
+				padding: 0px 10px 10px 10px;
+			}
+			
+			#vprasanje{
+				margin: -40px -10px 10px -10px;
+			}
+			
+			#answer{
+				width: 69%;
+			}
+			
+			#submit{
+				width: 30%;
+			}
+			
+			#vprasanje{
+				font-size: 20px;
+			}
+			
+			#odgovor{
+				margin-top: 50px;
+				font-size: 16px;
+				min-height: 25px;
+			}
+			
+			h3, ul, li{
+				font-size: 14px;
+			}
+			
+			p{
+				font-size: 10px;
+			}
+		}
+		@media screen and (max-width: 400px) {	
+			.stolpec{
+				width: 100%;
+				clear: both;
+			}
+			
+			.con-r{
+				padding: 0 20px 0;
+				background: #F8F8F8;
+				border: 1px solid #CFCFCF;
+				border-radius: 6px;
+				margin-bottom: 15px;
+				margin-left: 0px;
+			}
+		
+			.con-l{
+				padding: 0 20px 0;
+				background: #F8F8F8;
+				border: 1px solid #CFCFCF;
+				border-radius: 6px;
+				margin-bottom: 15px;	
+				margin-right: 0px;
+			}
+			
+			.moznosti{
+				width: 100%;
+				margin-bottom: 20px;
+			}
+		}
+		
+		@media screen and (max-width: 250px) {	
+			#answer{
+				width: 56%;
+			}
+			
+			#submit{
+				width: 40%;
+			}
+		}
+		
+		@media screen and (max-width: 200px) {	
+			#submit{
+				font-size: 10px;
+			}
+		}
+	</style>
+</head>
+	
+<body id="body">
+	<h1>Glavna mesta v Evropi</h1>
+	<div class="content">
+		<div class="content2">
+			<h2 id="vprasanje"></h2>
+			<div id="KEY">
+				<form onsubmit="return false" id="frm1">
+						<input id="answer" type="text" name="answer" value="" autocomplete="off">
+						<div id="submit" onclick="submit()"><div class="padding">Odgovori</div></div>
+				</form> 
+			</div>
+			
+			<div id="ABCD">
+				<div class="moznosti"><h3 class="moznost" id="moznost1" onclick="preveri(0)"></h3></div>
+				<div class="moznosti"><h3 class="moznost" id="moznost2" onclick="preveri(1)"></h3></div>
+				<div class="moznosti"><h3 class="moznost" id="moznost3" onclick="preveri(2)"></h3></div>
+				<div class="moznosti"><h3 class="moznost" id="moznost4" onclick="preveri(3)"></h3></div>
+			</div>
+			<h2 id="odgovor"></h2>
+			<div class="seznam">
+				<div class="stolpec">
+					<div class="con-l">
+						<h3>Ne znam</h3>
+						<ul id="neznam">
+							<p>ta seznam je prazen</p>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="stolpec">
+					<div class="con-r">
+						<h3>Znam</h3>
+						<ul id="znam">
+							<p>ta seznam je prazen</p>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<footer>
+				<p><a onclick="preklopiNacin()" id="spr">Preklopi način!</p></a>
+				<p>Ta spletna aplikacija si zapomni kaj že znate in kaj ne, zato uporablja piškotke, ki se shranijo v vaš brskalnik. Če piškotkov ne želite več oziroma bi radi resetirali aplikacijo <a href="#" onclick="clearCookie()">kliknite tukaj</a> in nato osvežite spletno stran.</p>
+				<p>Če ste našli napako v aplikaciji ali pa imate idejo kako jo izboljšati mi lahko pošljete email na <a href="mailto:njezersek@gmail.com?Subject=Glavna%20mesta">njezersek@gmail.com</a>.</p>
+				<p>Za ogled te spletne strani je najbolj primeren Google Chrome.</p>
+				<a href="index.html">Nazaj na domačo stran</a>
+				<p class="right">Glavna mesta evrope - 2014 - vse pravice pridržane - Nejc</p>
+			</footer>
+		</div>
+	</div>
+
+<script>
+var answer = '';
+
+var drzava = function (ime, mesto) {
+   this.Ime = ime;
+   this.Mesto = mesto;
+};
+//==========================DRŽAVE==========================//
+//  #drzava			ime						mesto			//
+var drzave = [
+//VZHODNA EVROPA											//
+new drzava('Rusija', 			'Moskva'),					//1
+new drzava('Belorusija', 		'Minsk'),					//2
+new drzava('Ukrajina', 			'Kijev'),					//3
+new drzava('Kazahstan', 		'Astana'),					//4
+new drzava('Moldavija', 		'Kišinjev'),				//5
+//SEVERNA EVROPA											//
+new drzava('Norveška', 			'Oslo'),					//6
+new drzava('Finska', 			'Helsinki'),				//7
+new drzava('Švedska',		 	'Stockholm'),				//8
+new drzava('Litva', 			'Vilna'),					//9
+new drzava('Latvija', 			'Riga'),					//10
+new drzava('Estonija', 			'Talin'),					//11
+new drzava('Danska', 			'Kobenhavn'),				//12
+new drzava('Islandija',		 	'Reykavik'),				//13
+//SREDNJA EVROPA											//
+new drzava('Slovenija', 		'Ljubljana'),				//14
+new drzava('Madžarska', 		'Budimpešta'),				//15
+new drzava('Avstrija', 			'Dunaj'),					//16
+new drzava('Nemčija', 			'Berlin'),					//17
+new drzava('Švica', 			'Bern'),					//18
+new drzava('Poljska', 			'Varšava'),					//19
+new drzava('Češka', 			'Praga'),					//20
+new drzava('Slovaška', 			'Bratislava'),				//21
+new drzava('Lihtenštajn', 		'Lihtenštajn'),				//22
+//JUGOVZHODNA EVROPA										//
+new drzava('Hrvaška', 			'Zagreb'),					//23
+new drzava('Bosna in Hercegovina','Sarajevo'),				//24
+new drzava('Srbija', 			'Beograd'),					//25
+new drzava('Črna gora', 		'Podgorica'),				//26
+new drzava('Romunija', 			'Bukarešta'),				//27
+new drzava('Kosovo', 			'Priština'),				//28
+new drzava('Albanija', 			'Tirana'),					//29
+new drzava('Makedonija', 		'Skopje'),					//30
+new drzava('Bolgarija', 		'Sofija'),					//31
+//ZAHODNA EVROPA											//
+new drzava('Francija', 			'Pariz'),					//32
+new drzava('Nizozemska', 		'Amsterdam'),				//33
+new drzava('Belgija', 			'Bruselj'),					//34
+new drzava('Velika Britanija', 	'London'),					//35
+new drzava('Irska', 			'Dublin'),					//36
+new drzava('Monako', 			'Monako'),					//37
+new drzava('Luksemburg', 		'Luksemburg'),				//38
+//JUŽNA EVROPA												//
+new drzava('Italija', 			'Rim'),						//39
+new drzava('Grčija', 			'Atene'),					//40
+new drzava('Španija', 			'Madrid'),					//41
+new drzava('Portugalska', 		'Lizbona'),					//42
+new drzava('Ciper', 			'Nikozija'),				//43
+new drzava('Andora',			'Andora'),					//44
+new drzava('Vatikan', 			'Vatikan'),					//45
+new drzava('Malta', 			'Valletta'),				//46
+new drzava('San Marino', 		'San Marino')				//47
+];
+//==========================================================//
+
+//==========================ZA NAPAČNE ODGOVORE=============//
+//  #drzava			ime						mesto			//
+var napacne = [
+//VZHODNA EVROPA											//
+new drzava('Rusija', 			'Moskva'),					//1
+new drzava('Belorusija', 		'Minsk'),					//2
+new drzava('Ukrajina', 			'Kijev'),					//3
+new drzava('Kazahstan', 		'Astana'),					//4
+new drzava('Moldavija', 		'Kišinjev'),				//5
+//SEVERNA EVROPA											//
+new drzava('Norveška', 			'Oslo'),					//6
+new drzava('Finska', 			'Helsinki'),				//7
+new drzava('Švedska',		 	'Stockholm'),				//8
+new drzava('Litva', 			'Vilna'),					//9
+new drzava('Latvija', 			'Riga'),					//10
+new drzava('Estonija', 			'Talin'),					//11
+new drzava('Danska', 			'Kobenhavn'),				//12
+new drzava('Islandija',		 	'Reykavik'),				//13
+//SREDNJA EVROPA											//
+new drzava('Slovenija', 		'Ljubljana'),				//14
+new drzava('Madžarska', 		'Budimpešta'),				//15
+new drzava('Avstrija', 			'Dunaj'),					//16
+new drzava('Nemčija', 			'Berlin'),					//17
+new drzava('Švica', 			'Bern'),					//18
+new drzava('Poljska', 			'Varšava'),					//19
+new drzava('Češka', 			'Praga'),					//20
+new drzava('Slovaška', 			'Bratislava'),				//21
+new drzava('Lihtenštajn', 		'Lihtenštajn'),				//22
+//JUGOVZHODNA EVROPA										//
+new drzava('Hrvaška', 			'Zagreb'),					//23
+new drzava('Bosna in Hercegovina','Sarajevo'),				//24
+new drzava('Srbija', 			'Beograd'),					//25
+new drzava('Črna gora', 		'Podgorica'),				//26
+new drzava('Romunija', 			'Bukarešta'),				//27
+new drzava('Kosovo', 			'Priština'),				//28
+new drzava('Albanija', 			'Tirana'),					//29
+new drzava('Makedonija', 		'Skopje'),					//30
+new drzava('Bolgarija', 		'Sofija'),					//31
+//ZAHODNA EVROPA											//
+new drzava('Francija', 			'Pariz'),					//32
+new drzava('Nizozemska', 		'Amsterdam'),				//33
+new drzava('Belgija', 			'Bruselj'),					//34
+new drzava('Velika Britanija', 	'London'),					//35
+new drzava('Irska', 			'Dublin'),					//36
+new drzava('Monako', 			'Monako'),					//37
+new drzava('Luksemburg', 		'Luksemburg'),				//38
+//JUŽNA EVROPA												//
+new drzava('Italija', 			'Rim'),						//39
+new drzava('Grčija', 			'Atene'),					//40
+new drzava('Španija', 			'Madrid'),					//41
+new drzava('Portugalska', 		'Lizbona'),					//42
+new drzava('Ciper', 			'Nikozija'),				//43
+new drzava('Andora',			'Andora'),					//44
+new drzava('Vatikan', 			'Vatikan'),					//45
+new drzava('Malta', 			'Valletta'),				//46
+new drzava('San Marino', 		'San Marino')				//47
+];
+//==========================================================//
+
+//==================SPREMENLJIVKE===========================//
+var vprasanje = document.getElementById("vprasanje");		//vprasnje def
+var A = document.getElementById("moznost1");				//moznost1 def
+var B = document.getElementById("moznost2");				//moznost2 def
+var C = document.getElementById("moznost3");				//moznost3 def
+var D = document.getElementById("moznost4");				//moznost4 def
+var odgovor = document.getElementById("odgovor");			//odgovor def
+
+var idVprasanja = '';										//idVprasanja def
+var idM1 = '';												//idM1 def
+var idM2 = '';												//idM2 def
+var idM3 = '';												//idM3 def
+var idPravilniOdgovor = '';									//idPravilniOdgovor def
+
+var drzavaId = Math.floor(Math.random()* drzave.length);	//
+
+var Znam= [];												//znam def
+var Neznam= [];												//neznam def
+
+var nacin = 'abcd';											//nacin def
+//==========================================================//
+
+
+//PIŠKOTKI
+
+if((localStorage.cNeznam == "") || (localStorage.cNeznam == "undefined") || (localStorage.cNeznam == undefined)){
+
+	}
+else{
+	getNCookie();
+
+}
+
+if((localStorage.cZnam == "") || (localStorage.cZnam == "undefined") || (localStorage.cZnam == undefined)){	
+
+	}
+else{
+	getZCookie();
+
+}
+
+if((localStorage.drzave == "") || (localStorage.drzave == "undefined") || (localStorage.drzave == undefined)){	
+
+	}
+else{
+	getCookie();
+
+}
+
+
+function sendDrzave(){
+	var S = JSON.stringify(drzave);
+	
+	localStorage.drzave = S;
+	return "cookies sent";
+}
+
+function sendNeznam(){
+	var Sn = JSON.stringify(Neznam);
+	
+	localStorage.cNeznam = Sn;
+	return "cookies sent";
+}
+
+function sendZnam(){
+	var Sz = JSON.stringify(Znam);
+	
+	localStorage.cZnam = Sz;
+	return "cookies sent";
+}
+
+function clearCookie(){
+	reset();
+	localStorage.drzave = '';
+	localStorage.cNeznam = '';
+	localStorage.cZnam = '';
+	return "cookies cleared";
+}
+
+function displayCookie(){
+	console.log(localStorage.drzave)
+	console.log(localStorage.cNeznam)
+	console.log(localStorage.cZnam)
+	return "cookies displayed";
+}
+
+function getCookie(){
+	drzave = '';
+	var S = localStorage.drzave;
+	drzave = JSON.parse(S);
+}
+
+function getNCookie(){
+	Neznam = '';
+	var Sn = localStorage.cNeznam;
+	Neznam = JSON.parse(Sn);
+	izpisiNeznam();
+}
+
+function getZCookie(){
+	Znam = '';
+	var Sz = localStorage.cZnam;
+	Znam = JSON.parse(Sz);
+	izpisiZnam();
+}
+
+//
+
+preklopiNacin();
+
+function vprasanjeGenBrez() {//generator 
+	vprasanje.innerHTML = 'Katero glavno mesto ima ' + drzave[drzavaId].Ime + '?';	//prvo vprašanje
+	document.getElementById("answer").value = '';
+}
+
+function vprasanjeGen(){
+	idVprasanja = Math.floor(Math.random()* drzave.length);	//naključno vprašanje in odgovor
+
+	idM1 = Math.floor(Math.random()* napacne.length);		//naključna možnost odgovora
+	idM2 = Math.floor(Math.random()* napacne.length);		//naključna možnost odgovora
+	idM3 = Math.floor(Math.random()* napacne.length);		//naključna možnost odgovora
+
+	idPravilniOdgovor = Math.floor(Math.random()* 4);
+
+	if((drzave[idVprasanja].Mesto == napacne[idM1].Mesto)||(drzave[idVprasanja].Mesto == napacne[idM2].Mesto)||(drzave[idVprasanja].Mesto == napacne[idM3].Mesto)){//preveri če sta dve enaki možnosti
+		vprasanjeGen();
+	}
+	else{
+		vprasanje.innerHTML = 'Katero glavno mesto ima ' + drzave[idVprasanja].Ime + '?';	//vprašanje
+		if (idPravilniOdgovor == 0){//če je pravilen odgovor A
+			A.innerHTML = drzave[idVprasanja].Mesto;
+			B.innerHTML = napacne[idM1].Mesto;
+			C.innerHTML = napacne[idM2].Mesto;
+			D.innerHTML = napacne[idM3].Mesto;
+		}
+		if (idPravilniOdgovor == 1){//če je pravilen odgovor B
+			A.innerHTML = napacne[idM1].Mesto;
+			B.innerHTML = drzave[idVprasanja].Mesto;
+			C.innerHTML = napacne[idM2].Mesto;
+			D.innerHTML = napacne[idM3].Mesto;
+		}
+		if (idPravilniOdgovor == 2){//če je pravilen odgovor C
+			A.innerHTML = napacne[idM1].Mesto;
+			B.innerHTML = napacne[idM2].Mesto;
+			C.innerHTML = drzave[idVprasanja].Mesto;
+			D.innerHTML = napacne[idM3].Mesto;
+		}
+		if (idPravilniOdgovor == 3){//če je pravilen odgovor D
+			A.innerHTML = napacne[idM1].Mesto;
+			B.innerHTML = napacne[idM2].Mesto;
+			C.innerHTML = napacne[idM3].Mesto;
+			D.innerHTML = drzave[idVprasanja].Mesto;
+		}
+	}
+}
+
+
+//FUNKCIJA SUBMIT//
+
+function submit() {
+	
+	var x = document.getElementById("frm1");
+	answer = x.elements[0].value.toLowerCase(); 	
+	if(answer == (drzave[drzavaId].Mesto).toLowerCase()){	/* ČE je odgovor PRAVILEN */						
+		odgovor.innerHTML = 'Odlično!';	
+
+		var index = Neznam.indexOf(drzave[drzavaId].Ime);
+		if (index >= 0) {//če je drzava na seznamu Neznam
+			Neznam.splice(index,1);//izbrise drzavo s seznama Neznam
+			izpisiNeznam();//izpise seznam Neznam
+		}
+		else{
+			if (Znam.indexOf(drzave[drzavaId].Ime) > 0);
+			else {//če drzave ni na seznamu Znam
+				Znam.push(drzave[drzavaId].Ime);
+			}
+		}
+		
+		izpisiZnam();
+		drzave.splice(drzavaId, 1);
+		sendDrzave();
+	}
+	else{	/* ČE je odgovor NAPAČEN */
+		odgovor.innerHTML = 'Ne. Glavno mesto je ' + drzave[drzavaId].Mesto + '.';
+		Neznam.push(drzave[drzavaId].Ime);		
+		izpisiNeznam();
+		drzave.push(drzave[drzavaId]);										
+		sendDrzave();
+	}
+	preverikonec();
+	drzavaId = Math.floor(Math.random()* drzave.length);					
+	setTimeout(function(){odgovor.innerHTML = ''}, 4000);
+	vprasanjeGenBrez();
+	
+}
+
+function preveri(st){
+	if(idPravilniOdgovor == st){
+		odgovor.innerHTML = 'Odlično!';	//odgovor
+		
+		var index = Neznam.indexOf(drzave[idVprasanja].Ime);
+		if (index >= 0) {//če je drzava na seznamu Neznam
+			Neznam.splice(index,1);//izbrise drzavo s seznama Neznam
+			izpisiNeznam();//izpise seznam Neznam
+		}
+		else{
+			if (Znam.indexOf(drzave[idVprasanja].Ime) > 0);
+			else {//če drzave ni na seznamu Znam
+				Znam.push(drzave[idVprasanja].Ime);
+			}
+		}
+		
+		izpisiZnam();
+		drzave.splice(idVprasanja, 1);
+		sendDrzave();
+	}
+	else{
+		odgovor.innerHTML = 'Narobe! Pravilno je ' + drzave[idVprasanja].Mesto + '.';	//odgovor
+		
+		Neznam.push(drzave[idVprasanja].Ime);		
+		izpisiNeznam();
+		drzave.push(drzave[idVprasanja]);										
+		sendDrzave();
+	}
+	preverikonec();
+	next();
+}
+
+function next(){
+	vprasanjeGen();
+	setTimeout(function(){odgovor.innerHTML = ''}, 4000);
+}
+	
+function izpisiNeznam(){
+	var listNeznam = '';
+	if(Neznam.length >= 1){
+		for(i = 0; i < Neznam.length; i++){
+			var listNeznam = listNeznam + '<li>' + Neznam[i] + '</li>';
+			document.getElementById("neznam").innerHTML = listNeznam;
+		}
+	}
+	else{
+		document.getElementById("neznam").innerHTML = '<p class="center">ta seznam je prazen</p>';
+	}
+	sendNeznam();
+}
+
+function izpisiZnam(){
+	var listZnam = '';
+	
+	for(i = 0; i < Znam.length; i++){
+		var listZnam = listZnam + '<li>' + Znam[i] + '</li>';
+		document.getElementById("znam").innerHTML = listZnam;
+	}
+	
+	sendZnam();
+}
+	
+document.addEventListener('keydown', function(event) {
+	if(nacin == 'key'){
+	if	(event.keyCode == 13) {submit();}
+	}
+});
+
+function reset(){
+	Znam = '';
+	listZnam = '';
+	document.getElementById("znam").innerHTML = '';
+	Neznam = '';
+	listNeznam = '';
+	document.getElementById("neznam").innerHTML = '';
+}
+
+function preverikonec(){
+	if(drzave.length < 1){
+		Neznam = '';
+		listNeznam = '';
+		Znam = '';
+		listZnam = '';
+		localStorage.drzave = '';
+		localStorage.cNeznam = '';
+		localStorage.cZnam = '';
+		document.getElementById("body").innerHTML = '<div class="content"><div class="content2"><h2 id="vprasanje">Znate že vse države!</h2><h2 id="odgovor">Če želite začeti znova, osvežite spletno stran.</h2><footer><p>Ta spletna aplikacija si zapomni kaj že znate in kaj ne, zato uporablja piškotke, ki se shranijo v vaš brskalnik. Če piškotkov ne želite več oziroma bi radi resetirali aplikacijo <a href="#" onclick="clearCookie()">kliknite tukaj</a> in nato osvežite spletno stran.</p><p>Če ste našli napako v aplikaciji ali pa imate idejo kako jo izboljšati mi lahko pošljete email na <a href="mailto:njezersek@gmail.com?Subject=Glavna%20mesta">njezersek@gmail.com</a>.</p><p>Za ogled te spletne strani je najbolj primeren Google Chrome.</p><p class="right">Glavna mesta evrope - 2014 - vse pravice pridržane - Nejc</p></footer></div></div>';
+	}
+}
+
+function nastaviABCD(){
+	document.getElementById("ABCD").style.display = "block";
+	document.getElementById("KEY").style.display = "none";
+	vprasanjeGen();
+	nacin = 'abcd';
+	document.getElementById("spr").innerHTML = 'Spremeni način na vnos s tipkovnico.'
+}
+
+function nastaviKEY(){
+	document.getElementById("ABCD").style.display = "none";
+	document.getElementById("KEY").style.display = "block";
+	vprasanjeGenBrez();
+	nacin = 'key';
+	document.getElementById("spr").innerHTML = 'Spremeni način na ABCD.'
+}
+
+function preklopiNacin(){
+	if(nacin == 'key'){
+		nastaviABCD();
+	}
+	else{
+		nastaviKEY();
+	}
+}
+</script>
+
+</body>
+
+</html>
+
+
+
+
+

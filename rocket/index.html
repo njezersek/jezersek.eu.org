@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style>
+		body{
+			margin: 0;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="c" style="border: 0px solid black;">
+	</canvas>
+	<script>
+		var c = document.getElementById('c');
+		var ctx = c.getContext('2d');
+		var id = 0;
+		var Rocket = function(d, maxs, left, right, up, down, shoot, color){
+			this.id = id;
+			id++;
+			this.x = 0;
+			this.y = 0;
+			this.sx = 0;//speed
+			this.sy = 0;//speed
+			this.vd = 0;//hitrost zavijanja
+			this.s = 0;//speed
+            this.maxs = maxs;
+			this.a = 0;
+			this.d = d;//direction
+			
+			this.points = [{x:this.x-10,y:this.y-10},{x:this.x+30,y:this.y},{x:this.x-10,y:this.y+10}];
+			
+			this.left = left;
+			this.right = right;
+			this.up = up;
+			this.down = down; 
+            this.shoot = shoot;
+			
+			this.color = color;
+			
+			this.render = function(){
+    			ctx.fillStyle = this.color;
+				
+				for(x=-1;x<=1;x++){
+					for(y=-1;y<=1;y++){
+						ctx.beginPath();
+						ctx.moveTo(this.points[0].x+(c.width*x), this.points[0].y+(c.height*y));
+						ctx.lineTo(this.points[1].x+(c.width*x), this.points[1].y+(c.height*y));
+						ctx.lineTo(this.points[2].x+(c.width*x), this.points[2].y+(c.height*y));
+						ctx.closePath();
+						ctx.fill();
+					}
+				}
+				
+			}
+			
+			this.move = function(){
+				//var sd = this.vd*this.s;
+				//if(Math.abs(sd) > 0.1)sd=0.1*(sd/Math.abs(sd));
+				//sd = sd / 2;
+				//this.d += sd;
+				this.d += this.vd;
+                
+                
+				this.s += this.a;
+				if(this.s > this.maxs)this.s=this.maxs;
+				if(this.s < -this.maxs)this.s=-this.maxs;
+                
+                if(this.a == 0 && this.s != 0){ //trenje
+                    this.s += (-0.02)*(this.s/Math.abs(this.s))
+                    if(Math.abs(this.s)<0.1)this.s=0;
+                }
+                
+				
+				this.sx = Math.cos(this.d)*this.s;
+				this.sy = Math.sin(this.d)*this.s;
+				
+				this.x += this.sx;
+				this.y += this.sy;
+				
+				this.x = (this.x+c.width)%c.width;
+				this.y = (this.y+c.height)%c.height
+				
+				this.points = [{x:this.x-10,y:this.y-10},{x:this.x+30,y:this.y},{x:this.x-10,y:this.y+10}];
+				
+				for(k=0; k<this.points.length; k++){
+					var point = this.points[k];
+					var nx = Math.cos(this.d) * (point.x-this.x) - Math.sin(this.d) * (point.y-this.y) + this.x;
+					var ny = Math.sin(this.d) * (point.x-this.x) + Math.cos(this.d) * (point.y-this.y) + this.y;
+					this.points[k] = {x:nx,y:ny};
+
+				}
+				
+			}
+            
+            this.fire = function(){
+                bullets.push(new Bullet(this.x, this.y, this.d, 10, this))
+            }
+			
+			var that = this;
+		
+			window.addEventListener('keydown', function(event){
+				if(event.keyCode == that.left){that.vd = 0.05}
+				if(event.keyCode == that.right){that.vd = -0.05}
+				
+				if(event.keyCode == that.up){that.a = 0.1}
+				if(event.keyCode == that.down){that.a = -0.1}
+                
+                if(event.keyCode == that.shoot){that.fire()};
+				
+				//alert(event.keyCode);
+			
+			});
+			
+			window.addEventListener('keyup', function(event){
+				if(event.keyCode == that.left){that.vd = 0}
+				if(event.keyCode == that.right){that.vd = 0}
+				if(event.keyCode == that.up){that.a = 0}
+				if(event.keyCode == that.down){that.a = 0}
+				
+			});
+			
+			
+		}
+        
+        var Bullet = function(x,y,d, s, from){
+            this.d = d;
+            this.s = s;
+            this.from = from;
+            this.x = x;
+			this.y = y;
+			this.color = "black";
+            
+            this.render = function(){
+				
+				
+				var v = 1;
+				
+				ctx.save();
+    			ctx.fillStyle = this.color;
+
+    			ctx.translate(this.x+3.5*v,this.y+1.5*v);
+    			ctx.rotate(this.d);
+    			ctx.translate(-this.x-3.5*v,-this.y-1.5*v);
+
+    			ctx.fillRect(this.x-3.5,this.y-1.5,7,3);
+
+    			ctx.restore();
+				
+			}
+			
+			this.move = function(){	
+				var sx = Math.cos(this.d)*this.s;
+				var sy = Math.sin(this.d)*this.s;
+				
+				this.x += sx;
+				this.y += sy;
+                
+                if(this.x < 0 || this.x > c.width || this.y < 0 || this.y > c.height){this.delete();}
+				
+			}
+            
+            this.delete = function(){
+                bullets.splice(bullets.indexOf(this),1)
+            };
+        }
+		
+		//var rockets = [new Kvadrat(1,1), new Kvadrat(1,2), new Kvadrat(2,1)];
+		var rockets = [new Rocket(0,5, 68, 65, 87, 83, 69,"red"), new Rocket(0,5, 76, 74, 73, 75, 79, "blue")];
+		var bullets = [];
+		
+		tick();
+		
+		function tick(){
+			for(i=0;i<rockets.length; i++){
+				rockets[i].move();
+			}
+            for(i=0;i<bullets.length; i++){
+				bullets[i].move();
+			}
+			render();
+			setTimeout(tick, 10);
+		}
+		
+		function render(){
+			ctx.clearRect(0,0,c.width, c.height);
+			
+			for(i=0;i<rockets.length; i++){
+				rockets[i].render();
+			}
+            
+            for(i=0;i<bullets.length; i++){
+				bullets[i].render();
+			}
+		}
+		
+		function resize(){
+			c.width = window.innerWidth;
+			c.height = window.innerHeight;
+		}
+		
+		resize();
+		
+		window.addEventListener('resize', function(event){
+			resize();
+		});
+		
+	</script>
+</body>	
+</html>

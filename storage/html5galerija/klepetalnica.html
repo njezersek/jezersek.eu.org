@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
+    
+	<title>Klepetalnica</title>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			font-family: 'Open Sans', sans-serif;
+		}
+		
+		.vrstica{
+			background: #36D900;
+			min-height: 20px;
+			width: 100%;
+			position: fixed;
+			padding: 10px;
+			color: #FFFFFF;
+		}
+		
+		.vrstica div{
+			display: inline;
+		}
+		
+		#odjava{
+			float: right;
+			margin-right: 35px;
+			cursor:pointer;
+		}
+		
+		.con{
+			margin: 7px;
+			margin-bottom: 50px;
+		}
+		
+		.senca{
+			background-color: rgba(0, 0, 0, 0.7);
+			background: rgba(0, 0, 0, 0.7);
+			z-index: 5;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+		}
+		
+		.popup{
+			width: 100%;
+			max-width:800px;
+			margin:50px auto;
+			background: #FFF;
+			border-radius: 3px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			min-height: 350px;
+		}
+		
+		.padding{
+			padding: 50px;
+		}
+		
+		.sporocilo{
+			position: fixed;
+			display: block;
+			width: 100%;
+			bottom: 0px;
+		}
+		
+		#messagesDiv{
+			height: 100%;
+		}
+		
+		.button{
+			height: 37px;
+			width: 10%;
+			background: #36D900;
+			transition-prperty: background;
+			transition-duration: 0.3s;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 25px 'calibri', serif;
+			float: left;
+			text-align: center;
+			position: relative;
+			cursor:pointer;
+		}
+		
+		.button-cancel{
+			height: 37px;
+			width: 100px;
+			background: #36D900;
+			transition-prperty: background;
+			transition-duration: 0.3s;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 25px 'calibri', serif;
+			float: right;
+			text-align: center;
+			position: relative;
+			cursor:pointer;
+		}
+		
+		.button:hover{
+			background: #2DB300;
+		}
+		
+		.button-cancel:hover{
+			background: #2DB300;
+		}
+		
+		text-con{
+			width: 89%;
+			display: block;
+			
+
+			border: 2px solid #36D900;
+			border-top-style: none;
+			border-left-style: none;
+			border-right-style: none;
+			border-bottom-style: solid;
+			
+			float: left;
+		}
+		
+		.message{
+			margin-left: 10px;
+			width: 87%;
+			height: 37px;
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			padding: 8px 0 8px;
+			background:none;
+			
+			border: none;
+			float: left;
+			font-size: 16px;
+		}
+		
+		.message:focus{
+			outline: none; 
+		}
+		
+		.input{
+			height: 37px;
+			width: 89%;
+			display: block;
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			padding: 8px 0 8px;
+
+			border: 2px solid #36D900;
+			border-top-style: none;
+			border-left-style: none;
+			border-right-style: none;
+			border-bottom-style: solid;
+			
+			float: left;
+			font-size: 16px;
+			
+			transition-prperty: border-color;
+			transition-duration: 0.3s;
+		}
+		
+		input:focus{
+			border-color: #2DB300;
+			outline: none; 
+		}
+		
+		.padding .top{
+			margin-top: 140px;
+			color: #20202F;
+		}
+		
+		#slika, #video, #link, #smejko{
+			display: none;
+		}
+
+		
+		.gumbi{
+			margin-top: 34px;
+			height: 20px;
+			background: #36D900;
+			transition-prperty: height;
+			transition-duration: 0.5s;
+		}
+		
+		.gumbi:hover{
+			height: 60px;
+		}
+		
+		.gumb-con{
+			padding-top: 20px;
+			padding-left: 50px;
+			display: block;
+			width: 100%;
+		}
+		
+		.gumb-con li{
+			color: #FFFFFF;
+			cursor:pointer;
+			display: inline-block;
+			padding: 0 20px;
+		}
+		
+		.slika{
+			max-width: 100%;
+			border-radius: 5px;
+		}
+		
+		.oblacek-me{
+			background: #E6E6E6;
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: 20px 20px 0 20px;
+			max-width: 80%;
+			float: right;
+			text-align: right;
+		}
+		
+		.oblacek-me{
+			background: #BFDFFF;
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: 20px 20px 0 20px;
+			max-width: 80%;
+			float: right;
+			text-align: right;
+		}
+		
+		.oblacek-you{
+			background: #E6E6E6;
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: 20px 20px 20px 0;
+			max-width: 80%;
+			float: left;
+			text-align: left;
+		}
+		
+		.server{
+			text-align: center;
+			font-size: 10px;
+			color: #666666;
+		}
+		
+		br{
+			clear: both;
+		}
+		
+		.container{
+			padding-top: 50px;
+		}
+		
+		iframe{
+			max-width: 100%;
+		}
+		
+		.smejkoti{
+			display: block;
+			margin: 0 auto;
+		}
+		
+		@media screen and (max-width: 600px) {
+			.button{
+				font-size: 16px;
+			}
+		}
+
+	</style>
+</head>
+<body id="body">
+	<div class="senca" id="senca">
+		<div class="popup" id="popout">
+			<div class="padding">
+				<h1>Dobrodošli v moji klepetalnici!</h1>
+				<h2>Kako vam je ime?</h2>
+					<input class="input" type='text' id='nameInput' placeholder='Tvoje ime'>
+					<div class="button" onclick="nastaviIme()">OK</div>
+				<p class="top">2015 - Vse pravice pridržane - Klepetalnica uporablja tehnologijo Firebase - Nejc</p>
+			</div>
+		</div>
+		<div class="popup" id="slika">
+			<div class="padding">
+				<h1>Pošlji sliko!</h1>
+				<h2>Prilepite URL slike.</h2>
+					<input class="input" type='text' id='imgInput' placeholder='URL slike'>
+					<div class="button" onclick="posljiSliko()">OK</div>
+				<p class="top">2015 - Vse pravice pridržane - Klepetalnica uporablja tehnologijo Firebase - Nejc</p>
+			</div>
+		</div>
+		<div class="popup" id="video">
+			<div class="padding">
+				<h1>Pošlji YouTube video!</h1>
+				<h2>Prilepite kodo videa.</h2>
+					<input class="input" type='text' id='videoInput' placeholder='koda videa (O2LAr4JvJmU)'>
+					<div class="button" onclick="posljiVideo()">OK</div>
+				<p class="top">2015 - Vse pravice pridržane - Klepetalnica uporablja tehnologijo Firebase - Nejc</p>
+			</div>
+		</div>
+		<div class="popup" id="link">
+			<div class="padding">
+				<h1>Pošlji link!</h1>
+				<h2>Prilepite URL.</h2>
+					<input class="input" type='text' id='linkInput' placeholder='URL'>
+					<div class="button" onclick="posljiLink()">OK</div>
+				<p class="top">2015 - Vse pravice pridržane - Klepetalnica uporablja tehnologijo Firebase - Nejc</p>
+			</div>
+		</div>
+		<div class="popup" id="smejko">
+			<div class="padding">
+				<h1>Pošlji smejkota!</h1>
+				<div id="smejkoti">
+					<img onclick="posljiSmejkota(1)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-1-icon.png"/>
+					<img onclick="posljiSmejkota(2)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-2-icon.png"/>
+					<img onclick="posljiSmejkota(3)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-3-icon.png"/>
+					<img onclick="posljiSmejkota(4)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-4-icon.png"/>
+					<img onclick="posljiSmejkota(5)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-5-icon.png"/>
+					<img onclick="posljiSmejkota(6)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-6-icon.png"/>
+					<img onclick="posljiSmejkota(7)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-7-icon.png"/>
+					<img onclick="posljiSmejkota(8)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-8-icon.png"/>
+					<img onclick="posljiSmejkota(9)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-9-icon.png"/>
+					<img onclick="posljiSmejkota(10)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-10-icon.png"/>
+					<img onclick="posljiSmejkota(11)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-11-icon.png"/>
+					<img onclick="posljiSmejkota(12)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-12-icon.png"/>
+					<img onclick="posljiSmejkota(13)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-13-icon.png"/>
+					<img onclick="posljiSmejkota(14)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-14-icon.png"/>
+					<img onclick="posljiSmejkota(15)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-15-icon.png"/>
+					<img onclick="posljiSmejkota(16)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-16-icon.png"/>
+					<img onclick="posljiSmejkota(17)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-17-icon.png"/>
+					<img onclick="posljiSmejkota(18)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-18-icon.png"/>
+					<img onclick="posljiSmejkota(19)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-19-icon.png"/>
+					<img onclick="posljiSmejkota(20)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-20-icon.png"/>
+					<img onclick="posljiSmejkota(21)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-21-icon.png"/>
+					<img onclick="posljiSmejkota(22)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-22-icon.png"/>
+					<img onclick="posljiSmejkota(23)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-23-icon.png"/>
+					<img onclick="posljiSmejkota(24)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-24-icon.png"/>
+					<img onclick="posljiSmejkota(25)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-25-icon.png"/>
+					<img onclick="posljiSmejkota(26)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-26-icon.png"/>
+					<img onclick="posljiSmejkota(27)" src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-27-icon.png"/>
+				</div>
+				<br/>
+				<div class="button-cancel" onclick="posljiSmejkota('back')">Prekliči</div>
+				<br/>
+				<p>2015 - Vse pravice pridržane - Klepetalnica uporablja tehnologijo Firebase - Nejc</p>
+			</div>
+		</div>
+	</div>
+	<div class="vrstica">
+		<div id="userInfo"></div>
+		<div id="odjava" onclick="odjava()">Odjava</div>
+	</div>
+	<div class="container">
+		<div class="con">
+			<div id='messagesDiv'></div>
+		</div>
+		<div class="sporocilo">
+			<div class="text-con">
+				<input class="message" type='text-area' id='messageInput' placeholder='Sporočilo' autocomplete="off">
+			</div>
+			<div class="button" onclick="newMassage()">Poslji</div>
+			<div class="gumbi">
+				<ul class="gumb-con">
+					<li class="gumb" onclick="odpriSliko()">Pošlji sliko</li>
+					<li class="gumb" onclick="odpriVideo()">Pošlji YouTube video</li>
+					<li class="gumb" onclick="odpriLink()">Pošlji link</li>
+					<li class="gumb" onclick="odpriSmejkota()">Pošlji smejkota</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script>
+	/*https://brilliant-inferno-9415.firebaseio.com/*/
+	/*https://p3n02t6ttw8.firebaseio-demo.com/ */
+	var chat = new Firebase('https://brilliant-inferno-9415.firebaseio.com/');
+	var okno = 1;
+	var uporabniskoIme = localStorage.userName;
+	
+	if((localStorage.userName == "") || (localStorage.userName == "undefined") || (localStorage.userName == undefined)){
+		document.getElementById('popout').style.display = "block";
+		document.getElementById('senca').style.display = "block";
+		document.getElementById('body').style.overflow = "hidden";
+		okno = 1;
+	}
+	else{
+		document.getElementById('popout').style.display = "none";
+		document.getElementById('senca').style.display = "none";
+		document.getElementById('body').style.overflow = "auto";
+		okno = 0;
+		setTimeout(serverLog, 1000);
+	}	
+	
+	window.scrollTo(0, 0);
+	
+	document.addEventListener('keydown', function(event) {
+		if	(event.keyCode == 13) {
+			if(okno == 1){
+				nastaviIme();
+			}
+			else if (okno == 0){
+				newMassage();
+			}
+			else if (okno == 3){
+				posljiSliko();
+			}
+			else if (okno == 4){
+				posljiVideo();
+			}
+			else if (okno == 5){
+				posljiLink();
+			}
+		};
+	});
+	
+	function newMassage() {
+		var textIn = get();
+		var nameIn = uporabniskoIme;
+		if(textIn == ' clearAll() '){
+			clear();
+			nameIn = 'serverDel'
+			textIn = 'Oseba '+ uporabniskoIme +' je izbrisala pogovor';
+		};
+		
+		
+		if(textIn.length > 0){
+			document.getElementById("messageInput").value = '';
+			var t = new Date();
+			var time = t.getDate() + '.' + (t.getMonth()+1) + '.' + t.getFullYear() + ' ' + t.getHours() + ':' + t.getMinutes();
+			chat.push({name: nameIn, text: textIn, time: time});
+		}
+		
+		
+	}
+	
+	function clear() {
+			chat.remove();
+	}
+	
+	chat.on('child_added', function(snapshot) {
+		var message = snapshot.val();
+		displayChatMessage(message.name, message.text);
+	});
+	
+	function displayChatMessage(name, text) {
+		if(name == 'server'){
+			document.getElementById('messagesDiv').innerHTML += '<div class="server">'+text+'</div><br/>';
+		}
+		else if(name == 'serverDel'){
+			document.getElementById('messagesDiv').innerHTML = '';
+		}
+		else if(name == uporabniskoIme){
+			document.getElementById('messagesDiv').innerHTML += '<div class="oblacek-me"><i> '+name+': </i><b>'+text+'</b></div><br/>';
+		}
+		else{
+			document.getElementById('messagesDiv').innerHTML += '<div class="oblacek-you"><i> '+name+': </i><b>'+text+'</b></div><br/>';
+		}
+		if(okno == 0)scrollBy(0, 100000);
+		else window.scrollTo(0, 0);
+	};
+	
+	function nastaviIme() {
+		uporabniskoIme = document.getElementById("nameInput").value;
+		if(uporabniskoIme.length > 0){
+			document.getElementById('popout').style.display = "none";
+			document.getElementById('senca').style.display = "none";
+			document.getElementById('body').style.overflow = "auto";
+			okno = 0;
+			localStorage.userName = uporabniskoIme;
+		}
+		setTimeout(serverLog, 1000);
+	}
+	
+	function odpriSliko() {
+		document.getElementById('slika').style.display = "block";
+		document.getElementById('senca').style.display = "block";
+		document.getElementById('body').style.overflow = "hidden";
+		okno = 3;
+		window.scrollTo(0, 0);
+	}
+	
+	function posljiSliko() {
+		var url = document.getElementById("imgInput").value;
+		var nameIn = uporabniskoIme;
+		var textIn = '<br/><a href="'+ url +'" target="_blank"><img class="slika" src="'+ url +'"/></a>';
+		var t = new Date();
+		var time = t.getDate() + '.' + (t.getMonth()+1) + '.' + t.getFullYear() + ' ' + t.getHours() + ':' + t.getMinutes();
+		document.getElementById("imgInput").value = '';
+		
+		if(url.length > 10){
+			chat.push({name: nameIn, text: textIn, time: time});
+		}
+		document.getElementById('slika').style.display = "none";
+		document.getElementById('senca').style.display = "none";
+		document.getElementById('body').style.overflow = "auto";
+		okno = 0;
+		scrollBy(0, 100000);
+	}
+	
+	function odpriVideo() {
+		document.getElementById('video').style.display = "block";
+		document.getElementById('senca').style.display = "block";
+		document.getElementById('body').style.overflow = "hidden";
+		okno = 4;
+		window.scrollTo(0, 0);
+	}
+	
+	function posljiVideo() {
+		var url = document.getElementById("videoInput").value;
+		var nameIn = uporabniskoIme;
+		var textIn = '<br/><iframe width="1200" height="630" src="https://www.youtube.com/embed/'+ url +'" frameborder="0" allowfullscreen"></iframe>';
+		var t = new Date();
+		var time = t.getDate() + '.' + (t.getMonth()+1) + '.' + t.getFullYear() + ' ' + t.getHours() + ':' + t.getMinutes();
+		document.getElementById("videoInput").value = '';
+		
+		if(url.length > 10){
+			chat.push({name: nameIn, text: textIn, time: time});
+		}
+		document.getElementById('video').style.display = "none";
+		document.getElementById('senca').style.display = "none";
+		document.getElementById('body').style.overflow = "auto";
+		okno = 0;
+		scrollBy(0, 100000);
+	}
+	
+	function odpriLink() {
+		document.getElementById('link').style.display = "block";
+		document.getElementById('senca').style.display = "block";
+		document.getElementById('body').style.overflow = "hidden";
+		okno = 5;
+		window.scrollTo(0, 0);
+	}
+	
+	function posljiLink() {
+		var url = document.getElementById("linkInput").value;
+		var nameIn = uporabniskoIme;
+		var textIn = '<br/><a href="'+ url +'" target="_blank">'+ url +'</a>';
+		var t = new Date();
+		var time = t.getDate() + '.' + (t.getMonth()+1) + '.' + t.getFullYear() + ' ' + t.getHours() + ':' + t.getMinutes();
+		document.getElementById("videoInput").value = '';
+		
+		if(url.length > 10){
+			chat.push({name: nameIn, text: textIn, time: time});
+		}
+		document.getElementById('link').style.display = "none";
+		document.getElementById('senca').style.display = "none";
+		document.getElementById('body').style.overflow = "auto";
+		okno = 0;
+		scrollBy(0, 100000);
+	}
+	
+	function odpriSmejkota() {
+		document.getElementById('smejko').style.display = "block";
+		document.getElementById('senca').style.display = "block";
+		document.getElementById('body').style.overflow = "hidden";
+		okno = 5;
+		window.scrollTo(0, 0);
+	}
+	
+	function posljiSmejkota(id) {
+		var nameIn = uporabniskoIme;
+		var textIn = '<br/><img src=" http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-'+ id +'-icon.png">';
+		var t = new Date();
+		var time = t.getDate() + '.' + (t.getMonth()+1) + '.' + t.getFullYear() + ' ' + t.getHours() + ':' + t.getMinutes();
+		
+		if(id != 'back'){
+			chat.push({name: nameIn, text: textIn, time: time});
+		}
+		
+		document.getElementById('smejko').style.display = "none";
+		document.getElementById('senca').style.display = "none";
+		document.getElementById('body').style.overflow = "auto";
+		okno = 0;
+		scrollBy(0, 100000);
+	}
+	
+	function serverLog(){
+		document.getElementById('userInfo').innerHTML = 'Prijavljeni ste kot ' + uporabniskoIme;
+		var t = new Date();
+		var time = t.getDate() + '.' + (t.getMonth()+1) + '.' + t.getFullYear() + ' ' + t.getHours() + ':' + t.getMinutes();
+		var textIn = time + ' - Oseba ' + uporabniskoIme + ' se je pridružila kleptu.';
+		var nameIn = 'server';
+		chat.push({name: nameIn, text: textIn});
+	}
+	
+	function odjava(){
+		localStorage.userName = '';
+		uporabniskoIme = '';
+		document.getElementById('popout').style.display = "block";
+		document.getElementById('senca').style.display = "block";
+		document.getElementById('body').style.overflow = "hidden";
+		okno = 1;
+		window.scrollTo(0, 0);
+	}
+	
+	var text;
+	function get(){
+		text = " " + document.getElementById("messageInput").value + " ";
+		
+		//prepreči HTML
+		var i = text.search("<");
+		while (i >= 0) {
+			i = text.search("<");
+			if(i >= 0){
+				text = text.replace("<", "&lt;");
+			}
+		}
+		var i = text.search(">");
+		while (i >= 0) {
+			i = text.search(">");
+			if(i >= 0){
+				text = text.replace(">", "&gt;");
+			}
+		}
+		
+		//doda link
+		var i = text.search("http");
+		var edit = text;
+		var linki = [];
+		while (i >= 0) {
+			var zacetekLinka = edit.search("http");
+			var doKonca = edit.substr(zacetekLinka, text.length);
+			var konecLinka = doKonca.search(" ");
+			var link = doKonca.substr(0, konecLinka);
+			edit = doKonca.substr(konecLinka, text.length);	
+			i = edit.search("http");
+			linki.push(link);
+		}
+		var edit2 = text;
+		var edit3 = "";
+		for(n=0; n<linki.length; n++){
+			var rez = edit2.search(linki[n]) + linki[n].length + 15 + linki[n].length;
+			edit2 = edit2.replace(linki[n], "<a href='" + linki[n] + "' target='_blank'>" + linki[n] + "</a>");	
+			edit3 = edit3.concat(edit2.substr(0, rez));
+			edit2 = edit2.substr(rez, edit2.length);
+		}
+		edit3 = edit3.concat(edit2.substr(0, rez));
+		text = edit3.toString();
+		
+		
+		//doda smejkota
+		var smejko = " :\\) ";
+		var i = text.search(smejko);
+		while (i >= 0) {
+			i = text.search(smejko);
+			if(i >= 0){
+				text = text.replace(" :) ", ' <img src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-1-icon.png" width="15px" style="position: relative; top: 3px;"> ');
+			}
+		}
+		
+		var smejko = " :\\( ";
+		var i = text.search(smejko);
+		while (i >= 0) {
+			i = text.search(smejko);
+			if(i >= 0){
+				text = text.replace(" :( ", ' <img src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-9-icon.png" width="15px" style="position: relative; top: 3px;"> ');
+			}
+		}
+		
+		var smejko = " :D ";
+		var i = text.search(smejko);
+		while (i >= 0) {
+			i = text.search(smejko);
+			if(i >= 0){
+				text = text.replace(" :D ", ' <img src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-11-icon.png" width="15px" style="position: relative; top: 3px;"> ');
+			}
+		}
+		
+		var smejko = " :P ";
+		var i = text.search(smejko);
+		while (i >= 0) {
+			i = text.search(smejko);
+			if(i >= 0){
+				text = text.replace(" :P ", ' <img src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-25-icon.png" width="15px" style="position: relative; top: 3px;"> ');
+			}
+		}
+		
+		var smejko = " :x ";
+		var i = text.search(smejko);
+		while (i >= 0) {
+			i = text.search(smejko);
+			if(i >= 0){
+				text = text.replace(" :x ", ' <img src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-26-icon.png" width="15px" style="position: relative; top: 3px;"> ');
+			}
+		}
+		
+		var smejko = " :X ";
+		var i = text.search(smejko);
+		while (i >= 0) {
+			i = text.search(smejko);
+			if(i >= 0){
+				text = text.replace(" :X ", ' <img src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-26-icon.png" width="15px" style="position: relative; top: 3px;"> ');
+			}
+		}
+		
+		var smejko = " :o ";
+		var i = text.search(smejko);
+		while (i >= 0) {
+			i = text.search(smejko);
+			if(i >= 0){
+				text = text.replace(" :o ", ' <img src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-7-icon.png" width="15px" style="position: relative; top: 3px;"> ');
+			}
+		}
+		
+		var smejko = " :O ";
+		var i = text.search(smejko);
+		while (i >= 0) {
+			i = text.search(smejko);
+			if(i >= 0){
+				text = text.replace(" :O ", ' <img src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-7-icon.png" width="15px" style="position: relative; top: 3px;"> ');
+			}
+		}
+		
+		var smejko = " &lt;3 ";
+			var i = text.search(smejko);
+			while (i >= 0) {
+				i = text.search(smejko);
+				if(i >= 0){
+					text = text.replace(" &lt;3 ", ' <img src="http://icons.iconarchive.com/icons/seanau/flat-smiley/64/Smiley-10-icon.png" width="15px" style="position: relative; top: 3px;"> ');
+				}
+			}
+		
+		return text;
+	}
+	</script>
+</body>
+</html>

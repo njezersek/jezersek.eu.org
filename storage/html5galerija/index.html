@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+	<link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	<title>HTML5 GALERIJA</title>
+	<style>
+		body{
+			background: #2c3e50;
+			font-family: 'Oxygen', sans-serif;
+			margin: 0px;
+		}
+		
+		header{
+			background: #2c3e50;
+			margin: 0px;
+			padding: 20px;
+			
+		}
+		
+		h1{
+			margin :0px;
+			color: white;
+		}
+		
+		.object{
+			width: 20%;
+			height: 150px;
+			float: left;
+			position: relative;
+		}
+
+		.con{
+			background: #FFFFFF;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			
+			left: 0;
+			top: 0;
+			
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			
+			-webkit-transition-property: top, left, width, height, shadow, z-index;
+			-webkit-transition-duration: 0.2s;
+			-webkit-transition-timing-function: linear;
+			transition-property: top, left, width, height, shadow, z-index;
+			transition-duration: 0.2s;
+			transition-timing-function: linear;
+
+			
+		}
+		
+		.con:hover{
+			width: 104%;
+			height: 160px;
+			z-index: 20;
+			left: -2%;
+			top: -5px;
+			
+			-webkit-box-shadow: 0px 0px 30px -4px rgba(0,0,0,0.75);
+			-moz-box-shadow: 0px 0px 30px -4px rgba(0,0,0,0.75);
+			box-shadow: 0px 0px 30px -4px rgba(0,0,0,0.75);
+		}
+		
+		.opis h3{
+			margin: 0;
+			color: #ffffff;
+			text-align: center;
+			padding: 10px;
+		}
+		
+		.opis{
+			background: rgba(0, 0, 0, 0.7);
+			height: 100%;
+			opacity: 0;
+			
+			-webkit-transition-property: opacity;
+			-webkit-transition-duration: 0.2s;
+			-webkit-transition-timing-function: linear;
+			transition-property: opacity;
+			transition-duration: 0.2s;
+			transition-timing-function: linear;
+		}
+		
+		.con:hover .opis{
+			opacity: 1;
+		}
+		
+		
+		.container{
+			padding: 20px;
+			background: #d6d4d1; /* Old browsers */
+			background: -moz-linear-gradient(left,  #d6d4d1 0%, #eaeaea 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,#d6d4d1), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* IE10+ */
+			background: linear-gradient(to right,  #d6d4d1 0%,#eaeaea 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d4d1', endColorstr='#eaeaea',GradientType=1 ); /* IE6-9 */
+		}
+		
+		br{
+			clear: both;
+		}
+		
+		footer{
+			background: #2c3e50;
+		}
+		
+		footer p{
+			text-align: center;
+			color: white;
+			font-size: 20px;
+		}
+		
+		#a1{
+			background-image: url(media/kaca.jpg);
+		}
+		#a2{
+			background-image: url(media/crnaLuknja.jpg);
+		}
+		#a3{
+			background-image: url(media/metanjeVTarco.jpg);
+		}
+		#a4{
+			background-image: url(media/kalkulator.jpg);
+		}
+		#a5{
+			background-image: url(media/zogicaSkokica.jpg);
+		}
+		#a6{
+			background-image: url(media/responsive.jpg);
+		}
+		#a7{
+			background-image: url(media/glagoli.jpg);
+		}
+		#a8{
+			background-image: url(media/krizecKrozec.jpg);
+		}
+		#a9{
+			background-image: url(media/cevi.jpg);
+		}
+		#a10{
+			background-image: url(media/kvadrat.jpg);
+		}
+		#a11{
+			background-image: url(media/glavnaMesta.jpg);
+		}
+		#a12{
+			background-image: url(media/gospodarskakriza.jpg);
+		}
+		#a13{
+			background-image: url(media/generatorNalog.jpg);
+		}
+		#a14{
+			background-image: url(media/barve.jpg);
+		}
+		#a15{
+			background-image: url(media/klepetalnica.jpg);
+		}
+		#a16{
+			background-image: url(media/stoparica.jpg);
+		}
+
+		@media screen and (min-width: 1000px) {
+			.object{width: 20%;}
+		}
+		@media screen and (max-width: 1000px) {
+			.object{width: 25%;}
+		}
+		@media screen and (max-width: 800px) {
+			.object{width: 33.33%;}
+		}
+		@media screen and (max-width: 600px) {
+			.object{width: 50%;}
+		}
+		@media screen and (max-width: 400px) {
+			.object{width: 100%;}
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>HTML5 GALERIJA</h1>
+	</header>
+	<div class="container">
+		<div class="object"><a href="kaca.html"><div class="con" id="a1"><div class="opis"><h3>Klasična kača</h3></div></div></a></div>
+		<div class="object"><a href="crnaluknja.html"><div class="con" id="a2"><div class="opis"><h3>Črna luknja je igra v kateri morate pojesti kroge manjše od vas</h3></div></div></a></div>
+		<div class="object"><a href="metanjevtarco.html"><div class="con" id="a3"><div class="opis"><h3>Preprosta igra v kateri morate z žogico zadeti tarčo</h3></div></div></a></div>
+		<div class="object"><a href="kalkulator.html"><div class="con" id="a4"><div class="opis"><h3>Kalkulator</h3></div></div></a></div>
+		<div class="object"><a href="zogicaskokica.html"><div class="con" id="a5"><div class="opis"><h3>Žogica skokica, simulacija žogice v prostoru</h3></div></div></a></div>
+		<div class="object"><a href="responsive.html"><div class="con" id="a6"><div class="opis"><h3>Test postavitve spletne strani, ki se prilagaja velikosti zaslona</h3></div></div></a></div>
+		<div class="object"><a href="krizeckrozec.html"><div class="con" id="a8"><div class="opis"><h3>Igra križec krožec za dva igralca</h3></div></div></a></div>
+		<div class="object"><a href="glagoli.html"><div class="con" id="a7"><div class="opis"><h3>Aplikacija za učenje angleških nepravilnih glagolov</h3></div></div></a></div>
+		<div class="object"><a href="cevi.html"><div class="con" id="a9"><div class="opis"><h3>Program, ki naključno izrisuje cevi različnih velikosti</h3></div></div></a></div>
+		<div class="object"><a href="kvadrat.html"><div class="con" id="a10"><div class="opis"><h3>Test gladkega premikanja kvadrata po canvas-u</h3></div></div></a></div>
+		<div class="object"><a href="glavnamesta.html"><div class="con" id="a11"><div class="opis"><h3>Aplikacija za učenje glavnih mest Evrope</h3></div></div></a></div>
+		<div class="object"><a href="gospodarskakriza.html"><div class="con" id="a12"><div class="opis"><h3>Kviz o gospodarski krizi v ZDA</h3></div></div></a></div>
+		<div class="object"><a href="barve.html"><div class="con" id="a14"><div class="opis"><h3>Mešalnik barve</h3></div></div></a></div>
+		<div class="object"><a href="generatornaloge.html"><div class="con" id="a13"><div class="opis"><h3>Program za izdelavo elektronskih nalog</h3></div></div></a></div>
+		<div class="object"><a href="klepetalnica.html"><div class="con" id="a15"><div class="opis"><h3>Spletna klepetalnica, ki je odprta za vse uporabnike</h3></div></div></a></div>
+		<div class="object"><a href="stoparica.html"><div class="con" id="a16"><div class="opis"><h3>Štoparica</h3></div></div></a></div>
+		<br>
+	</div>
+	<footer>
+		<p id="info">2015 - vse pravice pridržane - Nejc Jezeršek</p>
+	</footer>
+	
+</body>
+</html>

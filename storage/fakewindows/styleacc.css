@@ -1,0 +1,36 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.orodnaVrstica{
+    bottom: 0;
+    width: 100%;
+    background: #82b7ff;
+    padding: 10px;
+    
+}
+
+body{
+    margin: 0px;
+}
+
+.cross{
+    width: 30px;
+    height: 30px;
+}
+
+h1{
+   font-family: 'Raleway', sans-serif;
+}

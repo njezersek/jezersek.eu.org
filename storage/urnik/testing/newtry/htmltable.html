@@ -1,0 +1,795 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>eAsistent Urnik</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta name="title" content="eAsistent" />
+		<meta name="description" content="eAsistent - rešitev za srednje, osnovne in višje šole. eDnevnik - elektronsko vodenje šolskega dnevnika. eRedovalnica - elektronsko vodenje redovalnice. Obvešèevalec - obvešèanje staršev o izostankih, ocenah, napovedanih ocenjevanjih znanja, predelani uèni snovi. eAsistent za starše - storitev, ki je staršem v pomoè pri šolanju otroka." />
+		<meta name="keywords" content="eAsistent, eDnevnik, eRedovalnica, eMatièni Urad, eUrnik, Sporoèila, Oglasna deska, dnevnik, redovalnica, urniki, nadomešèanja, srednja šola, osnovna šola, višja šola, Obvešèevalec, obvešèanje staršev, eAsistent za starše" />
+		<link rel="shortcut icon" href="https://www.easistent.com/favicon.ico"/>
+		<link rel="apple-touch-icon" href="https://www.easistent.com/favicon.png"/>
+		<link rel="stylesheet" type="text/css" href="https://www.easistent.com/css/print.css"/>
+		<style type="text/css">
+body
+{
+	font-family: arial;
+}
+
+td
+{
+	padding:0;
+}
+
+.collapse
+{
+	border-collapse:collapse;
+}
+
+.w100
+{
+	width:100%;
+}
+
+.text10
+{
+	font-size:10px;
+}
+
+.text11
+{
+	font-size:11px;
+}
+
+.text14
+{
+	font-size:14px;
+}
+
+.text20
+{
+	font-size:20px;
+}
+
+.bold
+{
+	font-weight:bold;
+}
+
+.gray
+{
+	color:gray;
+}
+
+.lgray
+{
+	color:#888;
+}
+
+.ednevnik-seznam_ur_teden,
+.ednevnik-seznam_ur_teden-urnik-naziv
+{
+	border-collapse:collapse;
+	width:100%;		
+}
+
+.ednevnik-seznam_ur_teden td
+{
+	border:1px solid black;
+	vertical-align:top;
+}
+
+.ednevnik-seznam_ur_teden-ura
+{
+    padding: 5px;
+}
+
+.ednevnik-seznam_ur_teden-urnik
+{
+    padding: 5px;
+}
+
+.ednevnik-seznam_ur_teden-urnik-naziv td
+{
+	border:none;
+	padding:0;
+}
+		</style>
+	</head>
+	<body>
+<div><strong class="text20">E1A </strong><span class="text11 gray">Teden 40, obdobje od 30. 5. do 5. 6.</span></div>
+
+
+<table class="ednevnik-seznam_ur_teden" id="myid">
+	<tr>
+		<th width="10%">
+			<div>Ura</div>
+			<div style="font-size:11px;">&nbsp;</div>
+		</th>
+		<th>
+			<div>Ponedeljek</div>
+			<div style="font-size:10px;font-weight:normal;color:#777;">30. 5.</div>
+		</th>
+		<th class="ednevnik-seznam_ur_teden-th-danes">
+			<div>Torek</div>
+			<div style="font-size:10px;font-weight:normal;color:#777;">31. 5.</div>
+		</th>
+		<th>
+			<div>Sreda</div>
+			<div style="font-size:10px;font-weight:normal;color:#777;">1. 6.</div>
+		</th>
+		<th>
+			<div>Èetrtek</div>
+			<div style="font-size:10px;font-weight:normal;color:#777;">2. 6.</div>
+		</th>
+		<th>
+			<div>Petek</div>
+			<div style="font-size:10px;font-weight:normal;color:#777;">3. 6.</div>
+		</th>
+	</tr>
+	
+	<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">1. ura</div>
+			<div class="text10 gray">7:30 - 8:15</div>
+		</td>
+		<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+		</td>
+		<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  ednevnik-seznam_ur_teden-td-danes" style="color:#444;">					
+				<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">PEN</td>
+						<td align="right"></td>
+					</tr>
+				</table>
+				<div class="text11">J. Grilj, 3</div>			
+			</div>
+		</td>
+		<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					
+				<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">NEF</td>
+						<td align="right"></td>
+					</tr>
+				</table>
+				<div class="text11">R. Meško, 203</div>					
+			</div>
+		</td>
+		<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">
+				<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">MAT</td>
+						<td align="right"></td>
+					</tr>
+				</table>
+				<div class="text11">K. Kastelic, 206</div>							
+			</div>
+		</td>
+		<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">
+				<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">PEN</td>
+						<td align="right"></td>
+					</tr>
+				</table>
+				<div class="text11">J. Grilj, 3	</div>							
+			</div>
+		</td>
+	</tr>
+	
+	
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">2. ura</div>
+			<div class="text10 gray">8:20 - 9:05</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  ednevnik-seznam_ur_teden-td-danes" style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">RUR						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					J. Grilj, 3					</div>
+										
+									</div>
+				<div id="ednevnik-seznam_ur_teden-blok-64489-2016-05-31"><div class="ednevnik-seznam_ur_teden-urnik  ednevnik-seznam_ur_teden-td-danes" style="color:#444;border-top:1px solid #000000;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">DVR						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					S. Pipan, dvraz					</div>
+										
+									</div>
+				</div>			</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">SLO						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					L. Lazar, 212					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">UPN2						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					J. Pešec, 111					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">GEO						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					S. Škerbot, 202					</div>
+										
+									</div>
+							</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">3. ura</div>
+			<div class="text10 gray">9:10 - 9:55</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  ednevnik-seznam_ur_teden-td-danes" style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">MAT						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					K. Kastelic, 206					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">SLO						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					L. Lazar, 212					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">MAT						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					K. Kastelic, 206					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ITKv						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					A. Volèini, 117					</div>
+										
+									</div>
+				<div id="ednevnik-seznam_ur_teden-blok-64499-2016-06-03"><div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;border-top:1px solid #000000;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">UPN2v						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					J. Pešec, 108					</div>
+										
+									</div>
+				</div>			</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">4. ura</div>
+			<div class="text10 gray">10:00 - 10:45</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  ednevnik-seznam_ur_teden-td-danes" style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">GEO						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					S. Škerbot, 202					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">KEM						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					A. Mihièinac, 216					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ANG1						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					L. Soboèan, 221					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ITKv						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					A. Volèini, 117					</div>
+										
+									</div>
+				<div id="ednevnik-seznam_ur_teden-blok-64509-2016-06-03"><div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;border-top:1px solid #000000;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">UPN2v						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					J. Pešec, 108					</div>
+										
+									</div>
+				</div>			</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">5. ura</div>
+			<div class="text10 gray">11:05 - 11:50</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  ednevnik-seznam_ur_teden-td-danes" style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ITK						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					A. Volèini, 111					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">TV3						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					A. Razdrh, TEL					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ANG1						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					L. Soboèan, 221					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">MTE						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					K. Kastelic, 206					</div>
+										
+									</div>
+							</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">6. ura</div>
+			<div class="text10 gray">11:55 - 12:40</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">NEF						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					R. Meško, 211					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  ednevnik-seznam_ur_teden-td-danes" style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ŠVZ						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					A. Razdrh, TEL					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">IOVp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					S. Pipan, 11					</div>
+										
+									</div>
+				<div id="ednevnik-seznam_ur_teden-blok-64529-2016-06-01"><div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;border-top:1px solid #000000;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">IOVp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					M. Seme, K2					</div>
+										
+									</div>
+				</div>			</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">UME						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					G. Korošec, 211					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">SLO						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					L. Lazar, 212					</div>
+										
+									</div>
+							</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">7. ura</div>
+			<div class="text10 gray">12:45 - 13:30</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">PEN						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					J. Grilj, 3					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  ednevnik-seznam_ur_teden-td-danes" style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ŠVZ						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					A. Razdrh, TEL					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">IOVp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					S. Pipan, 11					</div>
+										
+									</div>
+				<div id="ednevnik-seznam_ur_teden-blok-64539-2016-06-01"><div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;border-top:1px solid #000000;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">IOVp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					M. Seme, K2					</div>
+										
+									</div>
+				</div>			</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">UME						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					G. Korošec, 211					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">SLO						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					L. Lazar, 212					</div>
+										
+									</div>
+							</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">8. ura</div>
+			<div class="text10 gray">13:35 - 14:20</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">PEN						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					J. Grilj, 3					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">IOVp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					S. Pipan, 11					</div>
+										
+									</div>
+				<div id="ednevnik-seznam_ur_teden-blok-64549-2016-06-01"><div class="ednevnik-seznam_ur_teden-urnik " style="color:#444;border-top:1px solid #000000;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">IOVp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					M. Seme, K2					</div>
+										
+									</div>
+				</div>			</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">9. ura</div>
+			<div class="text10 gray">14:25 - 15:10</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ANG1						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					L. Soboèan, 220					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">10. ura</div>
+			<div class="text10 gray">15:30 - 16:15</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ITKp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					S. Pipan, 106					</div>
+										
+									</div>
+				<div id="ednevnik-seznam_ur_teden-blok-64439-2016-05-30"><div class="ednevnik-seznam_ur_teden-urnik  " style="color:#444;border-top:1px solid #000000;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ITKp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					M. Seme, 107					</div>
+					<div class="text11 gray bold">Skupina 1</div>					
+									</div>
+				</div>			</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">11. ura</div>
+			<div class="text10 gray">16:20 - 17:05</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ITKp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					S. Pipan, 106					</div>
+										
+									</div>
+				<div id="ednevnik-seznam_ur_teden-blok-64449-2016-05-30"><div class="ednevnik-seznam_ur_teden-urnik  " style="color:#444;border-top:1px solid #000000;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">ITKp						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					M. Seme, 107					</div>
+					<div class="text11 gray bold">Skupina 1</div>					
+									</div>
+				</div>			</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">12. ura</div>
+			<div class="text10 gray">17:10 - 17:55</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" style="background-color:#eeeeee;">
+			<div class="ednevnik-seznam_ur_teden-urnik  " style="color:#444;">					<table class="ednevnik-seznam_ur_teden-urnik-naziv">
+					<tr>
+						<td class="text14 bold">KEM						</td>
+						<td align="right"></td>
+					</tr>
+					</table>
+					<div class="text11">
+					A. Mihièinac, 218					</div>
+										
+									</div>
+							</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">13. ura</div>
+			<div class="text10 gray">18:00 - 18:45</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+				</tr>
+		<tr>
+		<td width="10%" class="ednevnik-seznam_ur_teden-td ednevnik-seznam_ur_teden-ura">
+			<div class="black bold text14" style="padding-bottom:0px;">14. ura</div>
+			<div class="text10 gray">18:50 - 19:35</div>
+		</td>
+					<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+						<td width="18%" class="ednevnik-seznam_ur_teden-td" >
+						</td>
+				</tr>
+	</table>
+</body>
+</html>

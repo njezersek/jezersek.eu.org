@@ -1,0 +1,95 @@
+body{
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background: #f7f7f7;
+}
+
+h1{
+    margin: 0 10px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.tile{
+    padding: 20px;
+    background: #fff;
+    color: #2a3f54;
+    text-decoration: none;
+    margin: 10px;
+    display: inline-block;
+    min-width: 200px;
+    min-height: 150px;
+    border-radius: 3px;
+    border: 1px solid #e6e5ea;
+    //box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+aside{
+    position: fixed;
+    width: 240px;
+    height: 100vh;
+    background: #2a3f54;
+    float: left;
+    border-right: 1px solid #10263b;
+    box-sizing: border-box;
+}
+
+aside h1{
+    color: #fff;
+    margin: 0;
+    font-weight: 400;
+    padding: 20px;
+}
+
+aside nav{
+
+}
+
+aside nav a{
+    padding: 10px 20px;
+    display: block;
+    color: #fff;
+    transition-property: background;
+    transition-duration: 0.3s;
+}
+
+aside nav a:hover{
+    background: #35475d;
+}
+
+main{
+    margin-left: 240px;
+}
+
+main .top{
+    background: #ededed;
+    padding: 10px;
+    color: #2a3f54;
+    border-bottom: 1px solid #e3e2e7;
+    padding-left: 30px;
+    position: fixed;
+    width: 100%;
+    height: 20px;
+}
+
+main .top a{
+    color: #2a3f54;
+    text-decoration: none;
+}
+
+main h1{
+    color: #65778d;
+    padding: 20px 0;
+    padding-bottom: 0;
+}
+
+main .cont{
+    padding: 20px;
+    padding-top: 40px;
+}
+
+main .cont .canvas-cont {
+
+}

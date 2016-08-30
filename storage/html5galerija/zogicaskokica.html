@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="media/favicon.ico" type="image/x-icon">
+	<title>Žogica skokica</title>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		
+		a{
+			text-decoration: none; 
+			color: #0066CC;
+			position: absolute;
+			margin: 20px;
+		}
+	</style>
+</head>
+	
+<body>
+	<a href="index.html"><h3>Nazaj na domačo spletno stran</h3></a>
+	<canvas id="canvas"></canvas>
+	<script>
+(function () {
+	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+	window.requestAnimationFrame = requestAnimationFrame;
+})();
+
+var keys = [];
+
+var data = function (x, y, tla) {
+		   this.sirinaOkna = x;
+		   this.visinaOkna = y;
+		   this.visinaTal = tla;
+		};	
+
+	
+var sprite = function (x1, y1, r,  px, py, p, zx, zy, mx, my, mzx, mzy, max, s) {
+		   this.X = x1;
+		   this.Y = y1;
+		   this.R = r;
+		   this.prijemX = px;
+		   this.prijemY = py;
+		   this.prijem = p;
+		   this.hitrostX = zx;
+		   this.hitrostY = zy;
+		   this.miskaX = mx;
+		   this.miskaY = my;
+		   this.hitrostMiskeX = mzx;
+		   this.hitrostMiskeY = mzy;
+		   this.maxSpeed = max;
+		   this.skok = s;
+		};
+var igra = new data(window.innerWidth, window.innerHeight, 40)
+		
+var krog = new sprite(igra.sirinaOkna/2, igra.visinaOkna/2, 40, 0, 0, false, 0, 0, 0, 0, 0, 0, 30, false);
+
+
+window.onload = function init() {
+	gameLoop();
+}
+
+window.addEventListener('resize',spremeniOkno,false);
+
+function spremeniOkno(){
+			igra.sirinaOkna = window.innerWidth;
+			igra.visinaOkna = window.innerHeight;		
+			canvas.width = igra.sirinaOkna;
+			canvas.height = igra.visinaOkna;
+		}
+
+document.addEventListener("mousedown", function () {	
+	var dx = krog.X - krog.miskaX;
+	var dy = krog.Y - krog.miskaY;
+	var legalD = krog.R * krog.R;
+	var D2 = (dx * dx) + (dy * dy);
+	if(D2 < legalD){		
+		krog.prijemX = krog.miskaX - krog.X;
+		krog.prijemY = krog.miskaY - krog.Y;
+		krog.hitrostX = 0;
+		krog.hitrostY = 0;
+		krog.prijem = true;
+	}		
+});
+
+document.addEventListener("mousemove", function () {
+	if(krog.prijem == true){
+		krog.hitrostX = event.clientX - krog.miskaX;
+		krog.hitrostY = event.clientY - krog.miskaY;
+	}
+	
+	krog.miskaX = event.clientX;     // Get the horizontal coordinate
+	krog.miskaY = event.clientY;     // Get the vertical coordinate
+});
+
+document.addEventListener("mouseup", function () {
+	krog.prijem = false;
+});
+
+
+window.addEventListener("keydown", function (e) {
+	keys[e.keyCode] = true;
+});
+window.addEventListener("keyup", function (e) {
+	keys[e.keyCode] = false;
+});
+
+
+
+function gameLoop() {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	canvas.width = igra.sirinaOkna;
+	canvas.height = igra.visinaOkna;
+	
+	if(krog.hitrostY < 30)krog.hitrostY += 1;//gravitaciski pospesek
+	if(krog.hitrostX > 0)krog.hitrostX -= 0.01;//zracni upor
+	if(krog.hitrostX < 0)krog.hitrostX += 0.01;//zracni upor
+	if(krog.Y > igra.visinaOkna - krog.R - 1){
+		if(krog.hitrostX > 0)krog.hitrostX -= 0.5;//trenje
+		if(krog.hitrostX < 0)krog.hitrostX += 0.5;//trenje
+		if((krog.hitrostX < 1)&&(krog.hitrostX > -1))krog.hitrostX = 0;
+	}
+	
+	if(krog.prijem == true){
+		krog.X = krog.miskaX - krog.prijemX; 
+		krog.Y = krog.miskaY - krog.prijemY; 
+	}
+	else if((krog.Y <= igra.visinaOkna - krog.R  - igra.visinaTal)&&(krog.Y >= 0  - krog.R)&&(krog.X <= igra.sirinaOkna  - krog.R)&&(krog.X >= 0 - krog.R)){
+		krog.X += krog.hitrostX;
+		krog.Y += krog.hitrostY;
+	}
+	
+	if(krog.Y > igra.visinaOkna - krog.R - igra.visinaTal){
+		krog.Y = igra.visinaOkna - krog.R  - igra.visinaTal;
+		krog.hitrostY = -krog.hitrostY/1.1;
+	}
+	if(krog.Y < 0 + krog.R){
+		krog.Y = 0 + krog.R;
+		krog.hitrostY = 0;
+	}
+	if(krog.X > igra.sirinaOkna - krog.R){
+		krog.X = igra.sirinaOkna - krog.R;
+		krog.hitrostY = krog.hitrostY/2;
+		krog.hitrostX = -krog.hitrostX/2;
+	}
+	if(krog.X < 0 + krog.R){
+		krog.X = 0 + krog.R;
+		krog.hitrostY = krog.hitrostY/2;
+		krog.hitrostX = -krog.hitrostX/2;
+	}	
+	
+	if(krog.skok == true)krog.hitrostY -= 2;
+
+	
+//tla
+	ctx.fillStyle = '#000000';
+	ctx.fillRect(0, igra.visinaOkna - igra.visinaTal, igra.sirinaOkna, igra.visinaTal);
+
+//zogica
+	ctx.beginPath();
+	ctx.arc(krog.X, krog.Y, krog.R, 0, 2 * Math.PI, false);
+	ctx.fillStyle = '#E65C00';
+	ctx.fill();
+	ctx.lineWidth = 2;
+	ctx.strokeStyle = '#000000';
+	ctx.stroke();
+
+	whatKey();
+	requestAnimationFrame(gameLoop);
+}
+
+function whatKey() {
+	if (keys[37]) {if (krog.hitrostX > -krog.maxSpeed) krog.hitrostX -= 0.4;}
+	else if(krog.hitrostX < 0)krog.hitrostX += 0.1;
+	if (keys[39]) {if (krog.hitrostX < krog.maxSpeed) krog.hitrostX += 0.4;}
+	else if(krog.hitrostX > 0)krog.hitrostX -= 0.1;
+	
+	/*if (keys[40]) {if (krog.hitrostY < krog.maxSpeed) krog.hitrostY += 0.4;}
+	else if(krog.hitrostY > 0)krog.hitrostY -= 0.1;*/
+	
+	if (keys[38]) {
+		if (krog.Y + krog.R > igra.visinaOkna - igra.visinaTal-1){
+			krog.skok = true;
+			setTimeout(konecSkoka, 100)
+		}
+		
+	}
+	
+	if ((krog.hitrostX > -0.1) && (krog.hitrostX < 0.1)) krog.hitrostX = 0;
+	if ((krog.hitrostY > -0.1) && (krog.hitrostY < 0.1)) krog.hitrostY = 0;
+}
+
+function konecSkoka(){
+	krog.skok = false;
+}
+	</script>
+</body>
+</html>

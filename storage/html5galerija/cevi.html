@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="media/favicon.ico" type="image/x-icon">
+	<title>Cevi</title>
+</head>
+	
+<body style="margin: 0;" id="body">
+	<canvas id="canvas" width="1280px" height="720px"></canvas>
+	<h1 id="display"></h1>
+	<a href="index.html" style="text-decoration: none; color: #0066CC;"><h3>Nazaj na domačo stran</h3></a>
+	<script>
+		var sirinaOkna = window.innerWidth;
+		var visinaOkna = window.innerHeight;
+		
+		canvas.width = sirinaOkna;
+		canvas.height = visinaOkna;
+	
+		var stKrogov = 10;
+		var prikaziFPS = 0;
+		var time;
+		var frame = 1;
+		var fps;
+		var x = 0;
+		var y = 100;
+		var zamik = 1;
+		var smer = 0;
+		var keys = [];
+		var maxSpeed = 10;
+		
+		
+		var barve = ['#003366', '#336699', '#3366CC', '#003399', '#0000CC', '#006666', '#006699', '#0099CC', '#0066CC', '#333399', '#009999', '#33CCCC', '#6600FF', '#6600CC', '#9900FF', '#9900CC', '#660066', '#993399', '#CC00CC', '#CC00FF', '#CC33FF', '#FF00FF', '#FF33CC', '#FF3399', '#FF0066', '#FF5050', '#FF6600', '#FF9933', '#FFCC00', '#FFFF00', '#FF9900', '#FF3300', '#FF0000', '#CC0000', '#CC3300', '#993300', '#CCFF33', '#99FF33', '#CCFF66', '#99FF66', '#66FF33', '#009900', '#009933', '#33CC33', '#00FF00']
+		
+		var c=document.getElementById("canvas");
+		var ctx=c.getContext("2d");
+		var width = canvas.width;
+		var height = canvas.height;
+	
+		var krog = function (x, y, r, c, zx, zy) {
+		   this.X = x;
+		   this.Y = y;
+		   this.R = r;
+		   this.C = c;
+		   this.zX = zx;
+		   this.zY = zy;
+		};
+		
+		var igralec = new krog(width/2, height/2, 20, '#000000', 0, 0);
+		
+		var krogi = [];
+		for(i=0; i < stKrogov; i++){
+			novKrog();
+		}
+		
+		
+		FPStick();
+		
+		window.addEventListener("keydown", function (e) {
+			keys[e.keyCode] = true;
+		});
+		window.addEventListener("keyup", function (e) {
+			keys[e.keyCode] = false;
+		});
+		
+		function FPStick(){
+			prikaziFPS++;
+			frame = Date.now() - time;
+			fps = 1000 / frame;
+			FPS = Math.floor(fps);
+			time = Date.now();
+			if(prikaziFPS == 10){
+				prikaziFPS = 0;
+				document.getElementById("display").innerHTML = FPS + 'fps';
+			}
+			if(fps > 0){
+				premakni();
+			}
+			
+			
+			if(igralec.X > width)igralec.X = 0;
+			if(igralec.X < 0)igralec.X = width;
+			if(igralec.Y > height)igralec.Y = 0;
+			if(igralec.Y < 0)igralec.Y = height;
+			
+			preveriZmago();
+			
+			window.requestAnimationFrame(FPStick);
+		}
+		
+		function premakni(){
+			for(i=0;i<krogi.length;i++){		
+				zamikX = krogi[i].zX * fps;
+				zamikY = krogi[i].zY * fps;
+				krogi[i].X = krogi[i].X + zamikX;
+				krogi[i].Y = krogi[i].Y + zamikY;
+				if(krogi[i].X > width){krogi.splice(i,1);novKrog();}
+				if(krogi[i].Y > height){krogi.splice(i,1);novKrog();}
+				if(krogi[i].X < 0){krogi.splice(i,1);novKrog();}
+				if(krogi[i].Y < 0){krogi.splice(i,1);novKrog();}
+			}
+			
+			zamik = 0.1 * fps;
+			igralec.X += (igralec.zX * zamik)/10;
+			igralec.Y += (igralec.zY * zamik)/10;
+			render();
+		}
+		
+		function render(){
+			
+			
+			for(i=0;i<krogi.length;i++){
+				var zacasniX = krogi[i].X;
+				var zacasniY = krogi[i].Y;
+				var zacasniR = krogi[i].R;
+				var zacasniC = krogi[i].C;
+				
+				ctx.beginPath();
+				ctx.arc(zacasniX, zacasniY, zacasniR, 0, 2 * Math.PI, false);
+				ctx.fillStyle = zacasniC;
+				ctx.fill();
+				ctx.lineWidth = 1;
+				ctx.strokeStyle = '#000000';
+				ctx.stroke();
+			}	
+			
+		}
+		
+		function novKrog(){
+			if(krogi.length < stKrogov){
+				var lurd = Math.floor(Math.random()* 3);
+				if(lurd == 0){
+					var pushX = Math.floor(Math.random()* width);
+					var pushY = 0;
+					var pushZX = (0.5 -(Math.random()* 1))/10;
+					var pushZY = (1 -(Math.random()* 1))/10;
+				}
+				if(lurd == 1){
+					var pushX = Math.floor(Math.random()* width);
+					var pushY = height;
+					var pushZX = (0.5 -(Math.random()* 1))/10;
+					var pushZY = (0 -(Math.random()* 1))/10;
+				}
+				if(lurd == 2){
+					var pushX = 0;
+					var pushY = Math.floor(Math.random()* height);
+					var pushZX = (1 -(Math.random()* 1))/10;
+					var pushZY = (0.5 -(Math.random()* 1))/10;
+				}
+				if(lurd == 3){
+					var pushX = width;
+					var pushY = Math.floor(Math.random()* height);
+					var pushZX = (0 -(Math.random()* 1))/10;
+					var pushZY = (0.5 -(Math.random()* 1))/10;
+				}
+				var pushR = Math.floor(Math.random()* (igralec.R + 50));
+				var pushC = barve[Math.floor(Math.random()* barve.length)];
+				krogi.push(new krog(pushX, pushY, pushR, pushC, pushZX, pushZY))
+			}
+		}
+		
+		
+		function preveriZmago(){
+			if(igralec.R > 300){
+				document.getElementById("body").innerHTML = "<h1>You're a winner!</h1>";
+			}
+		}
+	</script>
+</body>
+</html>

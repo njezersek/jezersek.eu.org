@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Stopwatch</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href='http://fonts.googleapis.com/css?family=Cutive+Mono&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<style>
+			body, html{
+				min-height: 100%;
+			}
+			
+			body{
+				margin: 0;
+				padding: 0;
+				font-family: 'Cutive Mono';
+				background-image: url('http://img.new.livestream.com/events/0000000000391e2c/61841749-2d74-45f5-b51e-7d5d30bf38fc.jpg');
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
+				height: 100%;
+				color: #FFF;
+			}
+			.main{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin-top: 200px;
+			}
+			.display{
+				font-family: 'Cutive Mono';
+				font-size: 100px;
+			}
+			
+			.gumbi{
+				display: flex;
+				align-items: center;
+			}
+			
+			.gumbi div{
+				padding: 10px;
+				margin: 5px;
+				border-radius: 3px;
+				min-width: 80px;
+				text-align: center;
+				border: solid #FFF 1px;
+				transition-property: background, color;
+				transition-duration: 0.2s;
+				cursor: pointer;
+			}
+			
+			.gumbi div:hover{
+				background: #FFF;
+				color: #7EDBD0;
+			}
+			
+			.gumbi div:active{
+				background: none;
+				color: #FFF;
+			}
+			
+			.times{
+				position: relative;
+				font-size: 30px;
+			}
+			
+			::-moz-selection { /* Code for Firefox */
+				background:none;
+			}
+
+			::selection {
+				background: none;
+			}
+			
+			@media screen and (max-width: 700px) {
+				.main{
+					margin-top: 100px;
+				}
+				.display{
+					font-size: 60px;
+				}
+			}
+			
+			@media screen and (max-width: 450px) {
+				.main{
+					margin-top: 70px;
+				}
+				.display{
+					font-size: 40px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<div id="display" class="display">00:00:00,00</div>
+			<div class="gumbi">
+				<div id="start" onclick="start()">start</div>
+				<div id="pause" onclick="stop()">pause</div>
+				<div id="reset" onclick="reset()">reset</div>
+				<div id="loop" onclick="loop()">loop</div>
+			</div>
+			<div id="times" class="times">
+			</div>
+		</div>
+		
+		
+		<script>
+
+			var ds = 0;
+			var s = 0;
+			var m = 0;
+			var h = 0;
+			
+			var dsP = "00";
+			var sP = "00";
+			var mP = "00";
+			var hP = "00";
+			
+			var pauza = true;
+			
+			var times = [];
+			
+			var interval = setInterval(tick, 10);
+			function tick(){
+					if(pauza == false){
+						ds++; 
+						if(ds > 99){
+							s++;
+							ds = 0;
+						}
+						if(s > 59){
+							m++;
+							s = 0;
+						}
+						if(m > 59){
+							h++;
+							m = 0;
+						}
+						
+						if(ds < 10) dsP = "0" + ds;
+						else dsP = "" + ds;
+						
+						if(s < 10) sP = "0" + s;
+						else sP = "" + s;
+						
+						if(m < 10) mP = "0" + m;
+						else mP = "" + m;
+						
+						if(h < 10) hP = "0" + h;
+						else hP = "" + h;
+					}
+					document.getElementById('display').innerHTML = hP + ":" + mP + ":" + sP + "," + dsP;
+					if(pauza == false){
+						document.getElementById('pause').style.display = "block";
+						document.getElementById('loop').style.display = "block";
+						document.getElementById('start').style.display = "none";
+						document.getElementById('reset').style.display = "none";
+					}
+					else{
+						document.getElementById('pause').style.display = "none";
+						document.getElementById('loop').style.display = "none";
+						document.getElementById('start').style.display = "block";
+						document.getElementById('reset').style.display = "block";
+					}
+				}
+			function start(){pauza = false}
+			function stop(){pauza = true}
+			function reset(){
+				pauza = true;
+				
+				ds = 0;
+				s = 0;
+				m = 0;
+				h = 0;
+				
+				dsP = "00";
+				sP = "00";
+				mP = "00";
+				hP = "00";
+				
+				times = [];
+				document.getElementById('times').innerHTML = "";
+				
+			}
+			function loop(){
+				times.push(hP + ":" + mP + ":" + sP + "," + dsP + "<br>");
+				document.getElementById('times').innerHTML = "";
+				for(i=0; i<times.length; i++){
+					document.getElementById('times').innerHTML += times[i];
+				}
+			}
+		</script>
+	</body>
+</html>

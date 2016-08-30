@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Generator naloge</title>
+	<style>
+		body{
+			background: #d6d4d1; /* Old browsers */
+			background: -moz-linear-gradient(left,  #d6d4d1 0%, #eaeaea 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,#d6d4d1), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* IE10+ */
+			background: linear-gradient(to right,  #d6d4d1 0%,#eaeaea 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d4d1', endColorstr='#eaeaea',GradientType=1 ); /* IE6-9 */
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+			margin: 0;
+		}
+	
+		.content{
+			width: 100%;
+			max-width:800px;
+			margin:50px auto;
+			background: #FFF;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+		}
+		
+		.mini-content{
+			width: 100%;
+			max-width:300px;
+			margin:150px auto;
+			background: #FFF;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			position: relative;
+		}
+		
+		.padding{
+			padding: 30px;
+		}
+		
+		.header{
+			background: #0066CC;
+			padding: 20px 30px 15px 30px;
+			margin: -30px -30px 30px -30px;
+			border-radius: 5px 5px 0 0;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'calibri', serif;
+		}
+		
+		.header input{
+			font-size: 30px;
+			padding: 1px;
+			background: none;
+			border: none;
+			color: #FFFFFF;
+		}
+		
+		.header input:focus{
+			outline: none; 
+		}
+		
+		p input{
+			margin-top: 10px;
+		}
+		
+		textarea{
+			margin: 10px 0;
+		}
+		
+		.gumb{
+			display: inline;
+			background: #0066CC;
+			border-radius: 7px;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'calibri', serif;
+			font-size: 20px;
+			padding: 5px;
+			margin-right: 10px;
+			cursor: pointer;
+		}
+		
+		.gumb-okno{
+			
+			display: inline-block;
+			background: #0066CC;
+			border-radius: 7px;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'calibri', serif;
+			font-size: 20px;
+			padding: 5px;
+			cursor: pointer;
+			margin-top: 10px;
+		}
+		
+		textarea{
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+		}
+		
+		#displaytocke{
+			margin-top: 20px;
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+		}
+		
+		footer{
+			margin-top: 20px;
+		}
+		
+		footer p {
+			margin: 3px;
+			font-size: 12px;
+			color: #333;
+		}
+		
+		a{
+			text-decoration: none;
+			color: #0066CC;
+		}
+		
+		#senca{
+			position: absolute; 
+			width: 100%; 
+			height: 100%; 
+			background: rgba(0,0,0,0.5);
+			margin-top: -50px;
+			display: none;
+		}
+	</style>
+</head>
+<body id="demo">
+	<div id="senca">
+		<div class="mini-content">
+			<div class="padding">
+				<div id="opozorilo"></div>
+				<div class="gumb-okno" onclick="skriOpozorilo()">OK</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="padding">
+			<div class="header">
+				<input autocomplete="off" type="text-area" id="naslov" placeholder="naslov naloge"></input>
+			</div>
+			<textarea value="" style="max-width:800px; width: 100%;" class="text" name="tekst" id="tekst" rows="10" placeholder="napišite besedilo in v [] zahtevane odgovore, ki ne bodo prikazani v nalogi"></textarea>
+			<div class="gumb" onclick="getNaloga()">Predogled naloge</div>
+			<div class="gumb" onclick="getHTML()">Shrani nalogo</div>
+			<div style="display: inline;">Preveri veliko začetnico: <div class="gumb" id="upostevaj" onclick="toggleUpostevaj()">ne</div></div>
+			<footer>
+				<p>O morebitnih napakah v programu ali idejah za izboljšanje mi lahko pišete na <a href="mailto:njezersek@gmail.com">njezersek@gmail.com</a>.</p>
+				<p>Generator nalog - 2015 - Vse pravice pridržane - Nejc Jezeršek</p>
+			</footer>
+		</div>
+	</div>
+	<script>
+		var text;
+		var id = 1;
+		var tocke = 0;
+		var urejevalnik;
+		var code;
+		var naslov;
+		var upostevajVeliko = false;
+		function get(){
+			id = 1;
+			text = document.getElementById('tekst').value;
+			
+			var i = text.search("\\[");
+			while (i >= 0) {
+				i = text.search("\\[");
+				if(i >= 0){
+					text = text.replace("[", "<input id='"+id+"' type='text-area' class='");
+					id++;
+				}
+			}
+			
+			var i = text.search("\\]");
+			while (i >= 0) {
+				i = text.search("\\]");
+				if(i >= 0){
+					text = text.replace("]", "'></input>");
+				}
+			}
+			
+			return "<div class='content'><div class='padding'><div class='header' id='naslov'>"+naslov+"</div><p>"+ text + "</p><br><div class='gumb' onclick='preveri()'>Preveri</div><div id='displaytocke'></div></div></div>";
+		}
+		
+		function getNaloga(){
+			code = document.getElementById('tekst').value;
+			naslov = document.getElementById('naslov').value;
+			urejevalnik = document.getElementById('demo').innerHTML;
+			document.getElementById('demo').innerHTML = get() + "<br><div class='gumb' onclick='nazaj()'>Nazaj v urejavalnik</div>";
+		}
+		
+		function nazaj(){
+			document.getElementById('demo').innerHTML = urejevalnik;
+			document.getElementById('tekst').value = code;
+			document.getElementById('naslov').value = naslov;
+		}
+		
+		function preveri(){
+			var idIN = id;
+			var tockeIN = tocke;
+			for(i=1; i<idIN; i++){
+				if(upostevajVeliko == false){
+					if(document.getElementById(i).className.toLowerCase() == document.getElementById(i).value.toLowerCase()){
+						document.getElementById(i).style.background = "#2ecc71";
+						tockeIN++;
+					}
+					else{
+						document.getElementById(i).style.background = "#e74c3c";
+					}
+				}
+				else{
+					if(document.getElementById(i).className == document.getElementById(i).value){
+						document.getElementById(i).style.background = "#2ecc71";
+						tockeIN++;
+					}
+					else{
+						document.getElementById(i).style.background = "#e74c3c";
+					}
+				}
+			}
+			idIN--;
+			document.getElementById('displaytocke').innerHTML = "Dosegel si " + tockeIN + "/" + idIN + " točk!";
+		}
+		
+		function getHTML(){
+			code = document.getElementById('tekst').value;
+			naslov = document.getElementById('naslov').value;
+			var naloga = get();
+			
+			var join1 = 
+				'<!DOCTYPE html>\
+				\
+				<html lang="sl">\
+				\
+				<head>\
+				\
+				<meta charset="UTF-8">\
+				\
+				<meta name="viewport" content="width=device-width, initial-scale=1">\
+				\
+				<title>'+ naslov +'</title>\
+				<style>\
+					body{\
+						background: #d6d4d1; /* Old browsers */\
+						background: -moz-linear-gradient(left,  #d6d4d1 0%, #eaeaea 100%); /* FF3.6+ */\
+						background: -webkit-gradient(linear, left top, right top, color-stop(0%,#d6d4d1), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */\
+						background: -webkit-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */\
+						background: -o-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* Opera 11.10+ */\
+						background: -ms-linear-gradient(left,  #d6d4d1 0%,#eaeaea 100%); /* IE10+ */\
+						background: linear-gradient(to right,  #d6d4d1 0%,#eaeaea 100%); /* W3C */\
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#d6d4d1", endColorstr="#eaeaea",GradientType=1 ); /* IE6-9 */\
+						font-family: "Trebuchet MS", Helvetica, sans-serif;\
+					}\
+				\
+					.content{\
+						width: 100%;\
+						max-width:800px;\
+						margin:50px auto;\
+						background: #FFF;\
+						border-radius: 5px;\
+						box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);\
+						-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);\
+						-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);\
+					}\
+					\
+					.padding{\
+						padding: 30px;\
+					}\
+					\
+					.header{\
+						background: #0066CC;\
+						padding: 20px 30px 15px 30px;\
+						margin: -30px -30px 30px -30px;\
+						border-radius: 5px 5px 0 0;\
+						color: #fff;\
+						text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);\
+						font: normal 30px "calibri", serif;\
+					}\
+					\
+					.header input{\
+						font-size: 20px;\
+						padding: 5px;\
+						background: none;\
+						border: none;\
+						color: #FFFFFF;\
+					}\
+					\
+					.header input:focus{\
+						outline: none; \
+					}\
+					\
+					p input{\
+						margin-top: 10px;\
+					}\
+					\
+					textarea{\
+						margin: 10px 0;\
+					}\
+					\
+					.gumb{\
+						display: inline;\
+						background: #0066CC;\
+						border-radius: 7px;\
+						color: #fff;\
+						text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);\
+						font: normal 30px "calibri", serif;\
+						font-size: 20px;\
+						padding: 5px;\
+						margin-right: 10px;\
+					}\
+					\
+					pre, textarea{\
+						font-family: "Trebuchet MS", Helvetica, sans-serif;\
+					}\
+					\
+					#displaytocke{\
+						margin-top: 20px;\
+						font-family: "Trebuchet MS", Helvetica, sans-serif;\
+					}\
+				</style>\
+				\
+				</head>\
+				\
+				<body>';
+			var join3 = '\
+			\
+			\
+			<script>\
+			\
+			\
+				function preveri(){\
+			\
+			\
+				var id = '+id+';\
+			\
+				var tocke = 0;\
+			\
+				var uVeliko = '+upostevajVeliko+';\
+			\
+				for(i=1; i<id; i++){\
+			\
+					if(uVeliko == false){\
+			\
+						if(document.getElementById(i).className.toLowerCase() == document.getElementById(i).value.toLowerCase()){\
+			\
+							document.getElementById(i).style.background = "#2ecc71";\
+			\
+							tocke++;\
+			\
+						}\
+			\
+						else{\
+			\
+							document.getElementById(i).style.background = "#e74c3c";\
+			\
+						}\
+			\
+					}\
+			\
+					else{\
+			\
+						if(document.getElementById(i).className == document.getElementById(i).value){\
+			\
+							document.getElementById(i).style.background = "#2ecc71";\
+			\
+							tocke++;\
+			\
+						}\
+			\
+						else{\
+			\
+							document.getElementById(i).style.background = "#e74c3c";\
+			\
+						}\
+					}\
+				}\
+			\
+				id--;\
+			\
+				document.getElementById("displaytocke").innerHTML = "Dosegel si " + tocke + "/" + id + " točk!";\
+			\
+				}\
+			\
+			\
+			</'+'script>\
+			\
+			\
+			</body>\
+			\
+			\
+			</html>';
+			
+			
+			if(naslov.length > 0){
+				if(text.length > 0){
+					download(naslov + ".html",join1 + naloga + join3)
+				}
+				else{
+					objavi("Ne morete shraniti naloge brez vsebine!");
+				}
+			}
+			else{
+				objavi("Ne morete shraniti naloge brez naslova!");
+			}
+			document.getElementById('tekst').value = code;
+			document.getElementById('naslov').value = naslov;
+		}
+		
+		function toggleUpostevaj(){
+			if(upostevajVeliko == false){
+				upostevajVeliko = true;
+				document.getElementById('upostevaj').innerHTML = "ja";
+			}
+			else{
+				upostevajVeliko = false;
+				document.getElementById('upostevaj').innerHTML = "ne";
+			}
+		}
+		
+		
+		function download(filename, text) {
+			var pom = document.createElement('a');
+			pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+			pom.setAttribute('download', filename);
+			pom.click();
+		}
+		
+		function objavi(text){
+			document.getElementById("senca").style.display = "block";
+			document.getElementById("opozorilo").innerHTML = text;
+		}
+		
+		function skriOpozorilo(){
+			document.getElementById("senca").style.display = "none";
+			document.getElementById("opozorilo").innerHTML = "";
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="media/favicon.ico" type="image/x-icon">
+	<title>Metanje žogice v tarčo</title>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		
+		h1{
+			padding: 50px;
+			position: absolute;
+		}
+		
+		canvas{
+			padding: 0;
+			margin: 0;
+		}
+		
+		a{
+			text-decoration: none; 
+			color: #0066CC;
+			position: absolute;
+			bottom: 40px;
+			padding: 0;
+			margin: 0 40px 0;
+		}
+	</style>
+</head>
+	
+<body>
+	<h1 id="display">Vrzi žogico tarčo!</h1>
+	<canvas id="canvas"></canvas>
+	<a href="index.html"><h3>Nazaj na domačo spletno stran</h3></a>
+	<script>
+(function () {
+	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+	window.requestAnimationFrame = requestAnimationFrame;
+})();
+var data = function (x, y, tla, dovoljeno, tarca, tx, ty, t, ima) {
+		   this.sirinaOkna = x;
+		   this.visinaOkna = y;
+		   this.visinaTal = tla;
+		   this.krogIgralca = dovoljeno;
+		   this.tarcaR = tarca;
+		   this.tarcaX = tx;
+		   this.tarcaY = ty;
+		   this.tocke = t;
+		   this.imaTocko = ima;
+		};	
+
+	
+var sprite = function (x1, y1, r,  px, py, p, zx, zy, mx, my, mzx, mzy) {
+		   this.X = x1;
+		   this.Y = y1;
+		   this.R = r;
+		   this.prijemX = px;
+		   this.prijemY = py;
+		   this.prijem = p;
+		   this.hitrostX = zx;
+		   this.hitrostY = zy;
+		   this.miskaX = mx;
+		   this.miskaY = my;
+		   this.hitrostMiskeX = mzx;
+		   this.hitrostMiskeY = mzy;
+		};
+var igra = new data(window.innerWidth, window.innerHeight, 40, 300, 60, 200, 200, 0, false)
+		
+var krog = new sprite(igra.sirinaOkna - 40, igra.visinaOkna/2, 40, 0, 0, false, 0, 0, 0, 0, 0, 0);
+
+
+window.onload = function init() {
+	gameLoop();
+}
+
+window.addEventListener('resize',spremeniOkno,false);
+
+function spremeniOkno(){
+			igra.sirinaOkna = window.innerWidth;
+			igra.visinaOkna = window.innerHeight;		
+			canvas.width = igra.sirinaOkna;
+			canvas.height = igra.visinaOkna;
+		}
+
+document.addEventListener("mousedown", function () {	
+	var dxM = igra.sirinaOkna - krog.miskaX;
+	var dyM= igra.visinaOkna - krog.miskaY;
+	var legalDM = igra.krogIgralca * igra.krogIgralca;
+	var D2M = (dxM * dxM) + (dyM * dyM);
+	if(D2M < legalDM){
+		var dx = krog.X - krog.miskaX;
+		var dy = krog.Y - krog.miskaY;
+		var legalD = krog.R * krog.R;
+		var D2 = (dx * dx) + (dy * dy);
+		if(D2 < legalD){		
+			krog.prijemX = krog.miskaX - krog.X;
+			krog.prijemY = krog.miskaY - krog.Y;
+			krog.hitrostX = 0;
+			krog.hitrostY = 0;
+			krog.prijem = true;
+		}		
+	}
+	
+});
+
+document.addEventListener("mousemove", function () {
+	if(krog.prijem == true){
+		krog.hitrostX = event.clientX - krog.miskaX;
+		krog.hitrostY = event.clientY - krog.miskaY;
+		
+		var dxM = igra.sirinaOkna - krog.miskaX;
+		var dyM= igra.visinaOkna - krog.miskaY;
+		var legalDM = igra.krogIgralca * igra.krogIgralca;
+		var D2M = (dxM * dxM) + (dyM * dyM);
+		if(D2M > legalDM){
+			krog.prijem = false;
+		}
+	}
+	
+	krog.miskaX = event.clientX;     // Get the horizontal coordinate
+	krog.miskaY = event.clientY;     // Get the vertical coordinate
+});
+
+document.addEventListener("mouseup", function () {
+	krog.prijem = false;
+});
+
+
+
+
+function gameLoop() {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	canvas.width = igra.sirinaOkna;
+	canvas.height = igra.visinaOkna;
+	
+	if(krog.hitrostY < 30)krog.hitrostY += 1;//gravitaciski pospesek
+	if(krog.hitrostX > 0)krog.hitrostX -= 0.01;//zracni upor
+	if(krog.hitrostX < 0)krog.hitrostX += 0.01;//zracni upor
+	if(krog.Y > igra.visinaOkna - krog.R - 1){
+		if(krog.hitrostX > 0)krog.hitrostX -= 0.5;//trenje
+		if(krog.hitrostX < 0)krog.hitrostX += 0.5;//trenje
+		if((krog.hitrostX < 1)&&(krog.hitrostX > -1))krog.hitrostX = 0;
+	}
+	
+	if(krog.prijem == true){
+		krog.X = krog.miskaX - krog.prijemX; 
+		krog.Y = krog.miskaY - krog.prijemY; 
+	}
+	else if((krog.Y <= igra.visinaOkna - krog.R  - igra.visinaTal)&&(krog.Y >= 0  - krog.R)&&(krog.X <= igra.sirinaOkna  - krog.R)&&(krog.X >= 0 - krog.R)){
+		krog.X += krog.hitrostX;
+		krog.Y += krog.hitrostY;
+	}
+	
+	if(krog.Y > igra.visinaOkna - krog.R - igra.visinaTal){
+		krog.Y = igra.visinaOkna - krog.R  - igra.visinaTal;
+		krog.hitrostY = -krog.hitrostY/1.5;
+	}
+	if(krog.Y < 0 + krog.R){
+		krog.Y = 0 + krog.R;
+		krog.hitrostY = 0;
+	}
+	if(krog.X > igra.sirinaOkna - krog.R){
+		krog.X = igra.sirinaOkna - krog.R;
+		krog.hitrostY = krog.hitrostY/2;
+		krog.hitrostX = -krog.hitrostX/2;
+	}
+	if(krog.X < 0 + krog.R){
+		krog.X = 0 + krog.R;
+		krog.hitrostY = krog.hitrostY/2;
+		krog.hitrostX = -krog.hitrostX/2;
+	}	
+	
+	if(krog.X > igra.sirinaOkna - igra.krogIgralca)igra.imaTocko = false;
+	else{
+		if((Math.round(krog.hitrostX) == 0)&&(Math.round(krog.hitrostY) == 0)){
+			krog.X = igra.sirinaOkna - 40;
+			krog.Y = igra.visinaOkna/2;
+			igra.imaTocko = false;
+		}
+	}
+		
+		var dxT = igra.tarcaX - krog.X;
+		var dyT= igra.tarcaY - krog.Y;
+		var legalDT = igra.tarcaR + krog.R * igra.tarcaR + krog.R;
+		var D2T = (dxT * dxT) + (dyT * dyT);
+		if(D2T < legalDT){
+			if(igra.imaTocko == false){
+				igra.tocke ++;
+				igra.imaTocko = true;
+			}
+			document.getElementById('display').innerHTML = "tocke: " + igra.tocke;
+		}
+	
+//tla
+	ctx.fillStyle = '#6B4700';
+	ctx.fillRect(0, igra.visinaOkna - igra.visinaTal, igra.sirinaOkna, igra.visinaTal);
+//tarca
+	ctx.beginPath();
+	ctx.arc(igra.tarcaX, igra.tarcaY, igra.tarcaR, 0, 2 * Math.PI, false);
+	ctx.fillStyle = '#E62E00';
+	ctx.fill();
+//zogica
+	ctx.beginPath();
+	ctx.arc(krog.X, krog.Y, krog.R, 0, 2 * Math.PI, false);
+	ctx.fillStyle = '#E65C00';
+	ctx.fill();
+	ctx.lineWidth = 2;
+	ctx.strokeStyle = '#000000';
+	ctx.stroke();
+//krog
+	ctx.beginPath();
+	ctx.arc(igra.sirinaOkna, igra.visinaOkna, igra.krogIgralca, 0, 2 * Math.PI, false);
+	ctx.fillStyle = 'rgba(5, 255, 13, 0.20)';
+	ctx.fill();
+
+	requestAnimationFrame(gameLoop);
+}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+.jssora14l, .jssora14r, .jssora14ldn, .jssora14rdn{
+		position: absolute;
+		cursor: pointer;
+		display: block;
+		background: url(media/a14.png) no-repeat;
+		overflow:hidden;
+	}
+	
+.jssora14l { background-position: -15px -35px; }
+.jssora14r { background-position: -75px -35px; }
+.jssora14l:hover { background-position: -135px -35px; }
+.jssora14r:hover { background-position: -195px -35px; }
+.jssora14ldn { background-position: -255px -35px; }
+.jssora14rdn { background-position: -315px -35px; }
+
+#leva {
+width: 30px; 
+height: 50px; 
+top: 123px; 
+left: 0px;
+}
+
+#desna {
+width: 30px; 
+height: 50px; 
+top: 123px; 
+right: 0px
+}
+
+.slideshow {
+position: relative; 
+width: 1000px; 
+height: 500px; 
+overflow: hidden;
+border-radius: 10px;
+}
+
+.slides {
+cursor: move; 
+position: absolute; 
+left: 0px; 
+top: 0px; 
+width: 1000px; 
+height: 500px;
+overflow: hidden;
+margin-top: 20px;
+border-radius: 10px;
+}

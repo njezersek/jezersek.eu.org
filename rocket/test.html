@@ -1,0 +1,63 @@
+<style>
+	td{
+		border: 1px solid black;
+	}
+</style>
+
+<table>
+	<tr>
+		<td></td>
+		<td id="w">W</td>
+		<td id="e">E</td>
+	</tr>
+	<tr>
+		<td id="a">A</td>
+		<td id="s">S</td>
+		<td id="d">D</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<td></td>
+		<td id="i">I</td>
+		<td id="o">O</td>
+	</tr>
+	<tr>
+		<td id="j">J</td>
+		<td id="k">K</td>
+		<td id="l">L</td>
+	</tr>
+</table>
+
+<script>
+	window.addEventListener('keydown', function(event){
+		if(event.keyCode == 87)document.getElementById('w').style.background = "green";
+		if(event.keyCode == 69)document.getElementById('e').style.background = "green";
+		if(event.keyCode == 65)document.getElementById('a').style.background = "green";
+		if(event.keyCode == 83)document.getElementById('s').style.background = "green";
+		if(event.keyCode == 68)document.getElementById('d').style.background = "green";
+		
+		if(event.keyCode == 73)document.getElementById('i').style.background = "green";
+		if(event.keyCode == 79)document.getElementById('o').style.background = "green";
+		if(event.keyCode == 74)document.getElementById('j').style.background = "green";
+		if(event.keyCode == 75)document.getElementById('k').style.background = "green";
+		if(event.keyCode == 76)document.getElementById('l').style.background = "green";
+		console.log(event.keyCode);
+	});
+	
+	window.addEventListener('keyup', function(event){
+		if(event.keyCode == 87)document.getElementById('w').style.background = "";
+		if(event.keyCode == 69)document.getElementById('e').style.background = "";
+		if(event.keyCode == 65)document.getElementById('a').style.background = "";
+		if(event.keyCode == 83)document.getElementById('s').style.background = "";
+		if(event.keyCode == 68)document.getElementById('d').style.background = "";
+		
+		if(event.keyCode == 73)document.getElementById('i').style.background = "";
+		if(event.keyCode == 79)document.getElementById('o').style.background = "";
+		if(event.keyCode == 74)document.getElementById('j').style.background = "";
+		if(event.keyCode == 75)document.getElementById('k').style.background = "";
+		if(event.keyCode == 76)document.getElementById('l').style.background = "";
+		console.log(event.keyCode);
+	});
+</script>

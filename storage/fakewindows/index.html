@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NEJCstar</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="okna">
+        
+    </div>
+    <div id="start-menu" style="display: none;">
+    </div>
+    <div id="tool-bar">
+        <div id="start" onclick='toggleStart()'></div>
+        <div id="ura">19:08<br>21.8.2016</div>
+    </div>
+    <script>
+        var progrmi = [
+            {vrsta: "html", url: "https://jezersek.eu.org", ime: "jezersek.eu.org"},
+            {vrsta: "html", url: "https://jezersek.eu.org/connect4/", ime: "connect4"}
+        ];
+        var startOpend = false;
+        
+        ura();
+        function ura(){
+            var d = new Date();
+            var h = d.getHours();
+            var min = d.getMinutes();
+            var day = d.getDate();
+            var m = d.getMonth()+1;
+            var y = d.getFullYear();						if(min<10)min = "0"+min;			if(h<10)h = "0"+h;
+            document.getElementById('ura').innerHTML = h+":"+min+"<br>"+day+"."+m+"."+y;
+            
+            setTimeout(ura, 500);
+        }
+        function spusti(event, element){
+            element.prijem = false;
+        }
+        function primi(event, element){
+            var viewportOffset = element.getBoundingClientRect();
+            element.prijemX = viewportOffset.left - event.clientX;
+            element.prijemY = viewportOffset.top - event.clientY;
+            element.prijem = true;			if(element.style.zIndex != "100000")vOzadje();
+            element.style.zIndex = "100000";    
+        }				window.addEventListener('mousemove', function(event){			var okna = document.getElementById('okna').children;			for(var i=0; i<okna.length; i++){				premakni(event, okna[i]);			}		});
+        function premakni(event, element){
+            if(element.prijem){
+                element.style.left = (event.clientX+element.prijemX)+"px";
+                element.style.top = (event.clientY+element.prijemY)+"px";
+            }
+        }				function vOzadje(){			var okna = document.getElementById('okna').children;						for(var i=0; i<okna.length; i++){				okna[i].style.zIndex = Number(okna[i].style.zIndex)-1;			}					}
+        
+        function toggleStart(){
+            if(startOpend){
+                document.getElementById('start-menu').style.display = "none";
+                startOpend = false;
+            }
+            else{
+                document.getElementById('start-menu').style.display = "block";
+                var seznam = "";
+                
+                for(var i=0; i<progrmi.length; i++){
+                    seznam += "<div class='program' onclick='odpri(\""+progrmi[i].url+"\")'>"+progrmi[i].ime+"</div>";
+                }
+                
+                document.getElementById('start-menu').innerHTML = seznam;
+                
+                startOpend = true;
+            }
+        }				function zapri(element){			var okna = document.getElementById('okna');			okna.splice(okna.indexOf(element),1)		}
+        
+        function odpri(url){
+            htmldata = "<div class=\"window\" onmousedown='primi(event, this)' onmouseup='spusti(event, this)' ><div class=\"top\"><div class=\"button\">_</div><div class=\"button\" onclick='zapri(this)'>X</div></div><iframe src=\""+url+"\"></iframe></div>";
+            var e = document.createElement('div');
+            e.innerHTML = htmldata;
+            
+            while(e.firstChild) {
+                document.getElementById('okna').appendChild(e.firstChild);
+            }
+        }
+    </script>
+</body>
+</html>
+
+

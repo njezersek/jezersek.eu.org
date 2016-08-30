@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="UTF-8">	
+	<title>Tic-Tac-Toe</title>
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<style>
+		
+		body{
+			background: #29b765;
+			margin: 0;
+			padding: 0;
+		}
+		
+		table, th, td {
+			border-collapse: collapse;
+			text-align: center;
+			font-size: 50px;
+			font-family: "calibri";
+		}
+		
+		td{
+			border: 2px solid #FFF;
+			width: 150px;
+			height: 150px;
+			transition-property: opacity;
+			transition-duration: 0.3s;
+			opacity: 0.3;
+		}
+		
+		#td1{
+			border-top-style: none;
+			border-right-style: solid;
+			border-bottom-style: solid;
+			border-left-style: none;
+		}
+		#td2{
+			border-top-style: none;
+			border-right-style: solid;
+			border-bottom-style: solid;
+			border-left-style: solid;
+		}
+		#td3{
+			border-top-style: none;
+			border-right-style: none;
+			border-bottom-style: solid;
+			border-left-style: solid;
+		}
+		#td4{
+			border-top-style: solid;
+			border-right-style: solid;
+			border-bottom-style: solid;
+			border-left-style: none;
+		}
+		#td5{
+			border-top-style: solid;
+			border-right-style: solid;
+			border-bottom-style: solid;
+			border-left-style: solid;
+		}
+		#td6{
+			border-top-style: solid;
+			border-right-style: none;
+			border-bottom-style: solid;
+			border-left-style: solid;
+		}
+		#td7{
+			border-top-style: solid;
+			border-right-style: solid;
+			border-bottom-style: none;
+			border-left-style: none;
+		}
+		#td8{
+			border-top-style: solid;
+			border-right-style: solid;
+			border-bottom-style: none;
+			border-left-style: solid;
+		}
+		#td9{
+			border-top-style: solid;
+			border-right-style: none;
+			border-bottom-style: none;
+			border-left-style: solid;
+		}
+		
+		table{
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		h1, h2{
+			text-align: center;
+			font-family: 'Raleway', sans-serif;
+			color: #FFF;
+			font-size: 45px;
+			margin: 0;
+			padding: 30px;
+		}
+		
+		h3{
+			text-align: center;
+			font-family: 'Raleway', sans-serif;
+			color: #FFF;
+			font-size: 30px;
+			margin: 10px;
+			padding: 0px;
+		}
+		
+		td{
+			font-family: 'Raleway', sans-serif;
+			color: white;
+			font-size: 120px;
+			margin: 0;
+			padding: 0;
+		}
+		
+		#senca{
+			background: rgba(0,0,0,0.5);
+			position: fixed;
+			display: none;
+			width: 100%;
+			height: 100%;
+			transition-property: opacity;
+			transition-duration: 0.3s;
+		}
+		
+		#okno{
+			background: #FFF;
+			width: 350px;
+			margin: 200px auto 0;
+			padding: 20px 20px 60px;
+		}
+		
+		#title{
+			font-family: 'Raleway', sans-serif;
+			font-size: 25px;
+		}
+		
+		#gumb{
+			border: 2px solid #29b765;
+			font-family: 'Raleway', sans-serif;
+			font-size: 15px;
+			padding: 10px 15px;
+			display: inline-block;
+			float: right;
+			color: #29b765;
+			font-weight: bold;
+			cursor: pointer;
+		}
+	</style>
+</head>
+	
+<body>
+	<div id="senca">
+		<div id="okno">
+			<div id="title">napis</div>
+			<br>
+			<div id="gumb" onclick="zapriObjavo()">OK</div>
+		</div>
+	</div>
+	<h1 id="sporocilo">Tic-Tac-Toe</h1>
+	<h2 id="navrsti"></h2>
+	<div id="display">
+	</div>
+	
+	<script>
+		var data = ["_","_","_","_","_","_","_","_","_"];
+		var turn = "x";
+		
+		var player = "x";
+		var computer = "o";
+		
+		var playerScore = 0;
+		var computerScore = 0;
+		var nGames = 0;
+		
+		var Game = function(gameData, turn, change){
+			this.gameData = gameData;
+			if(turn == "x")var newTurn = "o";
+			else var newTurn = "x";
+			this.turn = newTurn;
+			this.prevTurn = turn;
+			this.value = evaluate(gameData);
+			this.nValue = null;
+			this.change = change;
+			
+			this.pGames = [];
+			
+			if(this.value == 0){
+			
+				//ustvari vse mozne igre
+				for(var i=0; i<this.gameData.length; i++){
+					if(this.gameData[i] == "_"){
+						this.gameData[i] = this.turn;
+						var newGame = this.gameData.slice();
+						this.gameData[i] = "_";
+						this.pGames[this.pGames.length] = new Game(newGame, this.turn, i);
+					}
+				}
+				
+				//uporabi minimax za dedovanje vrednotenja
+				if(this.turn == computer){ //isci najvecjo vrednost
+					var max = -10000
+					for(var p=0;p<this.pGames.length;p++){
+						if(this.pGames[p].nValue > max)max = this.pGames[p].nValue;
+						this.nValue = max;
+					}
+				}
+				else{ //isci najmanjso vrednost
+					var min = 10000
+					for(var p=0;p<this.pGames.length;p++){
+						if(this.pGames[p].nValue < min)min = this.pGames[p].nValue;
+						this.nValue = min;
+					}
+				}
+			}
+			else{
+				if(this.value == "_")this.nValue = 0;
+				else if(this.value == computer)this.nValue = 10;
+				else if(this.value == player)this.nValue = -10;
+			}
+			
+		}
+		
+		
+		function evaluate(gameData){
+			var players = ["x","o"];
+			for(var i=0; i<players.length; i++){
+				var p = players[i];
+				for(var j=0;j<3;j++){
+					if(gameData[j*3] == p && gameData[j*3+1] == p && gameData[j*3+2] == p)return p; //vodoravne
+				}
+				for(var j=0;j<3;j++){
+					if(gameData[j] == p && gameData[j+3] == p && gameData[j+6] == p)return p; //navpicne
+				}
+				if(gameData[0] == p && gameData[4] == p && gameData[8] == p)return p; //diagonale
+				if(gameData[2] == p && gameData[4] == p && gameData[6] == p)return p;
+			}
+			var c = 0;
+			for(var i=0; i<gameData.length; i++){
+				if(gameData[i] == "_")c++;
+			}
+			if(c==0)return "_";
+			return 0;
+		}
+		
+		function render(data){
+			console.log("   0 1 2");
+			var table = "";
+			table += "<table>";
+			for(y=0; y<3; y++){
+				table += "<tr>"
+				var line = y+": ";
+				for(x=y*3; x<y*3+3; x++){
+					if(data[x] == "_"){
+						table += "<td id='td"+(x+1)+"' onclick='update("+x+")' onmouseover='hover(this)' onmouseout='unhover(this)'></td>";
+						line += data[x]+" "
+					}
+					else{
+						table += "<td id='td"+(x+1)+"' style='opacity: 1;'>"+data[x]+"</td>";
+						line += data[x]+" "
+					}		
+				}
+				console.log(line);
+				table += "</tr>";
+			}
+			table += "</table>";
+			document.getElementById('display').innerHTML = table + "<br><br><h3>player: "+playerScore+"</h3><h3>computer: "+computerScore+"</h3><h3>number of gamse: "+nGames+"</h3>";
+		}
+		
+		function playerMove(move){
+			if(data[move] != "_")return;
+			data[move] = player;
+			turn = computer;
+			update('ai');
+		}
+		
+		function aiMove(){
+			//obrni turn ker je Game cuden
+		
+			if(turn == "x")var newTurn = "o";
+			else var newTurn = "x";
+		
+			var game = new Game(data, newTurn);
+			
+			moves = [];
+			for(var a=0; a<game.pGames.length; a++){
+				if(game.pGames[a].nValue == game.nValue)moves[moves.length] = game.pGames[a].change;
+			}
+			move = moves[Math.floor(Math.random()*moves.length)]; //od enakovrednih potez nakljucno izberi eno
+			
+			console.log(game);
+			//var move = prompt("Izberi polje za racunalnik");
+			data[move] = computer;
+			//alert(move);
+			
+			turn = player;
+			update(null);
+			
+		}
+		
+		function update(move){		
+			render(data);
+			var e = evaluate(data)
+			if(e == 0){
+				if(move != null){
+					if(turn == player)playerMove(move);
+					else if(move == 'ai')setTimeout(aiMove, 300);// zakasnitev racunalnika			
+				}
+			}
+			else{
+				if(e == "_")objavi("Draw!");
+				else objavi(e+" wins!");
+				
+				if(e == computer)computerScore++;
+				else if(e == player)playerScore++;
+				
+				nGames++;
+				
+			}
+			render(data);
+		}
+		
+		render(data);
+		
+		
+		var pause = false;
+		
+		document.getElementById("senca").style.opacity = "0";
+		
+		function hover(element){
+			if((element.style.opacity == "")&&(pause == false)&&(turn == player)){
+				element.innerHTML = turn;
+			}
+		}
+		function unhover(element){
+			render(data);
+		}
+		
+		function objavi(text){
+			document.getElementById("senca").style.opacity = "1";
+			document.getElementById("senca").style.zIndex = "20";
+			document.getElementById("senca").style.display = "block";
+			document.getElementById("title").innerHTML = text;
+			pause = true;
+		}
+		function zapriObjavo(){
+			document.getElementById("senca").style.opacity = "0";
+			document.getElementById("senca").style.zIndex = "0";
+			document.getElementById("senca").style.display = "none";
+			document.getElementById("title").innerHTML = "";
+			reset();
+			pause = false;
+		}
+		
+		
+		
+		function reset(){
+			data = ["_","_","_","_","_","_","_","_","_"];
+			//turn = "x";
+			if(turn == computer)aiMove();
+			render(data)
+		}
+		
+		
+		//key input
+		window.addEventListener('keypress', function(event){
+			console.log(event.keyCode);
+			if(event.keyCode >= 49 && event.keyCode <= 57)update(event.keyCode-49)
+		});
+	</script>
+</body>
+</html>

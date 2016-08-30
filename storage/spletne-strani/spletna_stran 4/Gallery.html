@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<head>
+   <title>Nejc Jezeršek - Gallery</title>
+   <meta charset="utf8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   <link rel="shortcut icon" href="media/logo.ico" type="image/x-icon">	
+   <link rel="stylesheet" type="text/css" href="style.css">
+   <link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Sniglet&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+	<header>
+		<div class="main">
+			<table>
+				<tr>
+					<td>
+						<a href="Domov.html"><h1>Nejc Jezeršek</h1></a>
+						<h2>My gallery</h2>
+					</td>
+					<td>
+						<nav>
+							<ul>
+								<a href="Home.html"><li>Home</li></a>
+								<a href="Gallery.html"><li>Gallery</li></a>
+								<a href="Aboutme.html"><li>About me</li></a>
+								<a href="Articles.html"><li>Articles</li></a>
+							</ul>
+						</nav>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</header>
+<div class="main">
+	
+	<div class="fluidcantainer">
+		<a href="media/nejc_banner.jpg"><div class="fluid" id="a1">
+		<h2 class="opis">Me</h2>
+		</div></a>
+		
+		<a href="media/slika1.jpg"><div class="fluid" id="a2">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika2.jpg"><div class="fluid" id="a3">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika3.jpg"><div class="fluid"  id="a4">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika4.jpg"><div class="fluid" id="a5">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika5.jpg"><div class="fluid" id="a6">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika6.jpg"><div class="fluid" id="a7">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika7.jpg"><div class="fluid"  id="a8">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika8.jpg"><div class="fluid" id="a9">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika9.jpg"><div class="fluid" id="a10">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika10.jpg"><div class="fluid" id="a11">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika11.jpg"><div class="fluid" id="a12">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika12.jpg"><div class="fluid" id="a13">
+		<h2 class="opis">Jaz</h2>
+		</div></a>
+		
+		<a href="media/slika13.jpg"><div class="fluid" id="a14">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika14.jpg"><div class="fluid" id="a15">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika15.jpg"><div class="fluid"  id="a16">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika16.jpg"><div class="fluid" id="a17">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika17.jpg"><div class="fluid" id="a18">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika18.jpg"><div class="fluid" id="a19">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika19.jpg"><div class="fluid"  id="a20">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika20.jpg"><div class="fluid" id="a21">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika21.jpg"><div class="fluid" id="a22">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika22.jpg"><div class="fluid" id="a23">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+		
+		<a href="media/slika23.jpg"><div class="fluid" id="a24">
+		<h2 class="opis">Image description</h2>
+		</div></a>
+	</div>
+	
+</div>
+<footer>
+<div class="main">
+   <p>Nejc Jezeršek - 2014 - All rights reserved - <a class="jezik" href="Galerija.html">nastavi jezik na SLO</a></p>
+</div>
+</footer>
+
+<script>
+		var sirina = window.innerWidth;
+		var visina = window.innerHeight;
+		spremeniOkno();
+		
+		window.addEventListener('resize',spremeniOkno,false);
+		
+		function spremeniOkno() {
+			sirina = window.innerWidth;
+			visina = window.innerHeight;
+			for (var stevec = 1; stevec < 25; stevec++) {
+				var id = 'a' + stevec.toString();
+				if (sirina >= 1200) {
+					document.getElementById(id).style.width = '25%';
+				}
+				else if (sirina >= 800) {
+					document.getElementById(id).style.width = '25%';
+				}
+				else if (sirina >= 600) {
+					document.getElementById(id).style.width = '33.3%';
+				}
+				else if (sirina >= 400) {
+					document.getElementById(id).style.width = '50%';
+				}
+				else {
+					document.getElementById(id).style.width = '100%';
+				}
+			}
+		}
+
+	</script>
+	
+ 
+	
+</body>

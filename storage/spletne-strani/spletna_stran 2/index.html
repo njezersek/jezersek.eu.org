@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>flat ui</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<header id="top">
+		<div class="top-header">
+			<div class="logo">Nejc Jezeršek</div>
+			<img id="mobile-menu" src="media/menu.png" onclick="showmenu()"></img>
+			<nav id="nav">	
+				<ul>
+					<li class="button" onclick="scroll('domov')">Domov</li>
+					<li class="button" onclick="scroll('projekti')">Moji projekti</li>
+					<li class="button" onclick="scroll('omeni')">O meni</li>
+					<li class="button" onclick="scroll('galerija')">Galerija</li>
+					<li class="button" onclick="scroll('kontakt')">Kontakt</li>
+				</ul>
+			</nav>
+		</div>
+		<h1>Flat UI</h1>
+		<h2>test</h2>
+		<div class="down"><img src="media/down.png"/></div>
+	</header>
+	<section id="galery" class="white-violete">
+	<div class="zigzag"></div>
+		<h1>Moji projekti</h1>
+		<div class="fluid-con">
+			<div id="fl1" class="fluid">
+				<div class="con">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con">
+				</div>
+			</div>
+			<br></br>
+		</div>
+	</section>
+	<section class="blue">
+		<h1>O meni</h1>
+		<div class="about">
+			<img class="inline" src="media/about.jpg"/>
+			<p class="inline" >Jaz sem Nejc Jezeršek dksh doisadhasiou ds gdaouisa duaisgd sauio dsuid gofddpaf 9dpuisf ifdot fdoui fzu tae7f gdfet dusafiazf  afefztef udszfar iaedsizguzft uisz tasif tfd jdks adhsaoid soipd hsapd sdh iudof dfudfh fauidsf  dsuiafg dsaioufgudisoa fd oiuds fase </p>
+			<br></br>
+		</div>
+	</section>
+	<section class="white-red">
+	<div class="zigzag"></div>
+		<h1>Galerija</h1>
+		<div class="fluid-con">
+			<div id="fl1" class="fluid">
+				<div class="con-red">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con-red">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con-red">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con-red">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con-red">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con-red">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con-red">
+				</div>
+			</div>
+			<div id="fl1" class="fluid">
+				<div class="con-red">
+				</div>
+			</div>	
+		</div>
+		<br></br>
+	</section>
+	<section class="orange">
+		<h1>Kontakt</h1>
+		<div class="fluid-ico">
+			<a href="mailto:njezersek@gmail.com"><div class="ico"><img id="em" src="media/email.png"/></div></a>
+			<a href="https://www.facebook.com/nejc.jezersek.3" ><div class="ico"><img id="fb" src="media/facebook.png"/></div></a>
+			<a href="https://twitter.com/njezersek" ><div class="ico"><img id="tw" src="media/twitter.png"/></div></a>
+			<a href="https://plus.google.com/u/0/+nejcjezersek/posts" ><div class="ico"><img id="gp" src="media/gplus.png"/></div></a>
+			<br></br>
+		</div>
+	</section>
+	
+	<script>
+	
+	var toY;
+	var menu = false;
+	
+	function scroll(to) {
+		toY = to;
+		premakni();
+	}
+	
+	function premakni(){
+		if(toY < document.body.scrollTop){
+			document.body.scrollTop -= 50;
+			window.requestAnimationFrame(premakni);
+		}
+		if(toY > document.body.scrollTop){
+			document.body.scrollTop += 50;
+			window.requestAnimationFrame(premakni);
+		}
+	}
+	
+	function showmenu(){
+		if(menu == false){
+			document.getElementById('nav').style.display = 'block';
+			menu = true;
+		}
+		else{
+			document.getElementById('nav').style.display = 'none';
+			menu = false;
+		}
+	}
+	
+	window.addEventListener('resize',spremeniOkno,false);
+		
+		function spremeniOkno() {
+			sirina = window.innerWidth;
+			
+				if (sirina >= 700) {
+					document.getElementById('nav').style.display = 'block';
+					menu = true;
+				}
+				else {
+					document.getElementById('nav').style.display = 'none';
+					menu = false;
+				}
+		}
+		
+		//document.getElementById('abc').scrollHeight
+	</script>
+</body>
+</html>

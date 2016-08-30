@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="media/favicon.ico" type="image/x-icon">
+	<title>Responsive HTML</title>
+	<link href='http://fonts.googleapis.com/css?family=Abel|Fredoka+One|Karla' rel='stylesheet' type='text/css'>
+	<style>
+		.fluid{
+	/*width: 100%;*/
+	height: 100px;
+	float: left;
+	margin: auto;		
+}
+
+#a1{
+	background-color: #CCFF33;
+}
+#a2{
+	background-color: #FFCC66;
+}
+#a3{
+	background-color: #CCFF66;
+}
+#a4{
+	background-color: #FF6699;
+}
+#a5{
+	background-color: #66FFCC;
+}
+#a6{
+	background-color: #CC99FF;
+}
+#a7{
+	background-color: #FF9933;
+}
+#a8{
+	background-color: #66CCFF;
+}
+#a9{
+	background-color: #FF704D;
+}
+#a10{
+	background-color: #CCCC00;
+}
+
+/*OZADJE*/
+body{
+	background: #fff;
+	font-family: 'Karla', sans-serif;
+}
+
+h1{
+	font-family: 'Fredoka One', cursive;
+	text-align: center;
+}
+
+.code{
+	font-family: 'Abel', sans-serif;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+footer{
+	top: 2000px;
+	clear: both;
+	background-color: cornflowerblue;
+}
+
+@media only screen and (max-width: 10000px) {
+	.fluid{
+		width: 20%;
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.fluid{
+		width: 25%;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.fluid{
+		width: 33.3%;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.fluid{
+		width: 50%;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.fluid{
+		width: 100%;
+	}
+}
+	</style>
+</head>
+	
+<body>
+	<h1 class="naslov">fluid grid layout</h1>
+	
+	<div class="fluidcantainer">
+		<div class="fluid" id="a1">
+		<h1>Fluid DIV 1</h1>
+		</div>
+		
+		<div class="fluid" id="a2">
+		<h1>Fluid DIV 2</h1>
+		</div>
+		
+		<div class="fluid" id="a3">
+		<h1>Fluid DIV 3</h1>
+		</div>
+		
+		<div class="fluid"  id="a4">
+		<h1>Fluid DIV 4</h1>
+		</div>
+		
+		<div class="fluid" id="a5">
+		<h1>Fluid DIV 5</h1>
+		</div>
+		
+		<div class="fluid" id="a6">
+		<h1>Fluid DIV 6</h1>
+		</div>
+		
+		<div class="fluid" id="a7">
+		<h1>Fluid DIV 7</h1>
+		</div>
+		
+		<div class="fluid"  id="a8">
+		<h1>Fluid DIV 8</h1>
+		</div>
+		
+		<div class="fluid" id="a9">
+		<h1>Fluid DIV 9</h1>
+		</div>
+		
+		<div class="fluid" id="a10">
+		<h1>Fluid DIV 10</h1>
+		</div>
+	</div>
+	
+	<footer>
+		<h2>Try to resize browser window!</h2>
+		<a href="index.html"><h3>Nazaj na domačo spletno stran</h3></a>
+	</footer>
+	
+	
+</body>
+
+</html>
+
+
+
